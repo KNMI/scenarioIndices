@@ -1,10 +1,7 @@
 #' Calculate potential evaporation (Makkink), year mean (seasons sum) and summer for brochure validation
 #' @description Function reads transormed mean temperature and transformed global radiation
 #' and calculates the Makkink evaporation for 'future time series' that match a certain climate, makes season sums and summer values
-#' @importFrom data.table fread
 #' @export
-
-
 evmk_sums_relchange<- function(ifile_ref, ifile_scenario,
                                       ofile="uitvoer.txt",
                                       sc,
