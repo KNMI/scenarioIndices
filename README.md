@@ -1,4 +1,4 @@
-# knmitransformer
+# scenarioIndices
 
 [![Travis-CI Build Status](https://travis-ci.org/cphotiadou/scenarioIndices.svg?branch=master)](https://travis-ci.org/cphotiadou/scenarioIndices)
 [![Coverage Status](https://img.shields.io/codecov/c/github/cphotiadou/scenarioIndices/master.svg)](https://codecov.io/github/cphotiadou/scenarioIndices?branch=master)

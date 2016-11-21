@@ -4,14 +4,12 @@
 \alias{evmk_sums_relchange}
 \title{Calculate potential evaporation (Makkink), year mean (seasons sum) and summer for brochure validation}
 \usage{
-evmk_sums_relchange(ifile_ref, ifile_scenario, ofile = "uitvoer.txt", sc,
-  p = NA)
+evmk_sums_relchange(ifile_tg, ifile_rsds, ofile = "uitvoer.txt", sc, p = NA)
 }
-<<<<<<< HEAD
 \arguments{
-\item{ifile_ref}{refence file for 1980-2010}
+\item{ifile_tg}{input file for tg}
 
-\item{ifile_scenario}{evmk file for scenario-period for relative change calc}
+\item{ifile_rsds}{input file for rsds}
 
 \item{ofile}{(DEFAULT="uitvoer.txt") Name of the output file to write the transformed data to.
 Format is similar to ifile}
@@ -20,8 +18,6 @@ Format is similar to ifile}
 
 \item{p}{time horizon                  [2030 (=DEFAULT), 2050, 2085]}
 }
-=======
->>>>>>> fb2c8e6b7500bf0bfb4e76031782523c1c274b02
 \description{
 Function reads transormed mean temperature and transformed global radiation
 and calculates the Makkink evaporation for 'future time series' that match a certain climate, makes season sums and summer values
