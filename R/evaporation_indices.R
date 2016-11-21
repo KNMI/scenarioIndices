@@ -1,14 +1,14 @@
 #' Calculate potential evaporation (Makkink), year mean (seasons sum) and summer for brochure validation
 #' @description Function reads transormed mean temperature and transformed global radiation
 #' and calculates the Makkink evaporation for 'future time series' that match a certain climate, makes season sums and summer values
-#' @param ifile_ref refence file for 1980-2010
-#' @param ifile_scenario evmk file for scenario-period for relative change calc
+#' @param ifile_tg input file for tg
+#' @param ifile_rsds input file for rsds
 #' @param ofile          (DEFAULT="uitvoer.txt") Name of the output file to write the transformed data to.
 #'                Format is similar to ifile
 #' @param sc             scenario                      ["GL", "GH", "WL", "WH"]
 #' @param p              time horizon                  [2030 (=DEFAULT), 2050, 2085]
 #' @export
-evmk_sums_relchange<- function(ifile_ref, ifile_scenario,
+evmk_sums_relchange<- function(ifile_tg, ifile_rsds,
                                       ofile="uitvoer.txt",
                                       sc,
                                       p=NA) {
@@ -22,19 +22,32 @@ evmk_sums_relchange<- function(ifile_ref, ifile_scenario,
   stop("Period must be valid, i.e. 2030, 2050, or 2085")
   }
 
-  evmk_ref <- droogte_berekening_KNMI14(ifile_tg, ifile_rsds,
-                                          ofile="uitvoer.txt",
-                                          sc=NA,p=)
-  ev <- test_evmk[-(1:5)]
-  ev <- as.data.frame(ev)
+  evmk_ref <- fread(system.file("refdata","KNMI14____ref_evmk___19810101-20101231_v3.2.txt", package="knmitransformer"))
 
-  mm <- (ev[,1]%/%100)%%100
+  evmk_scenario <- droogte_berekening_KNMI14(ifile_tg, ifile_rsds,
+                                          ofile="uitvoer.txt",
+                                          sc,p=NA)
+
+  if (!all(evmk_ref [1:5] == evmk_scenario[1:5])) {
+    flog.error("Same stations should be used for reference and scenarios")
+    stop("Same stations should be used for reference and scenarios")
+  }
+
+  ev_ref <- evmk_ref[-(1:5)]
+  ev_ref <- as.data.frame(ev_ref)
+
+  ev_sce <- evmk_scenario[-(1:5)]
+  ev_sce <- as.data.frame(ev_sce)
+
+  mm <- (ev_ref[,1]%/%100)%%100
   ss <- as.integer((mm/3)%%4+1)
-  yy <-  ev[,1]%/%10000
+  yy <-  ev_ref[,1]%/%10000
   wy <- ifelse(mm<12,yy,yy+1)
-  tabel <- reltable <- as.data.frame(matrix(NA,5*(length(drempels)+sum(products)),ncol(ev)))
-  names(tabel) <- test_evmk[1]
-  names(reltable) <- test_evmk[1]
+
+  table_ref <- table_sce <- reltable <- as.data.frame(matrix(NA,5*(length(drempels)+sum(products)),ncol(ev_ref)))
+  names(table_ref) <- evmk_ref[1]
+  names(table_sce) <- evmk_ref[1]
+  names(reltable) <- evmk_ref[1]
 
   i=0
 
@@ -57,8 +70,11 @@ evmk_sums_relchange<- function(ifile_ref, ifile_scenario,
       for(j in 1:length(drempels)) {
         i=i+1
         dname <- paste("N_",drempels[j],"mm",season,sep="")
-        tabel[i, 1] <- paste(dname,substr("        ",1,8-nchar(dname)))
-        tabel[i,-1] <- apply(ev[id,-1]>=drempels[j],2,sum) / length(unique(yy))
+        table_ref[i, 1] <- paste(dname,substr("        ",1,8-nchar(dname)))
+        table_ref[i,-1] <- apply(ev_ref[id,-1]>=drempels[j],2,sum) / length(unique(yy))
+        ##scenarios
+        table_sce[i, 1] <- paste(dname,substr("        ",1,8-nchar(dname)))
+        table_sce[i,-1] <- apply(ev_sce[id,-1]>=drempels[j],2,sum) / length(unique(yy))
       }
     }
 
@@ -66,14 +82,20 @@ evmk_sums_relchange<- function(ifile_ref, ifile_scenario,
     if(products[prod]==1) {
       dname=paste(prod,season,sep="")
       i=i+1
-      tabel[i, 1] <- paste(dname,substr("        ",1,8-nchar(dname)))
+      table_ref[i, 1] <- paste(dname,substr("        ",1,8-nchar(dname)))
       #X           <- aggregate(ev[id,-1],by=list(idy),  sum)
-      #tabel[i,-1] <- apply(X[,-1]       , 2          ,   sd)
-      tabel[i,-1]  <- apply(ev[id,-1],2,sum)/30
+      #table[i,-1] <- apply(X[,-1]       , 2          ,   sd)
+      table_ref[i,-1]  <- apply(ev_ref[id,-1],2,sum)/30
       # relative change
-      reltable[i,-1]    <- 100 * (fut[,-1] - obs[,-1]) / obs[,-1]
+      table_sce[i, 1] <- paste(dname,substr("        ",1,8-nchar(dname)))
+      table_sce[i,-1]  <- apply(ev_sce[id,-1],2,sum)/30
+      reltable[,-1]    <- round((100 * (table_sce[,-1] - table_ref[,-1]) / table_ref[,-1]),2)
 
     }
   } # end seasonal variables
+  reltable[,1] <- c("year","winter","spring","summer","autumn")
+
+  ofile <- paste("test/testthat/scenario_tabel_verdamping_trans_",sc,"_",p,".txt",sep="")
+  write.table(format(rbind(colnames(reltable),reltable),width=10,digits=1,justify="right"), ofile,col.names=F,row.names=F,quote=F)
 }
 

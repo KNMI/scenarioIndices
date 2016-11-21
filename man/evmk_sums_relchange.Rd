@@ -7,6 +7,7 @@
 evmk_sums_relchange(ifile_ref, ifile_scenario, ofile = "uitvoer.txt", sc,
   p = NA)
 }
+<<<<<<< HEAD
 \arguments{
 \item{ifile_ref}{refence file for 1980-2010}
 
@@ -19,6 +20,8 @@ Format is similar to ifile}
 
 \item{p}{time horizon                  [2030 (=DEFAULT), 2050, 2085]}
 }
+=======
+>>>>>>> fb2c8e6b7500bf0bfb4e76031782523c1c274b02
 \description{
 Function reads transormed mean temperature and transformed global radiation
 and calculates the Makkink evaporation for 'future time series' that match a certain climate, makes season sums and summer values
