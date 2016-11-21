@@ -8,8 +8,6 @@
 #' @param sc             scenario                      ["GL", "GH", "WL", "WH"]
 #' @param p              time horizon                  [2030 (=DEFAULT), 2050, 2085]
 #' @export
-
-
 evmk_sums_relchange<- function(ifile_ref, ifile_scenario,
                                       ofile="uitvoer.txt",
                                       sc,
