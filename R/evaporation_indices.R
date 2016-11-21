@@ -1,7 +1,12 @@
 #' Calculate potential evaporation (Makkink), year mean (seasons sum) and summer for brochure validation
 #' @description Function reads transormed mean temperature and transformed global radiation
 #' and calculates the Makkink evaporation for 'future time series' that match a certain climate, makes season sums and summer values
-#' @importFrom data.table fread
+#' @param ifile_ref refence file for 1980-2010
+#' @param ifile_scenario evmk file for scenario-period for relative change calc
+#' @param ofile          (DEFAULT="uitvoer.txt") Name of the output file to write the transformed data to.
+#'                Format is similar to ifile
+#' @param sc             scenario                      ["GL", "GH", "WL", "WH"]
+#' @param p              time horizon                  [2030 (=DEFAULT), 2050, 2085]
 #' @export
 
 
@@ -19,10 +24,9 @@ evmk_sums_relchange<- function(ifile_ref, ifile_scenario,
   stop("Period must be valid, i.e. 2030, 2050, or 2085")
   }
 
-  ifile_evmk <- droogte_berekening_KNMI14(ifile_tg, ifile_rsds,
+  evmk_ref <- droogte_berekening_KNMI14(ifile_tg, ifile_rsds,
                                           ofile="uitvoer.txt",
-                                          delta.file.rsds,
-                                          delta.file.tg = NA)
+                                          sc=NA,p=)
   ev <- test_evmk[-(1:5)]
   ev <- as.data.frame(ev)
 
