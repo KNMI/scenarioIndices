@@ -33,7 +33,7 @@ evmk_sums_relchange<- function(ifile_tg, ifile_rsds,
 
   evmk_ref <- fread(system.file("refdata","KNMI14____ref_evmk___19810101-20101231_v3.2.txt", package="knmitransformer"))
 
-  evmk_scenario <- droogte_berekening_KNMI14(ifile_tg, ifile_rsds,
+  evmk_scenario <- knmitransformer::droogte_berekening_KNMI14(ifile_tg, ifile_rsds,
                                           ofile="uitvoer.txt",
                                           sc,p, regio.file)
 
@@ -108,8 +108,7 @@ evmk_sums_relchange<- function(ifile_tg, ifile_rsds,
   } # end seasonal variables
   reltable[,1] <- c("year","winter","spring","summer","autumn")
 
-  ofile <- paste("test/testthat/scenario_tabel_verdamping_trans_",sc,"_",p,".txt",sep="")
-  write.table(format(rbind(colnames(reltable),reltable),width=10,digits=1,justify="right"), ofile,col.names=F,row.names=F,quote=F)
-  return(reltable)
+  result <- write.table(format(rbind(colnames(reltable),reltable),width=10,digits=1,justify="right"), ofile,col.names=F,row.names=F,quote=F)
+  return(result)
 }
 
