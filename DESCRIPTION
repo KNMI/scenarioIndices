@@ -13,7 +13,7 @@ Authors@R: as.person(c(
     "KNMI [cph]"
   ))
 Maintainer: Who to complain to <yourfault@somewhere.net>
-Description: Calculates the scenario Indices for temp, precip, evap & radaition
+Description: Calculates the scenario Indices for temp, precip, evap & radiation
               as the were published in the brochure for KNMI14 version15
 License: file LICENSE
 LazyData: TRUE
