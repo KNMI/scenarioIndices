@@ -7,11 +7,20 @@
 #'                Format is similar to ifile
 #' @param sc             scenario                      ["GL", "GH", "WL", "WH"]
 #' @param p              time horizon                  [2030 (=DEFAULT), 2050, 2085]
+#' @param regio.file     this (optional) argument provides the name of an ASCII file that relates the stations to
+#'                a particular region. First column is station id and second column region
+#'                KNMI14 distinguishes following regions:
+#'                <NLD> Nederland            [DEFAULT]
+#'                <NWN> Noordwest Nederland
+#'                <ZWN> Zuidwest Nederland
+#'                <NON> Noordoost Nederland
+#'                <MON> Middenoost Nederland
+#'                <ZON> Zuidoost Nederland
 #' @export
 evmk_sums_relchange<- function(ifile_tg, ifile_rsds,
                                       ofile="uitvoer.txt",
                                       sc,
-                                      p=NA) {
+                                      p=NA, regio.file = NA) {
   flog.info("Running evaporation calculation")
   flog.debug("Version is 1.0")
   # CONSTANTS AND FUNCTIONS ###############################################################################
@@ -26,7 +35,7 @@ evmk_sums_relchange<- function(ifile_tg, ifile_rsds,
 
   evmk_scenario <- droogte_berekening_KNMI14(ifile_tg, ifile_rsds,
                                           ofile="uitvoer.txt",
-                                          sc,p=NA)
+                                          sc,p, regio.file)
 
   if (!all(evmk_ref [1:5] == evmk_scenario[1:5])) {
     flog.error("Same stations should be used for reference and scenarios")
@@ -44,10 +53,14 @@ evmk_sums_relchange<- function(ifile_tg, ifile_rsds,
   yy <-  ev_ref[,1]%/%10000
   wy <- ifelse(mm<12,yy,yy+1)
 
+  products <- data.frame("sum"=1)
+  drempels <- vector()
+
   table_ref <- table_sce <- reltable <- as.data.frame(matrix(NA,5*(length(drempels)+sum(products)),ncol(ev_ref)))
   names(table_ref) <- evmk_ref[1]
   names(table_sce) <- evmk_ref[1]
   names(reltable) <- evmk_ref[1]
+
 
   i=0
 
@@ -97,5 +110,6 @@ evmk_sums_relchange<- function(ifile_tg, ifile_rsds,
 
   ofile <- paste("test/testthat/scenario_tabel_verdamping_trans_",sc,"_",p,".txt",sep="")
   write.table(format(rbind(colnames(reltable),reltable),width=10,digits=1,justify="right"), ofile,col.names=F,row.names=F,quote=F)
+  return(reltable)
 }
 
