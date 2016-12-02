@@ -3,3 +3,5 @@
 export(evmk_sums_reference)
 export(evmk_sums_relchange)
 importFrom(data.table,fread)
+importFrom(utils,write.table)
+import(futile.logger)
