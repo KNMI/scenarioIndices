@@ -33,9 +33,9 @@ evmk_sums_relchange<- function(ifile_tg, ifile_rsds,
 
   evmk_ref <- fread(system.file("refdata","KNMI14____ref_evmk___19810101-20101231_v3.2.txt", package="knmitransformer"))
 
-  evmk_scenario <- knmitransformer::droogte_berekening_KNMI14(ifile_tg, ifile_rsds,
+  evmk_scenario <- knmitransformer::droogte_berekening_KNMI14(ifile_tg = ifile_tg, ifile_rsds = ifile_rsds,
                                           ofile="uitvoer.txt",
-                                          sc,p, regio.file)
+                                          sc = sc,p = p, regio.file = regio.file)
 
   if (!all(evmk_ref [1:5] == evmk_scenario[1:5])) {
     flog.error("Same stations should be used for reference and scenarios")
@@ -56,7 +56,7 @@ evmk_sums_relchange<- function(ifile_tg, ifile_rsds,
   products <- data.frame("sum"=1)
   drempels <- vector()
 
-  table_ref <- table_sce <- reltable <- as.data.frame(matrix(NA,5*(length(drempels)+sum(products)),ncol(ev_ref)))
+  table_sce <-  table_ref <- reltable <- as.data.frame(matrix(NA,5*(length(drempels)+sum(products)),ncol(ev_ref)))
   names(table_ref) <- evmk_ref[1]
   names(table_sce) <- evmk_ref[1]
   names(reltable) <- evmk_ref[1]
@@ -98,17 +98,17 @@ evmk_sums_relchange<- function(ifile_tg, ifile_rsds,
       table_ref[i, 1] <- paste(dname,substr("        ",1,8-nchar(dname)))
       #X           <- aggregate(ev[id,-1],by=list(idy),  sum)
       #table[i,-1] <- apply(X[,-1]       , 2          ,   sd)
-      table_ref[i,-1]  <- apply(ev_ref[id,-1],2,sum)/30
+      table_ref[i,-1]  <- round(apply(ev_ref[id,-1],2,sum)/30,0)
       # relative change
       table_sce[i, 1] <- paste(dname,substr("        ",1,8-nchar(dname)))
-      table_sce[i,-1]  <- apply(ev_sce[id,-1],2,sum)/30
+      table_sce[i,-1]  <- round(apply(ev_sce[id,-1],2,sum)/30,0)
       reltable[,-1]    <- round((100 * (table_sce[,-1] - table_ref[,-1]) / table_ref[,-1]),2)
 
     }
   } # end seasonal variables
   reltable[,1] <- c("year","winter","spring","summer","autumn")
 
-  result <- write.table(format(rbind(colnames(reltable),reltable),width=10,digits=1,justify="right"), ofile,col.names=F,row.names=F,quote=F)
-  return(result)
+  write.table(format(reltable,width=8,nsmall=2), ofile,col.names=F,row.names=F,quote=F)
+  return(reltable)
 }
 
