@@ -12,6 +12,14 @@ ifile_rsds <- system.file("refdata","KNMI14____ref_rsds___19810101-20101231_v3.2
 ofile      <- "tmp.txt" # output file - used only temporary
 regio.file <- system.file("extdata","stationstabel", package="knmitransformer") # table that links stations to region
 
+
+test_that("evaporation sums reference", {
+
+  tmp <- evmk_sums_reference(ofile = ofile)
+
+  expect_equal_to_reference(tmp, "regressionOutput/evaporation/KNMI14_ref_evmk_sums.rds")
+})
+
 test_that("2030 decadal prediction", {
   sc="GL"
 
@@ -20,7 +28,8 @@ test_that("2030 decadal prediction", {
   tmp <- evmk_sums_relchange(ifile_tg=ifile_tg, ifile_rsds=ifile_rsds,
                              ofile = ofile,
                              sc=sc,
-                             p=p)
+                             p=p,
+                             regio.file = regio.file)
 
 
 
@@ -34,19 +43,19 @@ test_that("Scenario WL", {
   tmp <- evmk_sums_relchange(ifile_tg=ifile_tg, ifile_rsds=ifile_rsds,
                              ofile=ofile,
                              sc=sc,
-                             p=p)
+                             p=p,
+                             regio.file = regio.file)
 
 
 
   expect_equal_to_reference(tmp, "regressionOutput/evaporation/KNMI14_WL_2050_evmk_sums.rds")
 
-  # Regression test based only on the smaller subset used also for the other
-  # scenarios
   p = 2085
   tmp <- evmk_sums_relchange(ifile_tg=ifile_tg, ifile_rsds=ifile_rsds,
                              ofile=ofile,
                              sc=sc,
-                             p=p)
+                             p=p,
+                             regio.file = regio.file)
 
 
 
@@ -60,17 +69,19 @@ test_that("Scenario WH", {
   tmp <- evmk_sums_relchange(ifile_tg=ifile_tg, ifile_rsds=ifile_rsds,
                              ofile=ofile,
                              sc=sc,
-                             p=p)
+                             p=p,
+                             regio.file = regio.file)
 
 
 
-  expect_equal_to_reference(tmp, "regressionOutput/evaporation/KNMI14_WH2050_evmk_sums.rds")
+  expect_equal_to_reference(tmp, "regressionOutput/evaporation/KNMI14_WH_2050_evmk_sums.rds")
 
   p = 2085
   tmp <- evmk_sums_relchange(ifile_tg=ifile_tg, ifile_rsds=ifile_rsds,
                              ofile=ofile,
                              sc=sc,
-                             p=p)
+                             p=p,
+                             regio.file = regio.file)
 
 
 
@@ -84,7 +95,8 @@ test_that("Scenario GH", {
   tmp <- evmk_sums_relchange(ifile_tg=ifile_tg, ifile_rsds=ifile_rsds,
                              ofile=ofile,
                              sc=sc,
-                             p=p)
+                             p=p,
+                             regio.file = regio.file)
 
 
 
@@ -94,7 +106,8 @@ test_that("Scenario GH", {
   tmp <- evmk_sums_relchange(ifile_tg=ifile_tg, ifile_rsds=ifile_rsds,
                              ofile=ofile,
                              sc=sc,
-                             p=p)
+                             p=p,
+                             regio.file = regio.file)
 
 
 
@@ -108,7 +121,8 @@ test_that("Scenario GL", {
   tmp <- evmk_sums_relchange(ifile_tg=ifile_tg, ifile_rsds=ifile_rsds,
                              ofile=ofile,
                              sc=sc,
-                             p=p)
+                             p=p,
+                             regio.file = regio.file)
 
 
 
@@ -118,7 +132,8 @@ test_that("Scenario GL", {
   tmp <- evmk_sums_relchange(ifile_tg=ifile_tg, ifile_rsds=ifile_rsds,
                              ofile=ofile,
                              sc=sc,
-                             p=p)
+                             p=p,
+                             regio.file = regio.file)
 
 
 
