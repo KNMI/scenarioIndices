@@ -1,5 +1,0 @@
-reference year seasonal.sum 595 599 578 559 560 546 546 549 615 576 569 572 573 585
-reference winter seasonal.sum 30 30 30 29 27 27 26 27 33 30 30 30 30 31
-reference spring seasonal.sum 187 190 183 176 178 171 172 172 190 180 176 178 179 181
-reference summer seasonal.sum 285 287 277 266 267 260 261 264 291 276 271 272 272 278
-reference autumn seasonal.sum 91 91 89 88 87 87 85 86 99 90 91 92 91 94
