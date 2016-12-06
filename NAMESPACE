@@ -3,6 +3,6 @@
 export(evmk_sums_reference)
 export(evmk_sums_relchange)
 import(futile.logger)
-import(knmitransformer)
 importFrom(data.table,fread)
+importFrom(knmitransformer,droogte_berekening_KNMI14)
 importFrom(utils,write.table)
