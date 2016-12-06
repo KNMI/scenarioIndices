@@ -2,6 +2,7 @@
 
 export(evmk_sums_reference)
 export(evmk_sums_relchange)
+import(futile.logger)
+import(knmitransformer)
 importFrom(data.table,fread)
 importFrom(utils,write.table)
-import(futile.logger)
