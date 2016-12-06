@@ -5,7 +5,7 @@ sudo: false
 cache: packages
 
 r_github_packages:
-  - MartinRoth/knmitransformer
+  - MartinRoth/knmitransformer@evaporation
 
 
 after_success:
