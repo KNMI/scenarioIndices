@@ -33,7 +33,7 @@ evmk_sums_relchange<- function(ifile_tg, ifile_rsds,
 
   evmk_ref <- fread(system.file("refdata","KNMI14____ref_evmk___19810101-20101231_v3.2.txt", package="knmitransformer"))
 
-  evmk_scenario <- knmitransformer::droogte_berekening_KNMI14(ifile_tg = ifile_tg, ifile_rsds = ifile_rsds,
+  evmk_scenario <- droogte_berekening_KNMI14(ifile_tg = ifile_tg, ifile_rsds = ifile_rsds,
                                           ofile="uitvoer.txt",
                                           sc = sc,p = p, regio.file = regio.file)
 
