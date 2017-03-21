@@ -4,8 +4,8 @@
 \alias{evmk_sums_relchange}
 \title{Calculate potential evaporation (Makkink), year mean (seasons sum) and summer for brochure validation}
 \usage{
-evmk_sums_relchange(ifile_tg, ifile_rsds, ofile = "uitvoer.txt", sc, p = NA,
-  regio.file = NA)
+evmk_sums_relchange(ifile_tg, ifile_rsds, ofile = "uitvoer.txt", scenario,
+  horizon = NA, regio.file = NA)
 }
 \arguments{
 \item{ifile_tg}{input file for tg}
@@ -15,9 +15,9 @@ evmk_sums_relchange(ifile_tg, ifile_rsds, ofile = "uitvoer.txt", sc, p = NA,
 \item{ofile}{(DEFAULT="uitvoer.txt") Name of the output file to write the transformed data to.
 Format is similar to ifile}
 
-\item{sc}{scenario                      ["GL", "GH", "WL", "WH"]}
+\item{scenario}{scenario                      ["GL", "GH", "WL", "WH"]}
 
-\item{p}{time horizon                  [2030 (=DEFAULT), 2050, 2085]}
+\item{horizon}{time horizon                  [2030 (=DEFAULT), 2050, 2085]}
 
 \item{regio.file}{this (optional) argument provides the name of an ASCII file that relates the stations to
 a particular region. First column is station id and second column region
