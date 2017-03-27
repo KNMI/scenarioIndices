@@ -36,4 +36,3 @@ a particular region. First column is station id and second column region
 \description{
 function reads reference ts for evmk, rr, tg & rdrs
 }
-

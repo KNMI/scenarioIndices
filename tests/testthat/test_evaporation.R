@@ -50,7 +50,7 @@ test_that("scenarioenario WL", {
 
   expect_equal_to_reference(tmp, "regressionOutput/evaporation/KNMI14_WL_2050_evmk_sums.rds")
 
-  p = 2085
+  horizon = 2085
   tmp <- evmk_sums_relchange(ifile_tg=ifile_tg, ifile_rsds=ifile_rsds,
                              ofile=ofile,
                              scenario=scenario,

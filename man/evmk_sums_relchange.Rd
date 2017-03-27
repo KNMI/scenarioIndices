@@ -33,4 +33,3 @@ KNMI14 distinguishes following regions:
 Function reads transormed mean temperature and transformed global radiation
 and calculates the Makkink evaporation for 'future time series' that match a certain climate, makes season sums and summer values
 }
-

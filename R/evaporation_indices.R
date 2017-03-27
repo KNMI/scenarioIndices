@@ -5,8 +5,8 @@
 #' @param ifile_rsds input file for rsds
 #' @param ofile          (DEFAULT="uitvoer.txt") Name of the output file to write the transformed data to.
 #'                Format is similar to ifile
-#' @param scenario             scenario                      ["GL", "GH", "WL", "WH"]
-#' @param horizon             time horizon                  [2030 (=DEFAULT), 2050, 2085]
+#' @param scenario  scenario                      ["GL", "GH", "WL", "WH"]
+#' @param horizon   time horizon                  [2030 (=DEFAULT), 2050, 2085]
 #' @param regio.file     this (optional) argument provides the name of an ASCII file that relates the stations to
 #'                a particular region. First column is station id and second column region
 #'                KNMI14 distinguishes following regions:
@@ -33,11 +33,12 @@ evmk_sums_relchange<- function(ifile_tg, ifile_rsds,
 
   evmk_ref <- fread(system.file("refdata","KNMI14____ref_evmk___19810101-20101231_v3.2.txt", package="knmitransformer"))
 
-  evmk_scenario <- TransformEvap(ifile_tg = ifile_tg, ifile_rsds = ifile_rsds,
-                                          ofile="uitvoer.txt",
-                                          scenario = scenario,
-                                          horizon = horizon,
-                                          regio.file = regio.file)
+  evmk_scenario <- TransformEvap(ifile_tg = ifile_tg,
+                                 ifile_rsds = ifile_rsds,
+                                 ofile="uitvoer.txt",
+                                 scenario = scenario,
+                                 horizon = horizon,
+                                 regio.file = regio.file)
 
   if (!all(evmk_ref [1:5] == evmk_scenario[1:5])) {
     flog.error("Same stations should be used for reference and scenarios")

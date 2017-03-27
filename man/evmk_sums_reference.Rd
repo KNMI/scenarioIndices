@@ -14,4 +14,3 @@ Format is similar to ifile}
 Function reads Makkink evaporation reference series
 and makes season sums
 }
-
