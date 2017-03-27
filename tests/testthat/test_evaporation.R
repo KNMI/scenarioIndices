@@ -2,7 +2,7 @@ context("Evaporation sums calculations")
 
 library(futile.logger)
 flog.threshold(DEBUG)
-flog.appender(appender.file('scenarioIndices_evaporation.log'))
+flog.appender(appender.file('scenarioenarioIndices_evaporation.log'))
 library(data.table)
 
 context("evmk sum calc - Entire station set")
@@ -21,14 +21,14 @@ test_that("evaporation sums reference", {
 })
 
 test_that("2030 decadal prediction", {
-  sc="GL"
+  scenario = "GL"
 
-  p=2030
+  horizon = 2030
 
   tmp <- evmk_sums_relchange(ifile_tg=ifile_tg, ifile_rsds=ifile_rsds,
                              ofile = ofile,
-                             sc=sc,
-                             p=p,
+                             scenario = scenario,
+                             horizon = horizon,
                              regio.file = regio.file)
 
 
@@ -36,25 +36,25 @@ test_that("2030 decadal prediction", {
   expect_equal_to_reference(tmp, "regressionOutput/evaporation/KNMI14___2030_evmk_sums.rds")
 })
 
-test_that("Scenario WL", {
-  sc="WL"
+test_that("scenarioenario WL", {
+  scenario = "WL"
 
-  p=2050
-  tmp <- evmk_sums_relchange(ifile_tg=ifile_tg, ifile_rsds=ifile_rsds,
-                             ofile=ofile,
-                             sc=sc,
-                             p=p,
+  horizon = 2050
+  tmp <- evmk_sums_relchange(ifile_tg = ifile_tg, ifile_rsds = ifile_rsds,
+                             ofile = ofile,
+                             scenario = scenario,
+                             horizon = horizon,
                              regio.file = regio.file)
 
 
 
   expect_equal_to_reference(tmp, "regressionOutput/evaporation/KNMI14_WL_2050_evmk_sums.rds")
 
-  p = 2085
+  horizon = 2085
   tmp <- evmk_sums_relchange(ifile_tg=ifile_tg, ifile_rsds=ifile_rsds,
                              ofile=ofile,
-                             sc=sc,
-                             p=p,
+                             scenario=scenario,
+                             horizon = horizon,
                              regio.file = regio.file)
 
 
@@ -62,25 +62,25 @@ test_that("Scenario WL", {
   expect_equal_to_reference(tmp, "regressionOutput/evaporation/KNMI14_WL_2085_evmk_sums.rds")
 })
 
-test_that("Scenario WH", {
-  sc="WH"
+test_that("scenarioenario WH", {
+  scenario = "WH"
 
-  p=2050
+  horizon = 2050
   tmp <- evmk_sums_relchange(ifile_tg=ifile_tg, ifile_rsds=ifile_rsds,
                              ofile=ofile,
-                             sc=sc,
-                             p=p,
+                             scenario=scenario,
+                             horizon = horizon,
                              regio.file = regio.file)
 
 
 
   expect_equal_to_reference(tmp, "regressionOutput/evaporation/KNMI14_WH_2050_evmk_sums.rds")
 
-  p = 2085
+  horizon = 2085
   tmp <- evmk_sums_relchange(ifile_tg=ifile_tg, ifile_rsds=ifile_rsds,
                              ofile=ofile,
-                             sc=sc,
-                             p=p,
+                             scenario=scenario,
+                             horizon = horizon,
                              regio.file = regio.file)
 
 
@@ -88,25 +88,25 @@ test_that("Scenario WH", {
   expect_equal_to_reference(tmp, "regressionOutput/evaporation/KNMI14_WH_2085_evmk_sums.rds")
 })
 
-test_that("Scenario GH", {
-  sc="GH"
+test_that("scenarioenario GH", {
+  scenario = "GH"
 
-  p=2050
+  horizon = 2050
   tmp <- evmk_sums_relchange(ifile_tg=ifile_tg, ifile_rsds=ifile_rsds,
                              ofile=ofile,
-                             sc=sc,
-                             p=p,
+                             scenario=scenario,
+                             horizon = horizon,
                              regio.file = regio.file)
 
 
 
   expect_equal_to_reference(tmp, "regressionOutput/evaporation/KNMI14_GH_2050_evmk_sums.rds")
 
-  p = 2085
+  horizon = 2085
   tmp <- evmk_sums_relchange(ifile_tg=ifile_tg, ifile_rsds=ifile_rsds,
                              ofile=ofile,
-                             sc=sc,
-                             p=p,
+                             scenario=scenario,
+                             horizon = horizon,
                              regio.file = regio.file)
 
 
@@ -114,25 +114,25 @@ test_that("Scenario GH", {
   expect_equal_to_reference(tmp, "regressionOutput/evaporation/KNMI14_GH_2085_evmk_sums.rds")
 })
 
-test_that("Scenario GL", {
-  sc="GL"
+test_that("scenarioenario GL", {
+  scenario = "GL"
 
-  p=2050
+  horizon = 2050
   tmp <- evmk_sums_relchange(ifile_tg=ifile_tg, ifile_rsds=ifile_rsds,
                              ofile=ofile,
-                             sc=sc,
-                             p=p,
+                             scenario=scenario,
+                             horizon = horizon,
                              regio.file = regio.file)
 
 
 
   expect_equal_to_reference(tmp, "regressionOutput/evaporation/KNMI14_GL_2050_evmk_sums.rds")
 
-  p = 2085
+  horizon = 2085
   tmp <- evmk_sums_relchange(ifile_tg=ifile_tg, ifile_rsds=ifile_rsds,
                              ofile=ofile,
-                             sc=sc,
-                             p=p,
+                             scenario=scenario,
+                             horizon = horizon,
                              regio.file = regio.file)
 
 

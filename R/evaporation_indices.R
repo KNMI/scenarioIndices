@@ -5,8 +5,8 @@
 #' @param ifile_rsds input file for rsds
 #' @param ofile          (DEFAULT="uitvoer.txt") Name of the output file to write the transformed data to.
 #'                Format is similar to ifile
-#' @param sc             scenario                      ["GL", "GH", "WL", "WH"]
-#' @param p              time horizon                  [2030 (=DEFAULT), 2050, 2085]
+#' @param scenario  scenario                      ["GL", "GH", "WL", "WH"]
+#' @param horizon   time horizon                  [2030 (=DEFAULT), 2050, 2085]
 #' @param regio.file     this (optional) argument provides the name of an ASCII file that relates the stations to
 #'                a particular region. First column is station id and second column region
 #'                KNMI14 distinguishes following regions:
@@ -19,16 +19,16 @@
 #' @export
 evmk_sums_relchange<- function(ifile_tg, ifile_rsds,
                                       ofile="uitvoer.txt",
-                                      sc,
-                                      p=NA, regio.file = NA) {
+                                      scenario,
+                                      horizon = NA, regio.file = NA) {
   flog.info("Running evaporation calculation")
   flog.debug("Version is 1.0")
   # CONSTANTS AND FUNCTIONS ###############################################################################
   version="v1.0"
 
-  if (!p %in% c(2030, 2050, 2085)) {
-    flog.error("p={%s} has to be a valid period", paste(p))
-  stop("Period must be valid, i.e. 2030, 2050, or 2085")
+  if (!horizon %in% c(2030, 2050, 2085)) {
+    flog.error("horizon={%s} has to be a valid period", paste(horizon))
+  stop("Horizon must be valid, i.e. 2030, 2050, or 2085")
   }
 
   evmk_ref <- fread(system.file("refdata","KNMI14____ref_evmk___19810101-20101231_v3.2.txt", package="knmitransformer"))
@@ -36,8 +36,8 @@ evmk_sums_relchange<- function(ifile_tg, ifile_rsds,
   evmk_scenario <- TransformEvap(ifile_tg = ifile_tg,
                                  ifile_rsds = ifile_rsds,
                                  ofile="uitvoer.txt",
-                                 scenario = sc,
-                                 horizon = p,
+                                 scenario = scenario,
+                                 horizon = horizon,
                                  regio.file = regio.file)
 
   if (!all(evmk_ref [1:5] == evmk_scenario[1:5])) {
