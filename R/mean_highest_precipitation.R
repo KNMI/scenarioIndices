@@ -25,7 +25,7 @@ PrecipDeficit_sce<- function(ifile_tg, ifile_rsds, ifile_rr,
                                horizon = NA, regio.file = NA) {
 
 
-  StationSub <- as.character(fread("inst/refdata/P102.txt")$V1)
+  StationSub <- as.character(fread("/nobackup/users/photiado/Projects_R/scenarioIndices/inst/refdata/P102.txt")$V1)
 
   # reference for evmk for de bilt
   evmkRef <- fread(system.file("refdata","KNMI14____ref_evmk___19810101-20101231_v3.2.txt",
