@@ -33,9 +33,12 @@ evmk_sums_relchange<- function(ifile_tg, ifile_rsds,
 
   evmk_ref <- fread(system.file("refdata","KNMI14____ref_evmk___19810101-20101231_v3.2.txt", package="knmitransformer"))
 
-  evmk_scenario <- droogte_berekening_KNMI14(ifile_tg = ifile_tg, ifile_rsds = ifile_rsds,
-                                          ofile="uitvoer.txt",
-                                          sc = sc,p = p, regio.file = regio.file)
+  evmk_scenario <- TransformEvap(ifile_tg = ifile_tg,
+                                 ifile_rsds = ifile_rsds,
+                                 ofile="uitvoer.txt",
+                                 scenario = sc,
+                                 horizon = p,
+                                 regio.file = regio.file)
 
   if (!all(evmk_ref [1:5] == evmk_scenario[1:5])) {
     flog.error("Same stations should be used for reference and scenarios")
