@@ -11,7 +11,6 @@ Authors@R: as.person(c(
     "Jules Beersma <jules.beersma@knmi.nl> [ctb]",
     "KNMI [cph]"
   ))
-Maintainer: Who to complain to <yourfault@somewhere.net>
 Description: Description: Calculates the scenario Indices for temp, precip, evap & radaition
               as the were published in the brochure for KNMI14 version15.
 License: file LICENSE
