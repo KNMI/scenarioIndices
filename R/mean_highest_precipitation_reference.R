@@ -8,7 +8,7 @@
 PrecipDeficit_ref<- function(ofile = "uitvoer.txt") {
 
 
-  StationSub <- as.character(fread("/nobackup/users/photiado/Projects_R/scenarioIndices/inst/refdata/P102.txt")$V1)
+  StationSub <- as.character(fread(system.file("refdata","P102.txt", package = "scenarioIndices"))$V1)
 
   # reference for evmk for de bilt
   evmkRef <- fread(system.file("refdata","KNMI14____ref_evmk___19810101-20101231_v3.2.txt",
@@ -25,7 +25,7 @@ PrecipDeficit_ref<- function(ofile = "uitvoer.txt") {
   evDeBiltGS <- evDeBilt[amjjas]
 
   # rr reference for P102
-  rrRef       <- fread("/nobackup/users/photiado/Projects_R/scenarioIndices/inst/refdata/KNMI14____ref_rrcentr___19810101-20101231_v3.2.txt")
+  rrRef       <- fread(system.file("refdata","KNMI14____ref_rrcentr___19810101-20101231_v3.2.txt", package = "scenarioIndices"))
   stationID   <- rrRef[(1)]
   names(rrRef)<- as.character(stationID)
   rrRef       <- rrRef[-(1:5),StationSub, with=FALSE]

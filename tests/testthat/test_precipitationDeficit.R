@@ -9,7 +9,7 @@ context("precipDefic  calc - Entire station set")
 
 ifile_tg   <- system.file("refdata","KNMI14____ref_tg___19810101-20101231_v3.2.txt", package="knmitransformer")
 ifile_rsds <- system.file("refdata","KNMI14____ref_rsds___19810101-20101231_v3.2.txt", package="knmitransformer")
-ifile_rr   <- "/nobackup/users/photiado/Projects_R/scenarioIndices/inst/refdata/KNMI14____ref_rrcentr___19810101-20101231_v3.2.txt"
+ifile_rr   <- system.file("refdata","KNMI14____ref_rrcentr___19810101-20101231_v3.2.txt", package = "scenarioIndices")
 ofile      <- "tmp.txt" # output file - used only temporary
 regio.file <- system.file("extdata","stationstabel", package="knmitransformer") # table that links stations to region
 
