@@ -11,26 +11,6 @@ PrecipDeficit_ref(ofile = "uitvoer.txt")
 \arguments{
 \item{ofile}{(DEFAULT="uitvoer.txt") Name of the output file to write the transformed data to.
 Format is similar to ifile}
-
-\item{ifile_tg}{input file for tg}
-
-\item{ifile_rsds}{input file for rsds}
-
-\item{ifile_rr}{input for rr}
-
-\item{scenario}{scenario                      ["GL", "GH", "WL", "WH"]}
-
-\item{horizon}{time horizon                  [2030 (=DEFAULT), 2050, 2085]}
-
-\item{regio.file}{this (optional) argument provides the name of an ASCII file that relates the stations to
-a particular region. First column is station id and second column region
-               KNMI14 distinguishes following regions:
-               <NLD> Nederland [DEFAULT]
-               <NWN> Noordwest Nederland
-               <ZWN> Zuidwest Nederland
-               <NON> Noordoost Nederland
-               <MON> Middenoost Nederland
-               <ZON> Zuidoost Nederland}
 }
 \description{
 function reads reference ts for evmk, rr, tg & rdrs

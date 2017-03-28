@@ -42,7 +42,7 @@ PrecipDeficit_sce<- function(ifile_tg, ifile_rsds, ifile_rr,
   evDeBiltGS <- evDeBilt[amjjas]
 
   # rr reference for P102
-  rrRef       <- fread("inst/refdata/KNMI14____ref_rrcentr___19810101-20101231_v3.2.txt")
+  rrRef       <- fread(system.file("refdata","KNMI14____ref_rrcentr___19810101-20101231_v3.2.txt", package = "scenarioIndices"))
   stationID   <- rrRef[(1)]
   names(rrRef)<- as.character(stationID)
   rrRef       <- rrRef[-(1:5),StationSub, with=FALSE]

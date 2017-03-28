@@ -2,22 +2,8 @@
 #' as it was calculated for KNMI14 scenarios brochure For Just the REFERENCE Period
 #' this index uses the evmk of DeBilt and precipitation amount of 102 stations (the homogenenised ones) over the NL
 #' @description      function reads reference ts for evmk, rr, tg & rdrs
-#' @param ifile_tg   input file for tg
-#' @param ifile_rsds input file for rsds
-#' @param ifile_rr   input for rr
 #' @param ofile      (DEFAULT="uitvoer.txt") Name of the output file to write the transformed data to.
 #'                    Format is similar to ifile
-#' @param scenario    scenario                      ["GL", "GH", "WL", "WH"]
-#' @param horizon     time horizon                  [2030 (=DEFAULT), 2050, 2085]
-#' @param regio.file  this (optional) argument provides the name of an ASCII file that relates the stations to
-#' a particular region. First column is station id and second column region
-#'                KNMI14 distinguishes following regions:
-#'                <NLD> Nederland [DEFAULT]
-#'                <NWN> Noordwest Nederland
-#'                <ZWN> Zuidwest Nederland
-#'                <NON> Noordoost Nederland
-#'                <MON> Middenoost Nederland
-#'                <ZON> Zuidoost Nederland
 #' @export
 PrecipDeficit_ref<- function(ofile = "uitvoer.txt") {
 
