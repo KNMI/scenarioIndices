@@ -62,7 +62,7 @@ PrecipDeficit_sce<- function(ifile_tg, ifile_rsds, ifile_rr,
 
   #input for scenarios
   #calculate evmk for scenarios
-  evmk_scenario <- knmitransformer:::TransformEvap(ifile_tg = ifile_tg,
+  evmk_scenario <- TransformEvap(ifile_tg = ifile_tg,
                                                    ifile_rsds = ifile_rsds,
                                                    ofile="uitvoer.txt",
                                                    scenario = scenario,
@@ -81,7 +81,7 @@ PrecipDeficit_sce<- function(ifile_tg, ifile_rsds, ifile_rr,
   evDeBiltSCGS        <- evDeBiltSC[amjjas]
 
   # calculate rr for scenarios
-  rrScenario <- knmitransformer:::TransformPrecip(ifile = ifile_rr,
+  rrScenario <- TransformPrecip(ifile = ifile_rr,
                   ofile="tmp.txt",
                   scenario=scenario,
                   horizon = horizon,
