@@ -2,7 +2,7 @@ context("Evaporation sums calculations")
 
 library(futile.logger)
 flog.threshold(DEBUG)
-flog.appender(appender.file('scenarioenarioIndices_evaporation.log'))
+flog.appender(appender.file('scenarioIndices_evaporation.log'))
 library(data.table)
 
 context("evmk sum calc - Entire station set")

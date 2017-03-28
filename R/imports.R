@@ -1,5 +1,5 @@
 #' @importFrom data.table fread
 #' @importFrom utils write.table
 #' @import futile.logger
-#' @importFrom knmitransformer TransformEvap
+#' @importFrom knmitransformer TransformEvap TransformPrecip
 NULL

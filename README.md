@@ -3,10 +3,9 @@
 [![Travis-CI Build Status](https://travis-ci.org/cphotiadou/scenarioIndices.svg?branch=master)](https://travis-ci.org/cphotiadou/scenarioIndices)
 [![Coverage Status](https://img.shields.io/codecov/c/github/cphotiadou/scenarioIndices/master.svg)](https://codecov.io/github/cphotiadou/scenarioIndices?branch=master)
 
-The 'scenarioIndices' is a supplementary package for the knmitransformer. With this program a set of indices are calculated using the trnasformed series from the transformation program to represent the scenario indices of KNMI 2014 scenarios.
+The 'scenarioIndices' is a supplementary package for the knmitransformer. With this program a set of climate impact indicators are calculated using the transformed series from knmitransformer to represent the scenario indices published in the KNMI'14 brochure (revi. version).
 
 ##
 For more information, see:
-  Bakker, A. (2015), Time series transformation tool: description of the program
-to generate time series consistent with the KNMI’14 climate scenarios, Technical
-Report TR-349, De Bilt, the Netherlands.
+KNMI, 2014: KNMI'14-klimaatscenario's voor Nederland; Leidraad voor professionals in klimaatadaptie, KNMI, De Bilt, 34 pp
+KNMI, 2014: KNMI'14 climate scenarios for the Netherlands; A guide for professionals in climate adaptation, KNMI, De Bilt, 34 pp
