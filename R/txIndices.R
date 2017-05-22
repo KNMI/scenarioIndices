@@ -1,0 +1,97 @@
+#' Calculates a set of daily maximum temperature related indices as they were defined
+#' for the KNMI14 scenarios brochure
+#' @description      function calculates a set of TX related incides
+#' @param index      indices ("nID", "nWD", "nSD", "nTD", "aTX")
+#' @param ifile      Name of the input file (ASCII) that contains reference data
+#'                   (all numerics) in which the columns provide time series for
+#'                   specific stations.
+#'                   The first column should provide either 00000000 or a
+#'                   datestring YYYYMMDD:
+#'                   Rows starting with 00000000 are considered station info
+#'                   (station number, lat, lon etc.) and are ignored.
+#'                   Rows starting with a datestring refer to a specific day in the
+#'                   time series.
+#'                   Rows starting with "#" are completely ignored and returned
+#'                   unchanged.
+#' @param ofile      (DEFAULT=NA) Name of the output file to write the indices to.
+#'                   Format is similar to ifile without the 5 first lines
+#' @param scenario   scenario ("GL", "GH", "WL", "WH")
+#' @param horizon    time horizon ( DEFAULT=2030, 2050, 2085)
+#' @param season     season (0= year, 1=winter, 2=spring, 3=summer, 4=autumn)
+#' @param regio.file this (optional) argument provides the name of an ASCII file that relates the stations to
+#'                   a particular region. First column is station id and second column region
+#'                   KNMI14 distinguishes following regions:
+#'                   <NLD> Nederland            [DEFAULT]
+#'                   <NWN> Noordwest Nederland
+#'                   <ZWN> Zuidwest Nederland
+#'                   <NON> Noordoost Nederland
+#'                   <MON> Middenoost Nederland
+#'                   <ZON> Zuidoost Nederland
+#'
+#'
+#' @export
+TempMaxIndices<- function(ifile_tx, index,
+                          ofile = NA, scenario,
+                          horizon=2030, season,
+                          regio.file = NA) {
+
+
+  if (index!=c("nID", "nWD", "nSD", "nTD", "aTX"))
+    stop("index should be one of nID nWD nSD nTD aTX")
+
+
+
+  input <- TransformTemp(ifile=ifile_tx, var="tx", scenario=scenario,
+                         horizon=horizon, regio.file=regio.file)
+
+  input <- input[-(1:5)]
+  input <- as.data.frame(input)
+
+  #Seasons
+  mm <- (input[,1]%/%100)%%100
+  ss <- as.integer((mm/3)%%4+1)
+  yy <-  input[,1]%/%10000
+  wy <- ifelse(mm<12,yy,yy+1)
+
+  if(season=="year"){
+    id  <- 1:length(yy)
+    idy <- yy
+  } else {
+    if(season=="winter"){
+      id  <- which(ss==1 & wy > min(wy) & wy < max(wy))
+      idy <- wy[id]
+    } else {
+      id  <- which(ss==season)
+      idy <- yy[id]
+    }
+  }
+
+  #Indices
+  if(index=="nID"){
+    X     <- aggregate(input[id,-1] < 0,by=list(idy),  sum)
+  } else {
+    if(index=="nWD") {
+      X     <- aggregate(input[id,-1] >= 20,by=list(idy),  sum)
+    } else {
+    if(index=="nSD") {
+      X     <- aggregate(input[id,-1] >= 25,by=list(idy),  sum)
+    } else {
+    if(index=="nTD") {
+      X     <- aggregate(input[id,-1] >= 30,by=list(idy),  sum)
+    } else {
+    if(index=="aTX") {
+      X     <- aggregate(input[id,-1],by=list(idy),  mean)
+        }
+        }
+      }
+    }
+  }
+
+
+
+  return(X)
+}
+
+
+
+
