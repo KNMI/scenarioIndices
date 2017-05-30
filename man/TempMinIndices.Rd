@@ -14,9 +14,11 @@ TempMinIndices(ifile_tn, index, ofile = NA, scenario, horizon = 2030,
 \item{ofile}{(DEFAULT=NA) Name of the output file to write the indices to.
 Format is similar to ifile without the 5 first lines}
 
-\item{scenario}{scenario ("GL", "GH", "WL", "WH")}
+\item{scenario}{scenario ("GL", "GH", "WL", "WH"). If scenario is not one of the 4
+then the indices are calculated for the reference period 1981-2010}
 
-\item{horizon}{time horizon ( DEFAULT=2030, 2050, 2085)}
+\item{horizon}{time horizon ( DEFAULT=2030, 2050, 2085). If horizon is not one of the 3
+then the indices are calculated for the reference period 1981-2010}
 
 \item{season}{season (0= year, 1=winter, 2=spring, 3=summer, 4=autumn)}
 

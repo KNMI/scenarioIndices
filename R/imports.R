@@ -2,5 +2,5 @@
 #' @importFrom utils write.table
 #' @importFrom stats sd
 #' @import futile.logger
-#' @importFrom knmitransformer TransformEvap TransformPrecip
+#' @importFrom knmitransformer TransformEvap TransformPrecip TransformTemp
 NULL
