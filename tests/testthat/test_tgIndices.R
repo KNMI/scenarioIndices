@@ -5,7 +5,7 @@ flog.threshold(DEBUG)
 flog.appender(appender.file('scenarioIndices_AVGtemperature.log'))
 library(data.table)
 
-context("Temp ref indices - Entire station set")
+context("Temp tg ref indices - Entire station set")
 
 ifile_tg   <- system.file("refdata","KNMI14____ref_tg___19810101-20101231_v3.2.txt", package="knmitransformer")
 ofile      <- "tmp.txt" # output file - used only temporary
@@ -24,7 +24,7 @@ test_that("2030 decadal prediction", {
                         horizon = horizon, season = "year",
                         regio.file = regio.file)
 
-  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14___2030_tg_atg.rds")
+  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14___2030_tg_aTG.rds")
 
   index = "amnTG"
   tmp <- TempAvgIndices(ifile_tg = ifile_tg, index=index,
@@ -42,7 +42,7 @@ test_that("2030 decadal prediction", {
                         horizon = horizon,
                         regio.file = regio.file)
 
-  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14___2030_aTG.rds")
+  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14___2030_tg_amxTG.rds")
 
 })
 

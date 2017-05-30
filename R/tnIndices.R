@@ -15,8 +15,10 @@
 #'                   unchanged.
 #' @param ofile      (DEFAULT=NA) Name of the output file to write the indices to.
 #'                   Format is similar to ifile without the 5 first lines
-#' @param scenario   scenario ("GL", "GH", "WL", "WH")
-#' @param horizon    time horizon ( DEFAULT=2030, 2050, 2085)
+#' @param scenario   scenario ("GL", "GH", "WL", "WH"). If scenario is not one of the 4
+#'                   then the indices are calculated for the reference period 1981-2010
+#' @param horizon    time horizon ( DEFAULT=2030, 2050, 2085). If horizon is not one of the 3
+#'                   then the indices are calculated for the reference period 1981-2010
 #' @param season     season (0= year, 1=winter, 2=spring, 3=summer, 4=autumn)
 #' @param regio.file this (optional) argument provides the name of an ASCII file that relates the stations to
 #'                   a particular region. First column is station id and second column region
@@ -35,14 +37,21 @@ TempMinIndices<- function(ifile_tn, index,
                           horizon=2030, season,
                           regio.file = NA) {
 
-  if (index!=c("nstFD", "nFD", "nTN", "aTN"))
+  if (!index %in% c("nstFD", "nFD", "nTN", "aTN")){
     stop("index should be one of nstFD nFD nTN aTN")
+  }
 
+  if (!scenario %in% c("GL","GH","WL","WH") && horizon !=c(2030,2050,2085)){
+    input <-  knmitransformer:::ReadInput("tn",
+                                          system.file("refdata","KNMI14____ref_tn___19810101-20101231_v3.2.txt",
+                                                      package="knmitransformer"))$obs
+  } else {
+    input <- TransformTemp(ifile=ifile_tn, ofile=NA, scenario=scenario,
+                           horizon=horizon, var="tn", regio.file=regio.file)
+    input <- input[-(1:5)]
 
-  input <- TransformTemp(ifile=ifile_tn, var="tn", scenario=scenario,
-                         horizon=horizon, regio.file=regio.file)
+  }
 
-  input <- input[-(1:5)]
   input <- as.data.frame(input)
 
   #Seasons
