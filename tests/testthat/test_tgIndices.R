@@ -11,6 +11,23 @@ ifile_tg   <- system.file("refdata","KNMI14____ref_tg___19810101-20101231_v3.2.t
 ofile      <- "tmp.txt" # output file - used only temporary
 regio.file <- system.file("extdata","stationstabel", package="knmitransformer") # table that links stations to region
 
+
+test_that("reference", {
+  index = "aTG"
+
+  scenario = "ref"
+
+  horizon = 1981
+
+  tmp <- TempAvgIndices(ifile_tg = ifile_tg, index=index,
+                        ofile= ofile,
+                        scenario = scenario,
+                        horizon = horizon, season = "year",
+                        regio.file = regio.file)
+
+  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14___ref_tg_aTG.rds")
+
+})
 test_that("2030 decadal prediction", {
   index = "aTG"
 

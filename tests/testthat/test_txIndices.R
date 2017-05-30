@@ -5,20 +5,38 @@ flog.threshold(DEBUG)
 flog.appender(appender.file('scenarioIndices_MAXtemperature.log'))
 library(data.table)
 
-context("Temp ref indices - Entire station set")
+context("Temp tx ref indices - Entire station set")
 
 ifile_tx   <- system.file("refdata","KNMI14____ref_tx___19810101-20101231_v3.2.txt", package="knmitransformer")
 ofile      <- "tmp.txt" # output file - used only temporary
-regio.file <- system.file("extdata","stationstabel", package="knmitransformer") # table that links stations to region
+regio.file <- system.file("extdata","stationstabel", package="knmitransformer")
 
-test_that("2030 decadal prediction", {
+
+test_that("reference", {
+  index = "nID"
+
+  scenario = "ref"
+
+  horizon = 1981
+
+  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
+                        ofile= ofile,
+                        scenario = scenario,
+                        horizon = horizon, season = "year",
+                        regio.file = regio.file)
+
+  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14___ref_tx_nID.rds")
+
+})
+
+test_that("tx indices 2030 decadal prediction", {
   index = "nID"
 
   scenario = "GL"
 
   horizon = 2030
 
-  tmp <- TempAvgIndices(ifile_tx = ifile_tx, index=index,
+  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -27,311 +45,492 @@ test_that("2030 decadal prediction", {
   expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14___2030_tx_nID.rds")
 
   index = "nWD"
-  tmp <- TempAvgIndices(ifile_tx = ifile_tx, index=index,
+  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
                         regio.file = regio.file)
 
-  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14___2030_tg_amnTG.rds")
+  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14___2030_tx_nWD.rds")
 
   index = "nSD"
-  tmp <- TempAvgIndices(ifile_tx = ifile_tx, index=index,
+  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
                         ofile= ofile,
                         scenario = scenario, season = "year",
                         horizon = horizon,
                         regio.file = regio.file)
 
-  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14___2030_aTG.rds")
+  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14___2030_tx_nSD.rds")
 
   index = "nTD"
-  tmp <- TempAvgIndices(ifile_tx = ifile_tx, index=index,
+  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
                         ofile= ofile,
                         scenario = scenario, season = "year",
                         horizon = horizon,
                         regio.file = regio.file)
 
-  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14___2030_aTG.rds")
+  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14___2030_tx_nTD.rds")
 
   index = "aTX"
-  tmp <- TempAvgIndices(ifile_tx = ifile_tx, index=index,
+  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
                         ofile= ofile,
                         scenario = scenario, season = "year",
                         horizon = horizon,
                         regio.file = regio.file)
 
-  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14___2030_aTG.rds")
+  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14___2030_tx_aTX.rds")
 
 })
 
-test_that("aTG decadal prediction", {
-  index = "aTG"
+test_that("nID decadal prediction", {
+  index = "nID"
 
   scenario = "GL"
   horizon = 2050
 
-  tmp <- TempAvgIndices(ifile_tx = ifile_tx, index=index,
+  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
                         ofile= ofile, season = "year",
                         scenario = scenario,
                         horizon = horizon,
                         regio.file = regio.file)
 
-  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14_GL_2050_aTG.rds")
+  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14_GL_2050_tx_nID.rds")
 
   horizon = 2085
 
-  tmp <- TempAvgIndices(ifile_tx = ifile_tx, index=index,
+  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
                         regio.file = regio.file)
 
-  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14_GL_2085_aTG.rds")
+  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14_GL_2085_tx_nID.rds")
 
   scenario = "WL"
 
   horizon = 2050
 
-  tmp <- TempAvgIndices(ifile_tx = ifile_tx, index=index,
+  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
                         regio.file = regio.file)
 
-  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14_WL_2050_aTG.rds")
+  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14_WL_2050_tx_nID.rds")
 
   horizon = 2085
 
-  tmp <- TempAvgIndices(ifile_tx = ifile_tx, index=index,
+  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
                         regio.file = regio.file)
 
-  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14_WL_2085_aTG.rds")
+  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14_WL_2085_tx_nID.rds")
 
   scenario = "GH"
 
   horizon = 2050
 
-  tmp <- TempAvgIndices(ifile_tx = ifile_tx, index=index,
+  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
                         regio.file = regio.file)
 
-  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14_GH_2050_aTG.rds")
+  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14_GH_2050_tx_nID.rds")
 
   horizon = 2085
 
-  tmp <- TempAvgIndices(ifile_tx = ifile_tx, index=index,
+  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
                         regio.file = regio.file)
 
-  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14_GH_2085_aTG.rds")
+  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14_GH_2085_tx_nID.rds")
 
   scenario = "WH"
 
   horizon = 2050
 
-  tmp <- TempAvgIndices(ifile_tx = ifile_tx, index=index,
+  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
                         regio.file = regio.file)
 
-  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14_WH_2050_aTG.rds")
+  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14_WH_2050_tx_nID.rds")
 
   horizon = 2085
 
-  tmp <- TempAvgIndices(ifile_tx = ifile_tx, index=index,
+  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
                         regio.file = regio.file)
 
-  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14_WH_2085_aTG.rds")
+  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14_WH_2085_tx_nID.rds")
 
 })
 
-test_that("amnTG decadal prediction", {
-  index = "amnTG"
+test_that("nWd decadal prediction", {
+
+  index = "nWD"
 
   scenario = "GL"
   horizon = 2050
 
-  tmp <- TempAvgIndices(ifile_tx = ifile_tx, index=index,
+  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
                         regio.file = regio.file)
 
-  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14_GL_2050_amnTG.rds")
+  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14_GL_2050_tx_nWD.rds")
 
   horizon = 2085
 
-  tmp <- TempAvgIndices(ifile_tx = ifile_tx, index=index,
+  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
                         regio.file = regio.file)
 
-  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14_GL_2085_amnTG.rds")
+  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14_GL_2085_tx_nWD.rds")
 
   scenario = "WL"
   horizon = 2050
 
-  tmp <- TempAvgIndices(ifile_tx = ifile_tx, index=index,
+  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
                         regio.file = regio.file)
 
-  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14_WL_2050_amnTG.rds")
+  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14_WL_2050_tx_nWD.rds")
 
   horizon = 2085
 
-  tmp <- TempAvgIndices(ifile_tx = ifile_tx, index=index,
+  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
                         regio.file = regio.file)
 
-  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14_WL_2085_amnTG.rds")
+  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14_WL_2085_tx_nWD.rds")
 
 
   scenario = "GH"
   horizon = 2050
 
-  tmp <- TempAvgIndices(ifile_tx = ifile_tx, index=index,
+  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
                         regio.file = regio.file)
 
-  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14_GH_2050_amnTG.rds")
+  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14_GH_2050_tx_nWD.rds")
 
   horizon = 2085
 
-  tmp <- TempAvgIndices(ifile_tx = ifile_tx, index=index,
+  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
                         regio.file = regio.file)
 
-  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14_GH_2085_amnTG.rds")
+  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14_GH_2085_tx_nWD.rds")
 
   scenario = "WH"
   horizon = 2050
 
-  tmp <- TempAvgIndices(ifile_tx = ifile_tx, index=index,
+  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
                         regio.file = regio.file)
 
-  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14_WH_2050_amnTG.rds")
+  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14_WH_2050_tx_nWD.rds")
 
   horizon = 2085
 
-  tmp <- TempAvgIndices(ifile_tx = ifile_tx, index=index,
+  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
                         regio.file = regio.file)
 
-  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14_WH_2085_amnTG.rds")
+  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14_WH_2085_tx_nWD.rds")
 })
 
-test_that("amxTG decadal prediction", {
-  index = "amxTG"
+test_that("nSD decadal prediction", {
+
+   index = "nSD"
 
   scenario = "GL"
   horizon = 2050
 
-  tmp <- TempAvgIndices(ifile_tx = ifile_tx, index=index,
+  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
                         regio.file = regio.file)
 
-  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14_GL_2050_amxTG.rds")
+  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14_GL_2050_tx_nSD.rds")
 
   horizon = 2085
 
-  tmp <- TempAvgIndices(ifile_tx = ifile_tx, index=index,
+  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
                         regio.file = regio.file)
 
-  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14_GL_2085_amxTG.rds")
+  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14_GL_2085_tx_nSD.rds")
 
   scenario = "WL"
   horizon = 2050
 
-  tmp <- TempAvgIndices(ifile_tx = ifile_tx, index=index,
+  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
                         regio.file = regio.file)
 
-  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14_WL_2050_amxTG.rds")
+  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14_WL_2050_tx_nSD.rds")
 
   horizon = 2085
 
-  tmp <- TempAvgIndices(ifile_tx = ifile_tx, index=index,
+  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
                         regio.file = regio.file)
 
-  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14_WL_2085_amxTG.rds")
+  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14_WL_2085_tx_nSD.rds")
 
 
   scenario = "GH"
   horizon = 2050
 
-  tmp <- TempAvgIndices(ifile_tx = ifile_tx, index=index,
+  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
                         regio.file = regio.file)
 
-  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14_GH_2050_amxTG.rds")
+  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14_GH_2050_tx_nSD.rds")
 
   horizon = 2085
 
-  tmp <- TempAvgIndices(ifile_tx = ifile_tx, index=index,
+  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
                         regio.file = regio.file)
 
-  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14_GH_2085_amxTG.rds")
+  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14_GH_2085_tx_nSD.rds")
 
   scenario = "WH"
   horizon = 2050
 
-  tmp <- TempAvgIndices(ifile_tx = ifile_tx, index=index,
+  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
                         regio.file = regio.file)
 
-  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14_WH_2050_amxTG.rds")
+  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14_WH_2050_tx_nSD.rds")
 
   horizon = 2085
 
-  tmp <- TempAvgIndices(ifile_tx = ifile_tx, index=index,
+  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
                         regio.file = regio.file)
 
-  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14_WH_2085_amxTG.rds")
+  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14_WH_2085_tx_nSD.rds")
 })
 
+test_that("nTD decadal prediction", {
+
+  index = "nTD"
+
+  scenario = "GL"
+  horizon = 2050
+
+  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
+                        ofile= ofile,
+                        scenario = scenario,
+                        horizon = horizon, season = "year",
+                        regio.file = regio.file)
+
+  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14_GL_2050_tx_nTD.rds")
+
+  horizon = 2085
+
+  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
+                        ofile= ofile,
+                        scenario = scenario,
+                        horizon = horizon, season = "year",
+                        regio.file = regio.file)
+
+  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14_GL_2085_tx_nTD.rds")
+
+  scenario = "WL"
+  horizon = 2050
+
+  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
+                        ofile= ofile,
+                        scenario = scenario,
+                        horizon = horizon, season = "year",
+                        regio.file = regio.file)
+
+  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14_WL_2050_tx_nTD.rds")
+
+  horizon = 2085
+
+  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
+                        ofile= ofile,
+                        scenario = scenario,
+                        horizon = horizon, season = "year",
+                        regio.file = regio.file)
+
+  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14_WL_2085_tx_nTD.rds")
+
+
+  scenario = "GH"
+  horizon = 2050
+
+  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
+                        ofile= ofile,
+                        scenario = scenario,
+                        horizon = horizon, season = "year",
+                        regio.file = regio.file)
+
+  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14_GH_2050_tx_nTD.rds")
+
+  horizon = 2085
+
+  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
+                        ofile= ofile,
+                        scenario = scenario,
+                        horizon = horizon, season = "year",
+                        regio.file = regio.file)
+
+  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14_GH_2085_tx_nTD.rds")
+
+  scenario = "WH"
+  horizon = 2050
+
+  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
+                        ofile= ofile,
+                        scenario = scenario,
+                        horizon = horizon, season = "year",
+                        regio.file = regio.file)
+
+  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14_WH_2050_tx_nTD.rds")
+
+  horizon = 2085
+
+  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
+                        ofile= ofile,
+                        scenario = scenario,
+                        horizon = horizon, season = "year",
+                        regio.file = regio.file)
+
+  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14_WH_2085_tx_nTD.rds")
+})
+
+test_that("aTX decadal prediction", {
+
+  index = "aTX"
+
+  scenario = "GL"
+  horizon = 2050
+
+  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
+                        ofile= ofile,
+                        scenario = scenario,
+                        horizon = horizon, season = "year",
+                        regio.file = regio.file)
+
+  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14_GL_2050_tx_aTX.rds")
+
+  horizon = 2085
+
+  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
+                        ofile= ofile,
+                        scenario = scenario,
+                        horizon = horizon, season = "year",
+                        regio.file = regio.file)
+
+  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14_GL_2085_tx_aTX.rds")
+
+  scenario = "WL"
+  horizon = 2050
+
+  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
+                        ofile= ofile,
+                        scenario = scenario,
+                        horizon = horizon, season = "year",
+                        regio.file = regio.file)
+
+  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14_WL_2050_tx_aTX.rds")
+
+  horizon = 2085
+
+  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
+                        ofile= ofile,
+                        scenario = scenario,
+                        horizon = horizon, season = "year",
+                        regio.file = regio.file)
+
+  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14_WL_2085_tx_aTX.rds")
+
+
+  scenario = "GH"
+  horizon = 2050
+
+  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
+                        ofile= ofile,
+                        scenario = scenario,
+                        horizon = horizon, season = "year",
+                        regio.file = regio.file)
+
+  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14_GH_2050_tx_aTX.rds")
+
+  horizon = 2085
+
+  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
+                        ofile= ofile,
+                        scenario = scenario,
+                        horizon = horizon, season = "year",
+                        regio.file = regio.file)
+
+  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14_GH_2085_tx_aTX.rds")
+
+  scenario = "WH"
+  horizon = 2050
+
+  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
+                        ofile= ofile,
+                        scenario = scenario,
+                        horizon = horizon, season = "year",
+                        regio.file = regio.file)
+
+  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14_WH_2050_tx_aTX.rds")
+
+  horizon = 2085
+
+  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
+                        ofile= ofile,
+                        scenario = scenario,
+                        horizon = horizon, season = "year",
+                        regio.file = regio.file)
+
+  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14_WH_2085_tx_aTX.rds")
+})
 
