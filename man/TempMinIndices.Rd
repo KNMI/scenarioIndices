@@ -2,13 +2,24 @@
 % Please edit documentation in R/tnIndices.R
 \name{TempMinIndices}
 \alias{TempMinIndices}
-\title{Calculates a set of daily minimum temperature related indices as they were defined
-for the KNMI14 scenarios brochure}
+\title{Calculates a set of TN related indices}
 \usage{
-TempMinIndices(ifile_tn, index, ofile = NA, scenario, horizon = 2030,
-  season, regio.file = NA)
+TempMinIndices(ifile, index, ofile = NA, scenario, horizon = 2030, season,
+  regio.file = NA)
 }
 \arguments{
+\item{ifile}{Name of the input file (ASCII) that contains reference data
+(all numerics) in which the columns provide time series for
+specific stations.
+The first column should provide either 00000000 or a
+datestring YYYYMMDD:
+Rows starting with 00000000 are considered station info
+(station number, lat, lon etc.) and are ignored.
+Rows starting with a datestring refer to a specific day in the
+time series.
+Rows starting with "#" are completely ignored and returned
+unchanged.}
+
 \item{index}{indices ("nstFD", "nFD", "nTN", "aTN")}
 
 \item{ofile}{(DEFAULT=NA) Name of the output file to write the indices to.
@@ -31,19 +42,8 @@ KNMI14 distinguishes following regions:
 <NON> Noordoost Nederland
 <MON> Middenoost Nederland
 <ZON> Zuidoost Nederland}
-
-\item{ifile}{Name of the input file (ASCII) that contains reference data
-(all numerics) in which the columns provide time series for
-specific stations.
-The first column should provide either 00000000 or a
-datestring YYYYMMDD:
-Rows starting with 00000000 are considered station info
-(station number, lat, lon etc.) and are ignored.
-Rows starting with a datestring refer to a specific day in the
-time series.
-Rows starting with "#" are completely ignored and returned
-unchanged.}
 }
 \description{
-function calculates a set of TN related incides
+Calculates a set of daily minimum temperature related indices as
+they were defined for the KNMI14 scenarios brochure
 }

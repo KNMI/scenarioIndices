@@ -1,38 +1,11 @@
-#' Calculates a set of daily maximum temperature related indices as they were defined
-#' for the KNMI14 scenarios brochure
-#' @description      function calculates a set of TX related incides
+#' Calculates a set of TX related indices
+#'
+#' @description Calculates a set of daily maximum temperature related indices as
+#' they were defined for the KNMI14 scenarios brochure
 #' @param index      indices ("nID", "nWD", "nSD", "nTD", "aTX")
-#' @param ifile      Name of the input file (ASCII) that contains reference data
-#'                   (all numerics) in which the columns provide time series for
-#'                   specific stations.
-#'                   The first column should provide either 00000000 or a
-#'                   datestring YYYYMMDD:
-#'                   Rows starting with 00000000 are considered station info
-#'                   (station number, lat, lon etc.) and are ignored.
-#'                   Rows starting with a datestring refer to a specific day in the
-#'                   time series.
-#'                   Rows starting with "#" are completely ignored and returned
-#'                   unchanged.
-#' @param ofile      (DEFAULT=NA) Name of the output file to write the indices to.
-#'                   Format is similar to ifile without the 5 first lines
-#' @param scenario   scenario ("GL", "GH", "WL", "WH"). If scenario is not one of the 4
-#'                   then the indices are calculated for the reference period 1981-2010
-#' @param horizon    time horizon ( DEFAULT=2030, 2050, 2085). If horizon is not one of the 3
-#'                   then the indices are calculated for the reference period 1981-2010
-#' @param season     season (0= year, 1=winter, 2=spring, 3=summer, 4=autumn)
-#' @param regio.file this (optional) argument provides the name of an ASCII file that relates the stations to
-#'                   a particular region. First column is station id and second column region
-#'                   KNMI14 distinguishes following regions:
-#'                   <NLD> Nederland            [DEFAULT]
-#'                   <NWN> Noordwest Nederland
-#'                   <ZWN> Zuidwest Nederland
-#'                   <NON> Noordoost Nederland
-#'                   <MON> Middenoost Nederland
-#'                   <ZON> Zuidoost Nederland
-#'
-#'
+#' @inheritParams TempAvgIndices
 #' @export
-TempMaxIndices<- function(ifile_tx, index,
+TempMaxIndices<- function(ifile, index,
                           ofile = NA, scenario,
                           horizon=2030, season,
                           regio.file = NA) {
@@ -48,7 +21,7 @@ TempMaxIndices<- function(ifile_tx, index,
                                           system.file("refdata","KNMI14____ref_tx___19810101-20101231_v3.2.txt",
                                                       package="knmitransformer"))$obs
   } else {
-    input <- TransformTemp(ifile=ifile_tx, ofile=NA, scenario=scenario,
+    input <- TransformTemp(ifile=ifile, ofile=NA, scenario=scenario,
                            horizon=horizon, var="tx", regio.file=regio.file)
     input <- input[-(1:5) ]
 
