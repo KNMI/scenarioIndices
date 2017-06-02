@@ -19,7 +19,7 @@ test_that("reference", {
 
   horizon = 1981
 
-  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
+  tmp <- TempMaxIndices(ifile = ifile_tx, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -36,7 +36,7 @@ test_that("tx indices 2030 decadal prediction", {
 
   horizon = 2030
 
-  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
+  tmp <- TempMaxIndices(ifile = ifile_tx, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -45,7 +45,7 @@ test_that("tx indices 2030 decadal prediction", {
   expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14___2030_tx_nID.rds")
 
   index = "nWD"
-  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
+  tmp <- TempMaxIndices(ifile = ifile_tx, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -54,7 +54,7 @@ test_that("tx indices 2030 decadal prediction", {
   expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14___2030_tx_nWD.rds")
 
   index = "nSD"
-  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
+  tmp <- TempMaxIndices(ifile = ifile_tx, index=index,
                         ofile= ofile,
                         scenario = scenario, season = "year",
                         horizon = horizon,
@@ -63,7 +63,7 @@ test_that("tx indices 2030 decadal prediction", {
   expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14___2030_tx_nSD.rds")
 
   index = "nTD"
-  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
+  tmp <- TempMaxIndices(ifile = ifile_tx, index=index,
                         ofile= ofile,
                         scenario = scenario, season = "year",
                         horizon = horizon,
@@ -72,7 +72,7 @@ test_that("tx indices 2030 decadal prediction", {
   expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14___2030_tx_nTD.rds")
 
   index = "aTX"
-  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
+  tmp <- TempMaxIndices(ifile = ifile_tx, index=index,
                         ofile= ofile,
                         scenario = scenario, season = "year",
                         horizon = horizon,
@@ -88,7 +88,7 @@ test_that("nID decadal prediction", {
   scenario = "GL"
   horizon = 2050
 
-  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
+  tmp <- TempMaxIndices(ifile = ifile_tx, index=index,
                         ofile= ofile, season = "year",
                         scenario = scenario,
                         horizon = horizon,
@@ -98,7 +98,7 @@ test_that("nID decadal prediction", {
 
   horizon = 2085
 
-  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
+  tmp <- TempMaxIndices(ifile = ifile_tx, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -110,7 +110,7 @@ test_that("nID decadal prediction", {
 
   horizon = 2050
 
-  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
+  tmp <- TempMaxIndices(ifile = ifile_tx, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -120,7 +120,7 @@ test_that("nID decadal prediction", {
 
   horizon = 2085
 
-  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
+  tmp <- TempMaxIndices(ifile = ifile_tx, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -132,7 +132,7 @@ test_that("nID decadal prediction", {
 
   horizon = 2050
 
-  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
+  tmp <- TempMaxIndices(ifile = ifile_tx, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -142,7 +142,7 @@ test_that("nID decadal prediction", {
 
   horizon = 2085
 
-  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
+  tmp <- TempMaxIndices(ifile = ifile_tx, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -154,7 +154,7 @@ test_that("nID decadal prediction", {
 
   horizon = 2050
 
-  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
+  tmp <- TempMaxIndices(ifile = ifile_tx, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -164,7 +164,7 @@ test_that("nID decadal prediction", {
 
   horizon = 2085
 
-  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
+  tmp <- TempMaxIndices(ifile = ifile_tx, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -181,7 +181,7 @@ test_that("nWd decadal prediction", {
   scenario = "GL"
   horizon = 2050
 
-  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
+  tmp <- TempMaxIndices(ifile = ifile_tx, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -191,7 +191,7 @@ test_that("nWd decadal prediction", {
 
   horizon = 2085
 
-  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
+  tmp <- TempMaxIndices(ifile = ifile_tx, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -202,7 +202,7 @@ test_that("nWd decadal prediction", {
   scenario = "WL"
   horizon = 2050
 
-  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
+  tmp <- TempMaxIndices(ifile = ifile_tx, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -212,7 +212,7 @@ test_that("nWd decadal prediction", {
 
   horizon = 2085
 
-  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
+  tmp <- TempMaxIndices(ifile = ifile_tx, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -224,7 +224,7 @@ test_that("nWd decadal prediction", {
   scenario = "GH"
   horizon = 2050
 
-  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
+  tmp <- TempMaxIndices(ifile = ifile_tx, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -234,7 +234,7 @@ test_that("nWd decadal prediction", {
 
   horizon = 2085
 
-  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
+  tmp <- TempMaxIndices(ifile = ifile_tx, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -245,7 +245,7 @@ test_that("nWd decadal prediction", {
   scenario = "WH"
   horizon = 2050
 
-  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
+  tmp <- TempMaxIndices(ifile = ifile_tx, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -255,7 +255,7 @@ test_that("nWd decadal prediction", {
 
   horizon = 2085
 
-  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
+  tmp <- TempMaxIndices(ifile = ifile_tx, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -271,7 +271,7 @@ test_that("nSD decadal prediction", {
   scenario = "GL"
   horizon = 2050
 
-  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
+  tmp <- TempMaxIndices(ifile = ifile_tx, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -281,7 +281,7 @@ test_that("nSD decadal prediction", {
 
   horizon = 2085
 
-  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
+  tmp <- TempMaxIndices(ifile = ifile_tx, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -292,7 +292,7 @@ test_that("nSD decadal prediction", {
   scenario = "WL"
   horizon = 2050
 
-  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
+  tmp <- TempMaxIndices(ifile = ifile_tx, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -302,7 +302,7 @@ test_that("nSD decadal prediction", {
 
   horizon = 2085
 
-  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
+  tmp <- TempMaxIndices(ifile = ifile_tx, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -314,7 +314,7 @@ test_that("nSD decadal prediction", {
   scenario = "GH"
   horizon = 2050
 
-  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
+  tmp <- TempMaxIndices(ifile = ifile_tx, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -324,7 +324,7 @@ test_that("nSD decadal prediction", {
 
   horizon = 2085
 
-  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
+  tmp <- TempMaxIndices(ifile = ifile_tx, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -335,7 +335,7 @@ test_that("nSD decadal prediction", {
   scenario = "WH"
   horizon = 2050
 
-  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
+  tmp <- TempMaxIndices(ifile = ifile_tx, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -345,7 +345,7 @@ test_that("nSD decadal prediction", {
 
   horizon = 2085
 
-  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
+  tmp <- TempMaxIndices(ifile = ifile_tx, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -361,7 +361,7 @@ test_that("nTD decadal prediction", {
   scenario = "GL"
   horizon = 2050
 
-  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
+  tmp <- TempMaxIndices(ifile = ifile_tx, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -371,7 +371,7 @@ test_that("nTD decadal prediction", {
 
   horizon = 2085
 
-  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
+  tmp <- TempMaxIndices(ifile = ifile_tx, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -382,7 +382,7 @@ test_that("nTD decadal prediction", {
   scenario = "WL"
   horizon = 2050
 
-  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
+  tmp <- TempMaxIndices(ifile = ifile_tx, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -392,7 +392,7 @@ test_that("nTD decadal prediction", {
 
   horizon = 2085
 
-  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
+  tmp <- TempMaxIndices(ifile = ifile_tx, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -404,7 +404,7 @@ test_that("nTD decadal prediction", {
   scenario = "GH"
   horizon = 2050
 
-  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
+  tmp <- TempMaxIndices(ifile = ifile_tx, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -414,7 +414,7 @@ test_that("nTD decadal prediction", {
 
   horizon = 2085
 
-  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
+  tmp <- TempMaxIndices(ifile = ifile_tx, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -425,7 +425,7 @@ test_that("nTD decadal prediction", {
   scenario = "WH"
   horizon = 2050
 
-  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
+  tmp <- TempMaxIndices(ifile = ifile_tx, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -435,7 +435,7 @@ test_that("nTD decadal prediction", {
 
   horizon = 2085
 
-  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
+  tmp <- TempMaxIndices(ifile = ifile_tx, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -451,7 +451,7 @@ test_that("aTX decadal prediction", {
   scenario = "GL"
   horizon = 2050
 
-  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
+  tmp <- TempMaxIndices(ifile = ifile_tx, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -461,7 +461,7 @@ test_that("aTX decadal prediction", {
 
   horizon = 2085
 
-  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
+  tmp <- TempMaxIndices(ifile = ifile_tx, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -472,7 +472,7 @@ test_that("aTX decadal prediction", {
   scenario = "WL"
   horizon = 2050
 
-  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
+  tmp <- TempMaxIndices(ifile = ifile_tx, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -482,7 +482,7 @@ test_that("aTX decadal prediction", {
 
   horizon = 2085
 
-  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
+  tmp <- TempMaxIndices(ifile = ifile_tx, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -494,7 +494,7 @@ test_that("aTX decadal prediction", {
   scenario = "GH"
   horizon = 2050
 
-  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
+  tmp <- TempMaxIndices(ifile = ifile_tx, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -504,7 +504,7 @@ test_that("aTX decadal prediction", {
 
   horizon = 2085
 
-  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
+  tmp <- TempMaxIndices(ifile = ifile_tx, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -515,7 +515,7 @@ test_that("aTX decadal prediction", {
   scenario = "WH"
   horizon = 2050
 
-  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
+  tmp <- TempMaxIndices(ifile = ifile_tx, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -525,7 +525,7 @@ test_that("aTX decadal prediction", {
 
   horizon = 2085
 
-  tmp <- TempMaxIndices(ifile_tx = ifile_tx, index=index,
+  tmp <- TempMaxIndices(ifile = ifile_tx, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
