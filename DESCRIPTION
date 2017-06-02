@@ -1,8 +1,8 @@
 Package: scenarioIndices
 Type: Package
-Title: Calculate scenarion indices for knmitransformer
-Version: 0.1.0
-Date: 2016-11-18
+Title: Calculate indices for KNMI climate scenarios
+Version: 0.1.1
+Date: 2017-06-02
 Authors@R: as.person(c(
     "Alexander Bakker [aut]",
     "Christiana Photiadou <photiado@knmi.nl> [aut, cre]",
@@ -11,8 +11,8 @@ Authors@R: as.person(c(
     "Jules Beersma <jules.beersma@knmi.nl> [ctb]",
     "KNMI [cph]"
   ))
-Description: Description: Calculates the scenario Indices for temp, precip, evap & radaition
-              as the were published in the brochure for KNMI14 version15.
+Description: Calculates the scenario indices for temp, precip, evap & radiation
+  as the were published in the brochure for KNMI14 version15.
 License: file LICENSE
 LazyData: TRUE
 Imports:
