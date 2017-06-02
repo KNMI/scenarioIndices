@@ -48,8 +48,9 @@ evmk_sums_relchange<- function(ifile_tg, ifile_rsds,
   ev_ref <- evmk_ref[-(1:5)]
   ev_ref <- as.data.frame(ev_ref)
 
+#  ev_sce <- round(evmk_scenario[-(1:5)],1)
   ev_sce <- evmk_scenario[-(1:5)]
-  ev_sce <- as.data.frame(ev_sce)
+    ev_sce <- as.data.frame(ev_sce)
 
   mm <- (ev_ref[,1]%/%100)%%100
   ss <- as.integer((mm/3)%%4+1)
