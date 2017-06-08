@@ -27,38 +27,14 @@ PrecipDeficit_sce<- function(ifile_tg, ifile_rsds, ifile_rr,
 
   StationSub <- as.character(fread(system.file("refdata","P102.txt", package = "scenarioIndices"))$V1)
 
-  # reference for evmk for de bilt
-  evmkRef <- fread(system.file("refdata","KNMI14____ref_evmk___19810101-20101231_v3.2.txt",
-                               package="knmitransformer"))
-  stationID     <- evmkRef[(1)]
-  names(evmkRef)<- as.character(stationID)
-  evDeBilt      <- evmkRef[,"260",with=FALSE]
-  evDeBilt      <- evDeBilt[-(1:5)]
-
-  dt         <- evmkRef[-(1:5),1, with = FALSE]
-  mm         <- (dt%/%100)%%100
-  amjjas     <- which(mm>=4 & mm<=9)
-  yy         <- (dt%/%10000)[amjjas]
-  evDeBiltGS <- evDeBilt[amjjas]
-
-  # rr reference for P102
-  rrRef       <- fread(system.file("refdata","KNMI14____ref_rrcentr___19810101-20101231_v3.2.txt", package = "scenarioIndices"))
-  stationID   <- rrRef[(1)]
-  names(rrRef)<- as.character(stationID)
-  rrRef       <- rrRef[-(1:5),StationSub, with=FALSE]
-  rrRefMean   <- apply(as.data.frame(rrRef[amjjas,]),1,mean)
-
-  # maximum potential precipitation deficit & statistics (mean, sd, ranks)
-  Xsum  <- tapply(evDeBiltGS$`260` - rrRefMean,yy,max.pos.cumsum)
-  N<- 3 # find 3 highest years
-  ndx <- order(Xsum,decreasing=T)[1:N]
-  highestref <- round(mean(Xsum[ndx]),1)
-  nr    <- length(Xsum)
-  Xstat <- c(mean(Xsum),sd(Xsum),sort(as.numeric(Xsum)))# mean,sd,ranks Xsum
-
-  table_ref <- data.frame(statsYears = c("mean","sd", names(sort(Xsum)), "high"),
-                          reference = c(round(Xstat,1), highestref))
-
+  # read PrecipDeficitRef
+# Wrong PrecipDeficitRef
+  PrecipDeficitRef <- system.file("refdata", "PrecipDeficitRef_19810101-20101231_error.txt", package = "scenarioIndices")
+  Xstat <- read.table(PrecipDeficitRef)$V2
+  nx <- length(Xstat)
+  Xstat <- Xstat[1:(nx-1)]
+# Correct PrecipDeficitRef
+ # Xstat <- fread(system.file("refdata","PrecipDeficitRef_19810101-20101231_correct.txt", package = "scenarioIndices"))
 
   #input for scenarios
   #calculate evmk for scenarios
@@ -76,8 +52,7 @@ PrecipDeficit_sce<- function(ifile_tg, ifile_rsds, ifile_rr,
 
   stationID           <- evmk_scenario[(1)]
   names(evmk_scenario)<- as.character(stationID)
-  evDeBiltSC          <- evmk_scenario[,"260",with=FALSE]
-  evDeBiltSC          <- evDeBiltSC[-(1:5)]
+  evDeBiltSC          <- evmk_scenario[-(1:5),"260",with=FALSE]
   evDeBiltSCGS        <- evDeBiltSC[amjjas]
 
   # calculate rr for scenarios
@@ -85,16 +60,18 @@ PrecipDeficit_sce<- function(ifile_tg, ifile_rsds, ifile_rr,
                   ofile="tmp.txt",
                   scenario=scenario,
                   horizon = horizon,
-                  subscenario="centr")
+                  subscenario="centr", rounding = TRUE)
 
   stationID         <- rrScenario[(1)]
   names(rrScenario) <- as.character(stationID)
-  rrScenario        <- rrScenario[-(1:5),StationSub, with=FALSE]
+  #Wrong version. Correct should be -(1:5)
+  rrScenario        <- rrScenario[-(1:6),StationSub, with=FALSE]
   rrScenarioMean    <- apply(as.data.frame(rrScenario[amjjas,]),1,mean)
 
 
   # maximum potential precipitation deficit for scenarios & statistics (mean, sd, ranks)
   Ysum       <- tapply(evDeBiltSCGS$`260` - rrScenarioMean, yy, max.pos.cumsum)
+  N<- 3 # find 3 highest years
   ndy        <- order(Ysum,decreasing=T)[1:N]
   highestsce <- round(mean(Ysum[ndy]),1)
   Ystat      <- c(mean(Ysum), sd(Ysum), sort(as.numeric(Ysum)))
@@ -102,11 +79,11 @@ PrecipDeficit_sce<- function(ifile_tg, ifile_rsds, ifile_rr,
   nd <- length(delta)
   highestdel <- round(mean(delta[(nd-2):nd]),1)
 
-
-  table_sce  <- data.frame(variables = c("mean","sd", names(sort(Ysum)), "high"),
+  table_sce  <- data.frame(year = c("mean","sd",names(sort(Ysum)), "high"),
                           values = c(round(Ystat,1), highestsce),
-                          relchange = c(round(delta,1), highestdel))
+                          relativechange = c(round(delta,1), highestdel))
 
+  names(table_sce) <- c("year",  paste(scenario,horizon,sep=""), "delta")
 
   write.table(format(table_sce,width=8,nsmall=2), ofile,col.names=F,row.names=F,quote=F)
 
