@@ -28,10 +28,10 @@ PrecipDeficit_ref<- function(ofile = NA) {
   names(rrRef)<- as.character(stationID)
 # Error in KNMI14 runs: 19810101 was removed from calculations
 # CORRECT
-  rrRef       <- rrRef[-(1:5),StationSub, with=FALSE]
+#  rrRef       <- rrRef[-(1:5),StationSub, with=FALSE]
 #
 # WRONG
- # rrRef       <- rrRef[-(1:6),StationSub, with=FALSE]
+  rrRef       <- rrRef[-(1:6),StationSub, with=FALSE]
 #
   rrRefMean   <- apply(as.data.frame(rrRef[amjjas,]),1,mean)
 
@@ -43,8 +43,9 @@ PrecipDeficit_ref<- function(ofile = NA) {
   nr    <- length(Xsum)
   Xstat <- c(mean(Xsum),sd(Xsum),sort(as.numeric(Xsum)))# mean,sd,ranks Xsum
 
-  table_ref <- data.frame(statsYears = c("mean","sd", names(sort(Xsum)), "high"),
+  table_ref <- data.frame(year = c("mean","sd", names(sort(Xsum)), "high"),
                           reference = c(round(Xstat,1), highestref))
+
 
   return(table_ref)
 }
