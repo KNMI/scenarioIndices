@@ -10,8 +10,8 @@ context("precipDefic  calc - Entire station set")
 input_tg   <- system.file("refdata","KNMI14____ref_tg___19810101-20101231_v3.2.txt", package="knmitransformer")
 input_rsds <- system.file("refdata","KNMI14____ref_rsds___19810101-20101231_v3.2.txt", package="knmitransformer")
 input_rr   <- system.file("refdata","KNMI14____ref_rrcentr___19810101-20101231_v3.2.txt", package = "scenarioIndices")
-ofile      <- NA # output file - used only temporary
-regio.file <- system.file("extdata","stationstabel", package="knmitransformer") # table that links stations to region
+ofile      <- "tmp.txt" # output file - used only temporary
+regio.file <- "stationstabel"
 
 #
 # test_that("precipDefic  reference", {

@@ -9,8 +9,7 @@ context("Temp tn ref indices - Entire station set")
 
 input_tn   <- system.file("refdata","KNMI14____ref_tn___19810101-20101231_v3.2.txt", package="knmitransformer")
 ofile      <- "tmp.txt" # output file - used only temporary
-regio.file <- system.file("extdata","stationstabel", package="knmitransformer") # table that links stations to region
-
+regio.file <- "stationstabel"
 
 test_that("reference", {
   index = "aTN"

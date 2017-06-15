@@ -9,7 +9,7 @@ context("Temp tx ref indices - Entire station set")
 
 input_tx   <- system.file("refdata","KNMI14____ref_tx___19810101-20101231_v3.2.txt", package="knmitransformer")
 ofile      <- "tmp.txt" # output file - used only temporary
-regio.file <- system.file("extdata","stationstabel", package="knmitransformer")
+regio.file <- "stationstabel"
 
 
 test_that("reference", {
