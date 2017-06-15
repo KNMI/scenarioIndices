@@ -7,7 +7,7 @@ library(data.table)
 
 context("Temp tn ref indices - Entire station set")
 
-ifile_tn   <- system.file("refdata","KNMI14____ref_tn___19810101-20101231_v3.2.txt", package="knmitransformer")
+input_tn   <- system.file("refdata","KNMI14____ref_tn___19810101-20101231_v3.2.txt", package="knmitransformer")
 ofile      <- "tmp.txt" # output file - used only temporary
 regio.file <- system.file("extdata","stationstabel", package="knmitransformer") # table that links stations to region
 
@@ -19,7 +19,7 @@ test_that("reference", {
 
   horizon = 1981
 
-  tmp <- TempMinIndices(ifile = ifile_tn, index=index,
+  tmp <- TempMinIndices(input = input_tn, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -35,7 +35,7 @@ test_that("2030 decadal prediction", {
 
   horizon = 2030
 
-  tmp <- TempMinIndices(ifile = ifile_tn, index=index,
+  tmp <- TempMinIndices(input = input_tn, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -44,7 +44,7 @@ test_that("2030 decadal prediction", {
   expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14___2030_tn_aTN.rds")
 
   index = "nTN"
-  tmp <- TempMinIndices(ifile = ifile_tn, index=index,
+  tmp <- TempMinIndices(input = input_tn, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -53,7 +53,7 @@ test_that("2030 decadal prediction", {
   expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14___2030_tn_nTN.rds")
 
   index = "nFD"
-  tmp <- TempMinIndices(ifile = ifile_tn, index=index,
+  tmp <- TempMinIndices(input = input_tn, index=index,
                         ofile= ofile,
                         scenario = scenario, season = "year",
                         horizon = horizon,
@@ -62,7 +62,7 @@ test_that("2030 decadal prediction", {
   expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14___2030_tn_nFD.rds")
 
   index = "nstFD"
-  tmp <- TempMinIndices(ifile = ifile_tn, index=index,
+  tmp <- TempMinIndices(input = input_tn, index=index,
                         ofile= ofile,
                         scenario = scenario, season = "year",
                         horizon = horizon,
@@ -78,7 +78,7 @@ test_that("aTN decadal prediction", {
   scenario = "GL"
   horizon = 2050
 
-  tmp <- TempMinIndices(ifile = ifile_tn, index=index,
+  tmp <- TempMinIndices(input = input_tn, index=index,
                         ofile= ofile, season = "year",
                         scenario = scenario,
                         horizon = horizon,
@@ -88,7 +88,7 @@ test_that("aTN decadal prediction", {
 
   horizon = 2085
 
-  tmp <- TempMinIndices(ifile = ifile_tn, index=index,
+  tmp <- TempMinIndices(input = input_tn, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -100,7 +100,7 @@ test_that("aTN decadal prediction", {
 
   horizon = 2050
 
-  tmp <- TempMinIndices(ifile = ifile_tn, index=index,
+  tmp <- TempMinIndices(input = input_tn, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -110,7 +110,7 @@ test_that("aTN decadal prediction", {
 
   horizon = 2085
 
-  tmp <- TempMinIndices(ifile = ifile_tn, index=index,
+  tmp <- TempMinIndices(input = input_tn, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -122,7 +122,7 @@ test_that("aTN decadal prediction", {
 
   horizon = 2050
 
-  tmp <- TempMinIndices(ifile = ifile_tn, index=index,
+  tmp <- TempMinIndices(input = input_tn, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -132,7 +132,7 @@ test_that("aTN decadal prediction", {
 
   horizon = 2085
 
-  tmp <- TempMinIndices(ifile = ifile_tn, index=index,
+  tmp <- TempMinIndices(input = input_tn, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -144,7 +144,7 @@ test_that("aTN decadal prediction", {
 
   horizon = 2050
 
-  tmp <- TempMinIndices(ifile = ifile_tn, index=index,
+  tmp <- TempMinIndices(input = input_tn, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -154,7 +154,7 @@ test_that("aTN decadal prediction", {
 
   horizon = 2085
 
-  tmp <- TempMinIndices(ifile = ifile_tn, index=index,
+  tmp <- TempMinIndices(input = input_tn, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -170,7 +170,7 @@ test_that("nTN (tropical nights) decadal prediction", {
   scenario = "GL"
   horizon = 2050
 
-  tmp <- TempMinIndices(ifile = ifile_tn, index=index,
+  tmp <- TempMinIndices(input = input_tn, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -180,7 +180,7 @@ test_that("nTN (tropical nights) decadal prediction", {
 
   horizon = 2085
 
-  tmp <- TempMinIndices(ifile = ifile_tn, index=index,
+  tmp <- TempMinIndices(input = input_tn, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -191,7 +191,7 @@ test_that("nTN (tropical nights) decadal prediction", {
   scenario = "WL"
   horizon = 2050
 
-  tmp <- TempMinIndices(ifile = ifile_tn, index=index,
+  tmp <- TempMinIndices(input = input_tn, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -201,7 +201,7 @@ test_that("nTN (tropical nights) decadal prediction", {
 
   horizon = 2085
 
-  tmp <- TempMinIndices(ifile = ifile_tn, index=index,
+  tmp <- TempMinIndices(input = input_tn, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -213,7 +213,7 @@ test_that("nTN (tropical nights) decadal prediction", {
   scenario = "GH"
   horizon = 2050
 
-  tmp <- TempMinIndices(ifile = ifile_tn, index=index,
+  tmp <- TempMinIndices(input = input_tn, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -223,7 +223,7 @@ test_that("nTN (tropical nights) decadal prediction", {
 
   horizon = 2085
 
-  tmp <- TempMinIndices(ifile = ifile_tn, index=index,
+  tmp <- TempMinIndices(input = input_tn, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -234,7 +234,7 @@ test_that("nTN (tropical nights) decadal prediction", {
   scenario = "WH"
   horizon = 2050
 
-  tmp <- TempMinIndices(ifile = ifile_tn, index=index,
+  tmp <- TempMinIndices(input = input_tn, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -244,7 +244,7 @@ test_that("nTN (tropical nights) decadal prediction", {
 
   horizon = 2085
 
-  tmp <- TempMinIndices(ifile = ifile_tn, index=index,
+  tmp <- TempMinIndices(input = input_tn, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -259,7 +259,7 @@ test_that("nFD decadal prediction", {
   scenario = "GL"
   horizon = 2050
 
-  tmp <- TempMinIndices(ifile = ifile_tn, index=index,
+  tmp <- TempMinIndices(input = input_tn, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -269,7 +269,7 @@ test_that("nFD decadal prediction", {
 
   horizon = 2085
 
-  tmp <- TempMinIndices(ifile = ifile_tn, index=index,
+  tmp <- TempMinIndices(input = input_tn, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -280,7 +280,7 @@ test_that("nFD decadal prediction", {
   scenario = "WL"
   horizon = 2050
 
-  tmp <- TempMinIndices(ifile = ifile_tn, index=index,
+  tmp <- TempMinIndices(input = input_tn, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -290,7 +290,7 @@ test_that("nFD decadal prediction", {
 
   horizon = 2085
 
-  tmp <- TempMinIndices(ifile = ifile_tn, index=index,
+  tmp <- TempMinIndices(input = input_tn, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -302,7 +302,7 @@ test_that("nFD decadal prediction", {
   scenario = "GH"
   horizon = 2050
 
-  tmp <- TempMinIndices(ifile = ifile_tn, index=index,
+  tmp <- TempMinIndices(input = input_tn, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -312,7 +312,7 @@ test_that("nFD decadal prediction", {
 
   horizon = 2085
 
-  tmp <- TempMinIndices(ifile = ifile_tn, index=index,
+  tmp <- TempMinIndices(input = input_tn, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -323,7 +323,7 @@ test_that("nFD decadal prediction", {
   scenario = "WH"
   horizon = 2050
 
-  tmp <- TempMinIndices(ifile = ifile_tn, index=index,
+  tmp <- TempMinIndices(input = input_tn, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -333,7 +333,7 @@ test_that("nFD decadal prediction", {
 
   horizon = 2085
 
-  tmp <- TempMinIndices(ifile = ifile_tn, index=index,
+  tmp <- TempMinIndices(input = input_tn, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -349,7 +349,7 @@ test_that("nstFD decadal prediction", {
   scenario = "GL"
   horizon = 2050
 
-  tmp <- TempMinIndices(ifile = ifile_tn, index=index,
+  tmp <- TempMinIndices(input = input_tn, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -359,7 +359,7 @@ test_that("nstFD decadal prediction", {
 
   horizon = 2085
 
-  tmp <- TempMinIndices(ifile = ifile_tn, index=index,
+  tmp <- TempMinIndices(input = input_tn, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -370,7 +370,7 @@ test_that("nstFD decadal prediction", {
   scenario = "WL"
   horizon = 2050
 
-  tmp <- TempMinIndices(ifile = ifile_tn, index=index,
+  tmp <- TempMinIndices(input = input_tn, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -380,7 +380,7 @@ test_that("nstFD decadal prediction", {
 
   horizon = 2085
 
-  tmp <- TempMinIndices(ifile = ifile_tn, index=index,
+  tmp <- TempMinIndices(input = input_tn, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -392,7 +392,7 @@ test_that("nstFD decadal prediction", {
   scenario = "GH"
   horizon = 2050
 
-  tmp <- TempMinIndices(ifile = ifile_tn, index=index,
+  tmp <- TempMinIndices(input = input_tn, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -402,7 +402,7 @@ test_that("nstFD decadal prediction", {
 
   horizon = 2085
 
-  tmp <- TempMinIndices(ifile = ifile_tn, index=index,
+  tmp <- TempMinIndices(input = input_tn, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -413,7 +413,7 @@ test_that("nstFD decadal prediction", {
   scenario = "WH"
   horizon = 2050
 
-  tmp <- TempMinIndices(ifile = ifile_tn, index=index,
+  tmp <- TempMinIndices(input = input_tn, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -423,7 +423,7 @@ test_that("nstFD decadal prediction", {
 
   horizon = 2085
 
-  tmp <- TempMinIndices(ifile = ifile_tn, index=index,
+  tmp <- TempMinIndices(input = input_tn, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",

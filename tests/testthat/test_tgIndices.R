@@ -7,7 +7,7 @@ library(data.table)
 
 context("Temp tg ref indices - Entire station set")
 
-ifile_tg   <- system.file("refdata","KNMI14____ref_tg___19810101-20101231_v3.2.txt", package="knmitransformer")
+input_tg   <- system.file("refdata","KNMI14____ref_tg___19810101-20101231_v3.2.txt", package="knmitransformer")
 ofile      <- "tmp.txt" # output file - used only temporary
 regio.file <- system.file("extdata","stationstabel", package="knmitransformer") # table that links stations to region
 
@@ -19,7 +19,7 @@ test_that("reference", {
 
   horizon = 1981
 
-  tmp <- TempAvgIndices(ifile= ifile_tg, index=index,
+  tmp <- TempAvgIndices(input= input_tg, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -35,7 +35,7 @@ test_that("2030 decadal prediction", {
 
   horizon = 2030
 
-  tmp <- TempAvgIndices(ifile = ifile_tg, index=index,
+  tmp <- TempAvgIndices(input = input_tg, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -44,7 +44,7 @@ test_that("2030 decadal prediction", {
   expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14___2030_tg_aTG.rds")
 
   index = "amnTG"
-  tmp <- TempAvgIndices(ifile = ifile_tg, index=index,
+  tmp <- TempAvgIndices(input = input_tg, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -53,7 +53,7 @@ test_that("2030 decadal prediction", {
   expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14___2030_tg_amnTG.rds")
 
   index = "amxTG"
-  tmp <- TempAvgIndices(ifile = ifile_tg, index=index,
+  tmp <- TempAvgIndices(input = input_tg, index=index,
                         ofile= ofile,
                         scenario = scenario, season = "year",
                         horizon = horizon,
@@ -69,7 +69,7 @@ test_that("aTG decadal prediction", {
   scenario = "GL"
   horizon = 2050
 
-  tmp <- TempAvgIndices(ifile = ifile_tg, index=index,
+  tmp <- TempAvgIndices(input = input_tg, index=index,
                         ofile= ofile, season = "year",
                         scenario = scenario,
                         horizon = horizon,
@@ -79,7 +79,7 @@ test_that("aTG decadal prediction", {
 
   horizon = 2085
 
-  tmp <- TempAvgIndices(ifile = ifile_tg, index=index,
+  tmp <- TempAvgIndices(input = input_tg, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -91,7 +91,7 @@ test_that("aTG decadal prediction", {
 
   horizon = 2050
 
-  tmp <- TempAvgIndices(ifile = ifile_tg, index=index,
+  tmp <- TempAvgIndices(input = input_tg, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -101,7 +101,7 @@ test_that("aTG decadal prediction", {
 
   horizon = 2085
 
-  tmp <- TempAvgIndices(ifile = ifile_tg, index=index,
+  tmp <- TempAvgIndices(input = input_tg, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -113,7 +113,7 @@ test_that("aTG decadal prediction", {
 
   horizon = 2050
 
-  tmp <- TempAvgIndices(ifile = ifile_tg, index=index,
+  tmp <- TempAvgIndices(input = input_tg, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -123,7 +123,7 @@ test_that("aTG decadal prediction", {
 
   horizon = 2085
 
-  tmp <- TempAvgIndices(ifile = ifile_tg, index=index,
+  tmp <- TempAvgIndices(input = input_tg, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -135,7 +135,7 @@ test_that("aTG decadal prediction", {
 
   horizon = 2050
 
-  tmp <- TempAvgIndices(ifile = ifile_tg, index=index,
+  tmp <- TempAvgIndices(input = input_tg, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -145,7 +145,7 @@ test_that("aTG decadal prediction", {
 
   horizon = 2085
 
-  tmp <- TempAvgIndices(ifile = ifile_tg, index=index,
+  tmp <- TempAvgIndices(input = input_tg, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -161,7 +161,7 @@ test_that("amnTG decadal prediction", {
   scenario = "GL"
   horizon = 2050
 
-  tmp <- TempAvgIndices(ifile = ifile_tg, index=index,
+  tmp <- TempAvgIndices(input = input_tg, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -171,7 +171,7 @@ test_that("amnTG decadal prediction", {
 
   horizon = 2085
 
-  tmp <- TempAvgIndices(ifile = ifile_tg, index=index,
+  tmp <- TempAvgIndices(input = input_tg, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -182,7 +182,7 @@ test_that("amnTG decadal prediction", {
   scenario = "WL"
   horizon = 2050
 
-  tmp <- TempAvgIndices(ifile =  ifile_tg, index=index,
+  tmp <- TempAvgIndices(input =  input_tg, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -192,7 +192,7 @@ test_that("amnTG decadal prediction", {
 
   horizon = 2085
 
-  tmp <- TempAvgIndices(ifile =  ifile_tg, index=index,
+  tmp <- TempAvgIndices(input =  input_tg, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -204,7 +204,7 @@ test_that("amnTG decadal prediction", {
   scenario = "GH"
   horizon = 2050
 
-  tmp <- TempAvgIndices(ifile =  ifile_tg, index=index,
+  tmp <- TempAvgIndices(input =  input_tg, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -214,7 +214,7 @@ test_that("amnTG decadal prediction", {
 
   horizon = 2085
 
-  tmp <- TempAvgIndices(ifile =  ifile_tg, index=index,
+  tmp <- TempAvgIndices(input =  input_tg, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -225,7 +225,7 @@ test_that("amnTG decadal prediction", {
   scenario = "WH"
   horizon = 2050
 
-  tmp <- TempAvgIndices(ifile =  ifile_tg, index=index,
+  tmp <- TempAvgIndices(input =  input_tg, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -235,7 +235,7 @@ test_that("amnTG decadal prediction", {
 
   horizon = 2085
 
-  tmp <- TempAvgIndices(ifile =  ifile_tg, index=index,
+  tmp <- TempAvgIndices(input =  input_tg, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -250,7 +250,7 @@ test_that("amxTG decadal prediction", {
   scenario = "GL"
   horizon = 2050
 
-  tmp <- TempAvgIndices(ifile =  ifile_tg, index=index,
+  tmp <- TempAvgIndices(input =  input_tg, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -260,7 +260,7 @@ test_that("amxTG decadal prediction", {
 
   horizon = 2085
 
-  tmp <- TempAvgIndices(ifile =  ifile_tg, index=index,
+  tmp <- TempAvgIndices(input =  input_tg, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -271,7 +271,7 @@ test_that("amxTG decadal prediction", {
   scenario = "WL"
   horizon = 2050
 
-  tmp <- TempAvgIndices(ifile =  ifile_tg, index=index,
+  tmp <- TempAvgIndices(input =  input_tg, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -281,7 +281,7 @@ test_that("amxTG decadal prediction", {
 
   horizon = 2085
 
-  tmp <- TempAvgIndices(ifile =  ifile_tg, index=index,
+  tmp <- TempAvgIndices(input =  input_tg, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -293,7 +293,7 @@ test_that("amxTG decadal prediction", {
   scenario = "GH"
   horizon = 2050
 
-  tmp <- TempAvgIndices(ifile =  ifile_tg, index=index,
+  tmp <- TempAvgIndices(input =  input_tg, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -303,7 +303,7 @@ test_that("amxTG decadal prediction", {
 
   horizon = 2085
 
-  tmp <- TempAvgIndices(ifile =  ifile_tg, index=index,
+  tmp <- TempAvgIndices(input =  input_tg, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -314,7 +314,7 @@ test_that("amxTG decadal prediction", {
   scenario = "WH"
   horizon = 2050
 
-  tmp <- TempAvgIndices(ifile =  ifile_tg, index=index,
+  tmp <- TempAvgIndices(input =  input_tg, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",
@@ -324,7 +324,7 @@ test_that("amxTG decadal prediction", {
 
   horizon = 2085
 
-  tmp <- TempAvgIndices(ifile =  ifile_tg, index=index,
+  tmp <- TempAvgIndices(input =  input_tg, index=index,
                         ofile= ofile,
                         scenario = scenario,
                         horizon = horizon, season = "year",

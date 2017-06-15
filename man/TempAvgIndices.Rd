@@ -4,11 +4,11 @@
 \alias{TempAvgIndices}
 \title{Calculates a set of TG related indices}
 \usage{
-TempAvgIndices(ifile, index, ofile = NA, scenario, horizon = 2030, season,
+TempAvgIndices(input, index, ofile = NA, scenario, horizon = 2030, season,
   regio.file = NA)
 }
 \arguments{
-\item{ifile}{Name of the input file (ASCII) that contains reference data
+\item{input}{Name of the input file (ASCII) that contains reference data
 (all numerics) in which the columns provide time series for
 specific stations.
 The first column should provide either 00000000 or a
@@ -23,7 +23,7 @@ unchanged.}
 \item{index}{indices ("aTG", "amnTG", "amxTG")}
 
 \item{ofile}{(DEFAULT=NA) Name of the output file to write the indices to.
-Format is similar to ifile without the 5 first lines}
+Format is similar to input without the 5 first lines}
 
 \item{scenario}{scenario ("GL", "GH", "WL", "WH"). If scenario is not one of the 4
 then the indices are calculated for the reference period 1981-2010}

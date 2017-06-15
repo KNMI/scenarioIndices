@@ -2,11 +2,11 @@
 #' as it was calculated for KNMI14 scenarios brochure
 #' this index uses the evmk of DeBilt and precipitation amount of 102 stations (the homogenenised ones) over the NL
 #' @description      function reads reference ts for evmk, rr, tg & rdrs
-#' @param ifile_tg   input file for tg
-#' @param ifile_rsds input file for rsds
-#' @param ifile_rr   input for rr
+#' @param input_tg   input file for tg
+#' @param input_rsds input file for rsds
+#' @param input_rr   input for rr
 #' @param ofile      (DEFAULT="uitvoer.txt") Name of the output file to write the transformed data to.
-#'                    Format is similar to ifile
+#'                    Format is similar to input
 #' @param scenario    scenario                      ["GL", "GH", "WL", "WH"]
 #' @param horizon     time horizon                  [2030 (=DEFAULT), 2050, 2085]
 #' @param regio.file  this (optional) argument provides the name of an ASCII file that relates the stations to
@@ -19,10 +19,8 @@
 #'                <MON> Middenoost Nederland
 #'                <ZON> Zuidoost Nederland
 #' @export
-PrecipDeficit_sce<- function(ifile_tg, ifile_rsds, ifile_rr,
-                               ofile="uitvoer.txt",
-                               scenario,
-                               horizon = NA, regio.file = NA) {
+PrecipDeficit_sce<- function(input_tg, input_rsds, input_rr,
+                               scenario, horizon = NA, ofile=NA, regio.file = NA) {
 
 
   StationSub <- as.character(fread(system.file("refdata","P102.txt", package = "scenarioIndices"))$V1)
@@ -38,12 +36,9 @@ PrecipDeficit_sce<- function(ifile_tg, ifile_rsds, ifile_rr,
 
   #input for scenarios
   #calculate evmk for scenarios
-  evmk_scenario <- TransformEvap(ifile_tg = ifile_tg,
-                                                   ifile_rsds = ifile_rsds,
-                                                   ofile="uitvoer.txt",
-                                                   scenario = scenario,
-                                                   horizon = horizon,
-                                                   regio.file = regio.file)
+  evmk_scenario <- TransformEvap(input_tg = input_tg, input_rsds = input_rsds,
+                                  scenario = scenario, horizon = horizon,
+                                 ofile = NA, regio.file = regio.file)
 
   dt     <- evmk_scenario[-(1:5),1, with = FALSE]
   mm     <- (dt%/%100)%%100
@@ -56,7 +51,7 @@ PrecipDeficit_sce<- function(ifile_tg, ifile_rsds, ifile_rr,
   evDeBiltSCGS        <- evDeBiltSC[amjjas]
 
   # calculate rr for scenarios
-  rrScenario <- TransformPrecip(ifile = ifile_rr,
+  rrScenario <- TransformPrecip(input = input_rr,
                   ofile="tmp.txt",
                   scenario=scenario,
                   horizon = horizon,

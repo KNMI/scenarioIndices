@@ -3,7 +3,7 @@
 #' this index uses the evmk of DeBilt and precipitation amount of 102 stations (the homogenenised ones) over the NL
 #' @description      function reads reference ts for evmk, rr, tg & rdrs
 #' @param ofile      (DEFAULT="uitvoer.txt") Name of the output file to write the transformed data to.
-#'                    Format is similar to ifile
+#'                    Format is similar to input
 PrecipDeficit_ref<- function(ofile = NA) {
 
 

@@ -5,7 +5,7 @@
 #' @param index      indices ("nstFD", "nFD", "nTN", "aTN")
 #' @inheritParams TempAvgIndices
 #' @export
-TempMinIndices<- function(ifile, index,
+TempMinIndices<- function(input, index,
                           ofile = NA, scenario,
                           horizon=2030, season,
                           regio.file = NA) {
@@ -19,7 +19,7 @@ TempMinIndices<- function(ifile, index,
                                           system.file("refdata","KNMI14____ref_tn___19810101-20101231_v3.2.txt",
                                                       package="knmitransformer"))$obs
   } else {
-    input <- TransformTemp(ifile=ifile, ofile=NA, scenario=scenario,
+    input <- TransformTemp(input=input, ofile=NA, scenario=scenario,
                            horizon=horizon, var="tn", regio.file=regio.file)
     input <- input[-(1:5)]
 

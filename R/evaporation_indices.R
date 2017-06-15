@@ -1,10 +1,10 @@
 #' Calculate potential evaporation (Makkink), year mean (seasons sum) and summer for brochure validation
 #' @description Function reads transormed mean temperature and transformed global radiation
 #' and calculates the Makkink evaporation for 'future time series' that match a certain climate, makes season sums and summer values
-#' @param ifile_tg input file for tg
-#' @param ifile_rsds input file for rsds
+#' @param input_tg input file for tg
+#' @param input_rsds input file for rsds
 #' @param ofile          (DEFAULT="uitvoer.txt") Name of the output file to write the transformed data to.
-#'                Format is similar to ifile
+#'                Format is similar to input
 #' @param scenario  scenario                      ["GL", "GH", "WL", "WH"]
 #' @param horizon   time horizon                  [2030 (=DEFAULT), 2050, 2085]
 #' @param regio.file     this (optional) argument provides the name of an ASCII file that relates the stations to
@@ -17,10 +17,9 @@
 #'                <MON> Middenoost Nederland
 #'                <ZON> Zuidoost Nederland
 #' @export
-evmk_sums_relchange<- function(ifile_tg, ifile_rsds,
-                                      ofile="uitvoer.txt",
-                                      scenario,
-                                      horizon = NA, regio.file = NA) {
+evmk_sums_relchange<- function(input_tg, input_rsds, scenario,
+                                      horizon = NA, regio.file = NA, ofile=NA) {
+
   flog.info("Running evaporation calculation")
   flog.debug("Version is 1.0")
   # CONSTANTS AND FUNCTIONS ###############################################################################
@@ -33,8 +32,8 @@ evmk_sums_relchange<- function(ifile_tg, ifile_rsds,
 
   evmk_ref <- fread(system.file("refdata","KNMI14____ref_evmk___19810101-20101231_v3.2.txt", package="knmitransformer"))
 
-  evmk_scenario <- TransformEvap(ifile_tg = ifile_tg,
-                                 ifile_rsds = ifile_rsds,
+  evmk_scenario <- TransformEvap(input_tg = input_tg,
+                                 input_rsds = input_rsds,
                                  ofile="uitvoer.txt",
                                  scenario = scenario,
                                  horizon = horizon,

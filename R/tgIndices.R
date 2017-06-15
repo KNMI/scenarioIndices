@@ -3,7 +3,7 @@
 #' @description Calculates a set of daily average temperature related indices as
 #' they were defined for the KNMI14 scenarios brochure
 #' @param index      indices ("aTG", "amnTG", "amxTG")
-#' @param ifile      Name of the input file (ASCII) that contains reference data
+#' @param input      Name of the input file (ASCII) that contains reference data
 #'                   (all numerics) in which the columns provide time series for
 #'                   specific stations.
 #'                   The first column should provide either 00000000 or a
@@ -15,7 +15,7 @@
 #'                   Rows starting with "#" are completely ignored and returned
 #'                   unchanged.
 #' @param ofile      (DEFAULT=NA) Name of the output file to write the indices to.
-#'                   Format is similar to ifile without the 5 first lines
+#'                   Format is similar to input without the 5 first lines
 #' @param scenario   scenario ("GL", "GH", "WL", "WH"). If scenario is not one of the 4
 #'                   then the indices are calculated for the reference period 1981-2010
 #' @param horizon    time horizon ( DEFAULT=2030, 2050, 2085). If horizon is not one of the 3
@@ -33,7 +33,7 @@
 #'
 #'
 #' @export
-TempAvgIndices<- function(ifile, index,
+TempAvgIndices<- function(input, index,
                           ofile = NA, scenario,
                           horizon=2030, season,
                           regio.file = NA) {
@@ -49,7 +49,7 @@ TempAvgIndices<- function(ifile, index,
                 system.file("refdata","KNMI14____ref_tg___19810101-20101231_v3.2.txt",
                             package="knmitransformer"))$obs
     } else {
-        input <- TransformTemp(ifile=ifile, ofile=NA, scenario=scenario,
+        input <- TransformTemp(input=input, ofile=NA, scenario=scenario,
                                                 horizon=horizon, var="tg", regio.file=regio.file)
         input <- input[-(1:5) ]
 

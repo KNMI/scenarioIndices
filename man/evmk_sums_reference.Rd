@@ -8,7 +8,7 @@ evmk_sums_reference(ofile = "uitvoer.txt")
 }
 \arguments{
 \item{ofile}{(DEFAULT="uitvoer.txt") Name of the output file to write the transformed data to.
-Format is similar to ifile}
+Format is similar to input}
 }
 \description{
 Function reads Makkink evaporation reference series
