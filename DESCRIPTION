@@ -18,7 +18,8 @@ LazyData: TRUE
 Imports:
   knmitransformer,
   data.table,
-  futile.logger
+  futile.logger,
+  rgdal
 RoxygenNote: 6.0.1
 Suggests:
   testthat,
