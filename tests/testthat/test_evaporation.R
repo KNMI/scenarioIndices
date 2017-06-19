@@ -10,7 +10,8 @@ context("evmk sum calc - Entire station set")
 input_tg   <- system.file("refdata","KNMI14____ref_tg___19810101-20101231_v3.2.txt", package="knmitransformer")
 input_rsds <- system.file("refdata","KNMI14____ref_rsds___19810101-20101231_v3.2.txt", package="knmitransformer")
 ofile      <- "tmp.txt" # output file - used only temporary
-regio.file <- "stationstabel"
+var <- "tg"
+regions    <- knmitransformer::MatchRegionsOnStationId(knmitransformer::ReadInput(var, input_tg)$header[1, -1])
 
 
 test_that("evaporation sums reference", {
@@ -29,7 +30,7 @@ test_that("2030 decadal prediction", {
                              ofile = ofile,
                              scenario = scenario,
                              horizon = horizon,
-                             regio.file = regio.file)
+                             regions = regions)
 
 
 
@@ -44,7 +45,7 @@ test_that("scenarioenario WL", {
                              ofile = ofile,
                              scenario = scenario,
                              horizon = horizon,
-                             regio.file = regio.file)
+                             regions = regions)
 
 
 
@@ -55,7 +56,7 @@ test_that("scenarioenario WL", {
                              ofile=ofile,
                              scenario=scenario,
                              horizon = horizon,
-                             regio.file = regio.file)
+                             regions = regions)
 
 
 
@@ -70,7 +71,7 @@ test_that("scenarioenario WH", {
                              ofile=ofile,
                              scenario=scenario,
                              horizon = horizon,
-                             regio.file = regio.file)
+                             regions = regions)
 
 
 
@@ -81,7 +82,7 @@ test_that("scenarioenario WH", {
                              ofile=ofile,
                              scenario=scenario,
                              horizon = horizon,
-                             regio.file = regio.file)
+                             regions = regions)
 
 
 
@@ -96,7 +97,7 @@ test_that("scenarioenario GH", {
                              ofile=ofile,
                              scenario=scenario,
                              horizon = horizon,
-                             regio.file = regio.file)
+                             regions = regions)
 
 
 
@@ -107,7 +108,7 @@ test_that("scenarioenario GH", {
                              ofile=ofile,
                              scenario=scenario,
                              horizon = horizon,
-                             regio.file = regio.file)
+                             regions = regions)
 
 
 
@@ -122,7 +123,7 @@ test_that("scenarioenario GL", {
                              ofile=ofile,
                              scenario=scenario,
                              horizon = horizon,
-                             regio.file = regio.file)
+                             regions = regions)
 
 
 
@@ -133,7 +134,7 @@ test_that("scenarioenario GL", {
                              ofile=ofile,
                              scenario=scenario,
                              horizon = horizon,
-                             regio.file = regio.file)
+                             regions = regions)
 
 
 

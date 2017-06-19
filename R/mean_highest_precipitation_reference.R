@@ -39,12 +39,12 @@ PrecipDeficit_ref<- function(ofile = NA) {
   Xsum  <- tapply(evDeBiltGS$`260` - rrRefMean,yy,max.pos.cumsum)
   N<- 3 # find 3 highest years
   ndx <- order(Xsum,decreasing=T)[1:N]
-  highestref <- round(mean(Xsum[ndx]),1)
+  highestref <- mean(Xsum[ndx])
   nr    <- length(Xsum)
   Xstat <- c(mean(Xsum),sd(Xsum),sort(as.numeric(Xsum)))# mean,sd,ranks Xsum
 
   table_ref <- data.frame(year = c("mean","sd", names(sort(Xsum)), "high"),
-                          reference = c(round(Xstat,1), highestref))
+                          reference = c(round(Xstat,1), round(highestref),1))
 
 
   return(table_ref)

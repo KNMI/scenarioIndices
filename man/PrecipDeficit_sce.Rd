@@ -7,7 +7,7 @@ as it was calculated for KNMI14 scenarios brochure
 this index uses the evmk of DeBilt and precipitation amount of 102 stations (the homogenenised ones) over the NL}
 \usage{
 PrecipDeficit_sce(input_tg, input_rsds, input_rr, scenario, horizon = NA,
-  ofile = NA, regio.file = NA)
+  ofile = NA, regions = "NLD")
 }
 \arguments{
 \item{input_tg}{input file for tg}
@@ -23,15 +23,14 @@ PrecipDeficit_sce(input_tg, input_rsds, input_rr, scenario, horizon = NA,
 \item{ofile}{(DEFAULT="uitvoer.txt") Name of the output file to write the transformed data to.
 Format is similar to input}
 
-\item{regio.file}{this (optional) argument provides the name of an ASCII file that relates the stations to
-a particular region. First column is station id and second column region
-               KNMI14 distinguishes following regions:
-               <NLD> Nederland [DEFAULT]
-               <NWN> Noordwest Nederland
-               <ZWN> Zuidwest Nederland
-               <NON> Noordoost Nederland
-               <MON> Middenoost Nederland
-               <ZON> Zuidoost Nederland}
+\item{regions}{vector of regions
+KNMI14 distinguishes following regions:\cr
+<NLD> Nederland (DEFAULT) \cr
+<NWN> Noordwest Nederland \cr
+<ZWN> Zuidwest Nederland \cr
+<NON> Noordoost Nederland \cr
+<MON> Middenoost Nederland \cr
+<ZON> Zuidoost Nederland}
 }
 \description{
 function reads reference ts for evmk, rr, tg & rdrs

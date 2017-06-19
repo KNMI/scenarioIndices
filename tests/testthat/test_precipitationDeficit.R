@@ -11,8 +11,8 @@ input_tg   <- system.file("refdata","KNMI14____ref_tg___19810101-20101231_v3.2.t
 input_rsds <- system.file("refdata","KNMI14____ref_rsds___19810101-20101231_v3.2.txt", package="knmitransformer")
 input_rr   <- system.file("refdata","KNMI14____ref_rrcentr___19810101-20101231_v3.2.txt", package = "scenarioIndices")
 ofile      <- "tmp.txt" # output file - used only temporary
-regio.file <- "stationstabel"
-
+var <- "tg"
+regions    <- knmitransformer::MatchRegionsOnStationId(knmitransformer::ReadInput(var, input_tg)$header[1, -1])
 #
 # test_that("precipDefic  reference", {
 #
@@ -29,7 +29,7 @@ test_that("2030 decadal prediction", {
   tmp <- PrecipDeficit_sce(input_tg = input_tg, input_rsds = input_rsds,
                            input_rr = input_rr,ofile = ofile, scenario = scenario,
                            horizon = horizon,
-                           regio.file = regio.file)
+                           regions = regions)
 
   expect_equal_to_reference(tmp, "./regressionOutput/precipitationDeficit/KNMI14___2030_precipDefic.rds")
 })
@@ -42,7 +42,7 @@ test_that("scenario WL", {
   tmp <- PrecipDeficit_sce(input_tg = input_tg, input_rsds = input_rsds,
                            input_rr = input_rr,ofile = ofile, scenario = scenario,
                            horizon = horizon,
-                           regio.file = regio.file)
+                           regions = regions)
 
   expect_equal_to_reference(tmp, "./regressionOutput/precipitationDeficit/KNMI14_WL_2050_precipDefic.rds")
 
@@ -51,7 +51,7 @@ test_that("scenario WL", {
   tmp <- PrecipDeficit_sce(input_tg = input_tg, input_rsds = input_rsds,
                            input_rr = input_rr,ofile = ofile, scenario = scenario,
                            horizon = horizon,
-                           regio.file = regio.file)
+                           regions = regions)
 
   expect_equal_to_reference(tmp, "./regressionOutput/precipitationDeficit/KNMI14_WL_2085_precipDefic.rds")
 })
@@ -64,7 +64,7 @@ test_that("scenario WH", {
   tmp <- PrecipDeficit_sce(input_tg = input_tg, input_rsds = input_rsds,
                            input_rr = input_rr,ofile = ofile, scenario = scenario,
                            horizon = horizon,
-                           regio.file = regio.file)
+                           regions = regions)
 
 
   expect_equal_to_reference(tmp, "./regressionOutput/precipitationDeficit/KNMI14_WH_2050_precipDefic.rds")
@@ -74,7 +74,7 @@ test_that("scenario WH", {
   tmp <- PrecipDeficit_sce(input_tg = input_tg, input_rsds = input_rsds,
                            input_rr = input_rr,ofile = ofile, scenario = scenario,
                            horizon = horizon,
-                           regio.file = regio.file)
+                           regions = regions)
 
   expect_equal_to_reference(tmp, "./regressionOutput/precipitationDeficit/KNMI14_WH_2085_precipDefic.rds")
 })
@@ -87,7 +87,7 @@ test_that("scenario GH", {
   tmp <- PrecipDeficit_sce(input_tg = input_tg, input_rsds = input_rsds,
                            input_rr = input_rr,ofile = ofile, scenario = scenario,
                            horizon = horizon,
-                           regio.file = regio.file)
+                           regions = regions)
 
 
   expect_equal_to_reference(tmp, "./regressionOutput/precipitationDeficit/KNMI14_GH_2050_precipDefic.rds")
@@ -97,7 +97,7 @@ test_that("scenario GH", {
   tmp <- PrecipDeficit_sce(input_tg = input_tg, input_rsds = input_rsds,
                            input_rr = input_rr,ofile = ofile, scenario = scenario,
                            horizon = horizon,
-                           regio.file = regio.file)
+                           regions = regions)
 
   expect_equal_to_reference(tmp, "./regressionOutput/precipitationDeficit/KNMI14_GH_2085_precipDefic.rds")
 })
@@ -110,7 +110,7 @@ test_that("scenario GL", {
   tmp <- PrecipDeficit_sce(input_tg = input_tg, input_rsds = input_rsds,
                            input_rr = input_rr,ofile = ofile, scenario = scenario,
                            horizon = horizon,
-                           regio.file = regio.file)
+                           regions = regions)
 
   expect_equal_to_reference(tmp, "./regressionOutput/precipitationDeficit/KNMI14_GL_2050_precipDefic.rds")
 
@@ -119,7 +119,7 @@ test_that("scenario GL", {
   tmp <- PrecipDeficit_sce(input_tg = input_tg, input_rsds = input_rsds,
                            input_rr = input_rr,ofile = ofile, scenario = scenario,
                            horizon = horizon,
-                           regio.file = regio.file)
+                           regions = regions)
 
   expect_equal_to_reference(tmp, "./regressionOutput/precipitationDeficit/KNMI14_GL_2085_precipDefic.rds")
 })

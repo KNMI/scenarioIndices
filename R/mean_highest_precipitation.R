@@ -9,18 +9,17 @@
 #'                    Format is similar to input
 #' @param scenario    scenario                      ["GL", "GH", "WL", "WH"]
 #' @param horizon     time horizon                  [2030 (=DEFAULT), 2050, 2085]
-#' @param regio.file  this (optional) argument provides the name of an ASCII file that relates the stations to
-#' a particular region. First column is station id and second column region
-#'                KNMI14 distinguishes following regions:
-#'                <NLD> Nederland [DEFAULT]
-#'                <NWN> Noordwest Nederland
-#'                <ZWN> Zuidwest Nederland
-#'                <NON> Noordoost Nederland
-#'                <MON> Middenoost Nederland
-#'                <ZON> Zuidoost Nederland
+#' @param regions     vector of regions
+#'                   KNMI14 distinguishes following regions:\cr
+#'                   <NLD> Nederland (DEFAULT) \cr
+#'                   <NWN> Noordwest Nederland \cr
+#'                   <ZWN> Zuidwest Nederland \cr
+#'                   <NON> Noordoost Nederland \cr
+#'                   <MON> Middenoost Nederland \cr
+#'                   <ZON> Zuidoost Nederland
 #' @export
 PrecipDeficit_sce<- function(input_tg, input_rsds, input_rr,
-                               scenario, horizon = NA, ofile=NA, regio.file = NA) {
+                               scenario, horizon = NA, ofile=NA, regions = "NLD") {
 
 
   StationSub <- as.character(fread(system.file("refdata","P102.txt", package = "scenarioIndices"))$V1)
@@ -38,7 +37,7 @@ PrecipDeficit_sce<- function(input_tg, input_rsds, input_rr,
   #calculate evmk for scenarios
   evmk_scenario <- TransformEvap(input_tg = input_tg, input_rsds = input_rsds,
                                   scenario = scenario, horizon = horizon,
-                                 ofile = NA, regio.file = regio.file)
+                                 ofile = NA, regions = "NLD")
 
   dt     <- evmk_scenario[-(1:5),1, with = FALSE]
   mm     <- (dt%/%100)%%100
@@ -68,15 +67,15 @@ PrecipDeficit_sce<- function(input_tg, input_rsds, input_rr,
   Ysum       <- tapply(evDeBiltSCGS$`260` - rrScenarioMean, yy, max.pos.cumsum)
   N<- 3 # find 3 highest years
   ndy        <- order(Ysum,decreasing=T)[1:N]
-  highestsce <- round(mean(Ysum[ndy]),1)
+  highestsce <- mean(Ysum[ndy])
   Ystat      <- c(mean(Ysum), sd(Ysum), sort(as.numeric(Ysum)))
   delta      <- 100*(Ystat-Xstat) / Xstat
   nd <- length(delta)
-  highestdel <- round(mean(delta[(nd-2):nd]),1)
+  highestdel <- mean(delta[(nd-2):nd])
 
   table_sce  <- data.frame(year = c("mean","sd",names(sort(Ysum)), "high"),
-                          values = c(round(Ystat,1), highestsce),
-                          relativechange = c(round(delta,1), highestdel))
+                          values = c(round(Ystat,1), round(highestsce,1)),
+                          relativechange = c(round(delta,1), round(highestdel,1)))
 
   names(table_sce) <- c("year",  paste(scenario,horizon,sep=""), "delta")
 
