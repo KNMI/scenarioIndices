@@ -8,7 +8,7 @@
 TempMaxIndices<- function(input, index,
                           ofile = NA, scenario,
                           horizon=2030, season,
-                          regio.file = NA) {
+                          regions = "NLD") {
 
 
   if (!index %in% c("nID", "nWD", "nSD", "nTD", "aTX")){
@@ -22,7 +22,7 @@ TempMaxIndices<- function(input, index,
                                                       package="knmitransformer"))$obs
   } else {
     input <- TransformTemp(input=input, ofile=NA, scenario=scenario,
-                           horizon=horizon, var="tx", regio.file=regio.file)
+                           horizon=horizon, var="tx", regions = regions)
     input <- input[-(1:5) ]
 
   }

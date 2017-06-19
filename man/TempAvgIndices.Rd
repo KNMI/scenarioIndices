@@ -4,8 +4,8 @@
 \alias{TempAvgIndices}
 \title{Calculates a set of TG related indices}
 \usage{
-TempAvgIndices(input, index, ofile = NA, scenario, horizon = 2030, season,
-  regio.file = NA)
+TempAvgIndices(input, index, scenario, horizon = 2030, season,
+  regions = "NLD", ofile = NA)
 }
 \arguments{
 \item{input}{Name of the input file (ASCII) that contains reference data
@@ -20,10 +20,7 @@ time series.
 Rows starting with "#" are completely ignored and returned
 unchanged.}
 
-\item{index}{indices ("aTG", "amnTG", "amxTG")}
-
-\item{ofile}{(DEFAULT=NA) Name of the output file to write the indices to.
-Format is similar to input without the 5 first lines}
+\item{index}{vector of indices ("aTG", "amnTG", "amxTG")}
 
 \item{scenario}{scenario ("GL", "GH", "WL", "WH"). If scenario is not one of the 4
 then the indices are calculated for the reference period 1981-2010}
@@ -33,15 +30,17 @@ then the indices are calculated for the reference period 1981-2010}
 
 \item{season}{season (0= year, 1=winter, 2=spring, 3=summer, 4=autumn)}
 
-\item{regio.file}{this (optional) argument provides the name of an ASCII file that relates the stations to
-a particular region. First column is station id and second column region
-KNMI14 distinguishes following regions:
-<NLD> Nederland            [DEFAULT]
-<NWN> Noordwest Nederland
-<ZWN> Zuidwest Nederland
-<NON> Noordoost Nederland
-<MON> Middenoost Nederland
-<ZON> Zuidoost Nederland}
+\item{regions}{vector of regions
+KNMI14 distinguishes following regions:\cr
+<NLD> Nederland (DEFAULT) \cr
+<NWN> Noordwest Nederland \cr
+<ZWN> Zuidwest Nederland \cr
+<NON> Noordoost Nederland \cr
+<MON> Middenoost Nederland \cr
+         <ZON> Zuidoost Nederland}
+
+\item{ofile}{(DEFAULT=NA) Name of the output file to write the indices to.
+Format is similar to input without the 5 first lines}
 }
 \description{
 Calculates a set of daily average temperature related indices as

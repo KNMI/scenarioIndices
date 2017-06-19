@@ -8,7 +8,7 @@
 TempMinIndices<- function(input, index,
                           ofile = NA, scenario,
                           horizon=2030, season,
-                          regio.file = NA) {
+                          regions = "NLD") {
 
   if (!index %in% c("nstFD", "nFD", "nTN", "aTN")){
     stop("index should be one of nstFD nFD nTN aTN")
@@ -20,7 +20,7 @@ TempMinIndices<- function(input, index,
                                                       package="knmitransformer"))$obs
   } else {
     input <- TransformTemp(input=input, ofile=NA, scenario=scenario,
-                           horizon=horizon, var="tn", regio.file=regio.file)
+                           horizon=horizon, var="tn", regions = regions)
     input <- input[-(1:5)]
 
   }

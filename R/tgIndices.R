@@ -2,7 +2,7 @@
 #'
 #' @description Calculates a set of daily average temperature related indices as
 #' they were defined for the KNMI14 scenarios brochure
-#' @param index      indices ("aTG", "amnTG", "amxTG")
+#' @param index      vector of indices ("aTG", "amnTG", "amxTG")
 #' @param input      Name of the input file (ASCII) that contains reference data
 #'                   (all numerics) in which the columns provide time series for
 #'                   specific stations.
@@ -21,22 +21,20 @@
 #' @param horizon    time horizon ( DEFAULT=2030, 2050, 2085). If horizon is not one of the 3
 #'                   then the indices are calculated for the reference period 1981-2010
 #' @param season     season (0= year, 1=winter, 2=spring, 3=summer, 4=autumn)
-#' @param regio.file this (optional) argument provides the name of an ASCII file that relates the stations to
-#'                   a particular region. First column is station id and second column region
-#'                   KNMI14 distinguishes following regions:
-#'                   <NLD> Nederland            [DEFAULT]
-#'                   <NWN> Noordwest Nederland
-#'                   <ZWN> Zuidwest Nederland
-#'                   <NON> Noordoost Nederland
-#'                   <MON> Middenoost Nederland
-#'                   <ZON> Zuidoost Nederland
+#' @param regions     vector of regions
+#'                   KNMI14 distinguishes following regions:\cr
+#'                   <NLD> Nederland (DEFAULT) \cr
+#'                   <NWN> Noordwest Nederland \cr
+#'                   <ZWN> Zuidwest Nederland \cr
+#'                   <NON> Noordoost Nederland \cr
+#'                   <MON> Middenoost Nederland \cr
+#'                            <ZON> Zuidoost Nederland
 #'
 #'
 #' @export
-TempAvgIndices<- function(input, index,
-                          ofile = NA, scenario,
-                          horizon=2030, season,
-                          regio.file = NA) {
+TempAvgIndices<- function(input, index, scenario,
+                          horizon = 2030, season,
+                          regions = "NLD", ofile = NA) {
 
 #
   if (!index %in% c("aTG", "amnTG", "amxTG")) {
@@ -50,8 +48,8 @@ TempAvgIndices<- function(input, index,
                             package="knmitransformer"))$obs
     } else {
         input <- TransformTemp(input=input, ofile=NA, scenario=scenario,
-                                                horizon=horizon, var="tg", regio.file=regio.file)
-        input <- input[-(1:5) ]
+                                                horizon=horizon, var="tg",regions = regions)
+        input <- input[-(1:5), ]
 
     }
 

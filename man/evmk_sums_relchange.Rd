@@ -5,7 +5,7 @@
 \title{Calculate potential evaporation (Makkink), year mean (seasons sum) and summer for brochure validation}
 \usage{
 evmk_sums_relchange(input_tg, input_rsds, scenario, horizon = NA,
-  regio.file = NA, ofile = NA)
+  regions = "NLD", ofile = NA)
 }
 \arguments{
 \item{input_tg}{input file for tg}
@@ -16,14 +16,13 @@ evmk_sums_relchange(input_tg, input_rsds, scenario, horizon = NA,
 
 \item{horizon}{time horizon                  [2030 (=DEFAULT), 2050, 2085]}
 
-\item{regio.file}{this (optional) argument provides the name of an ASCII file that relates the stations to
-a particular region. First column is station id and second column region
-KNMI14 distinguishes following regions:
-<NLD> Nederland            [DEFAULT]
-<NWN> Noordwest Nederland
-<ZWN> Zuidwest Nederland
-<NON> Noordoost Nederland
-<MON> Middenoost Nederland
+\item{regions}{vector of regions
+ KNMI14 distinguishes following regions:\cr
+ <NLD> Nederland (DEFAULT) \cr
+ <NWN> Noordwest Nederland \cr
+ <ZWN> Zuidwest Nederland \cr
+ <NON> Noordoost Nederland \cr
+ <MON> Middenoost Nederland \cr
 <ZON> Zuidoost Nederland}
 
 \item{ofile}{(DEFAULT="uitvoer.txt") Name of the output file to write the transformed data to.

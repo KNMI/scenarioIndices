@@ -7,18 +7,17 @@
 #'                Format is similar to input
 #' @param scenario  scenario                      ["GL", "GH", "WL", "WH"]
 #' @param horizon   time horizon                  [2030 (=DEFAULT), 2050, 2085]
-#' @param regio.file     this (optional) argument provides the name of an ASCII file that relates the stations to
-#'                a particular region. First column is station id and second column region
-#'                KNMI14 distinguishes following regions:
-#'                <NLD> Nederland            [DEFAULT]
-#'                <NWN> Noordwest Nederland
-#'                <ZWN> Zuidwest Nederland
-#'                <NON> Noordoost Nederland
-#'                <MON> Middenoost Nederland
-#'                <ZON> Zuidoost Nederland
+#' @param regions     vector of regions
+#'                   KNMI14 distinguishes following regions:\cr
+#'                   <NLD> Nederland (DEFAULT) \cr
+#'                   <NWN> Noordwest Nederland \cr
+#'                   <ZWN> Zuidwest Nederland \cr
+#'                   <NON> Noordoost Nederland \cr
+#'                   <MON> Middenoost Nederland \cr
+#'                  <ZON> Zuidoost Nederland
 #' @export
 evmk_sums_relchange<- function(input_tg, input_rsds, scenario,
-                                      horizon = NA, regio.file = NA, ofile=NA) {
+                                      horizon = NA, regions = "NLD", ofile=NA) {
 
   flog.info("Running evaporation calculation")
   flog.debug("Version is 1.0")
@@ -37,7 +36,7 @@ evmk_sums_relchange<- function(input_tg, input_rsds, scenario,
                                  ofile="uitvoer.txt",
                                  scenario = scenario,
                                  horizon = horizon,
-                                 regio.file = regio.file)
+                                 regions = regions)
 
   if (!all(evmk_ref [1:5] == evmk_scenario[1:5])) {
     flog.error("Same stations should be used for reference and scenarios")
