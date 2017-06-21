@@ -21,7 +21,7 @@
 #' @param season     season (0= year, 1=winter, 2=spring, 3=summer, 4=autumn)
 #' @param subscenario subscenario for extreme precipitation
 #' ("lower", "centr" (=DEFAULT), "upper")
-#' #' @param ofile      (DEFAULT=NA) Name of the output file to write the indices to.
+#' @param ofile      (DEFAULT=NA) Name of the output file to write the indices to.
 #'                   Format is similar to input without the 5 first lines
 #' @export
 PrecipThreshIndices<- function(input, threshold, scenario = NA,
