@@ -17,7 +17,7 @@ TempMaxIndices<- function(input, index,
 
 
   if (!scenario %in% c("GL","GH","WL","WH") && horizon !=c(2030,2050,2085)){
-    input <-  knmitransformer:::ReadInput("tx",
+    input <-  knmitransformer::ReadInput("tx",
                                           system.file("refdata","KNMI14____ref_tx___19810101-20101231_v3.2.txt",
                                                       package="knmitransformer"))$obs
   } else {
