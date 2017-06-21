@@ -2,7 +2,7 @@ context("Temperature AVG indices")
 
 library(futile.logger)
 flog.threshold(DEBUG)
-flog.appender(appender.file('scenarioIndices_AVGtemperature.log'))
+flog.appender(appender.file("scenarioIndices_AVGtemperature.log"))
 library(data.table)
 
 context("Temp tg ref indices - Entire station set")

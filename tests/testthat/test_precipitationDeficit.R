@@ -2,7 +2,7 @@ context("Precipitation deficit (mean & highest) calculations")
 
 library(futile.logger)
 flog.threshold(DEBUG)
-flog.appender(appender.file('scenarioIndices_precipitationDeficit.log'))
+flog.appender(appender.file("scenarioIndices_precipitationDeficit.log"))
 library(data.table)
 
 context("precipDefic  calc - Entire station set")
