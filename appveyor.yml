@@ -13,8 +13,8 @@ install:
 # Adapt as necessary starting from here
 
 build_script:
-  - travis-tool.sh install_github MartinRoth/knmitransformer@oldfactor2
   - travis-tool.sh install_deps
+  - travis-tool.sh install_github MartinRoth/knmitransformer@oldfactor2
 
 test_script:
   - travis-tool.sh run_tests
