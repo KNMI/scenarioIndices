@@ -35,7 +35,7 @@ PrecipDeficit_sce<- function(input_tg, input_rsds, input_rr,
 
   #input for scenarios
   #calculate evmk for scenarios
-  evmk_scenario <- TransformEvap(input_tg = input_tg, input_rsds = input_rsds,
+  evmk_scenario <- TransformEvap(inputTemp = input_tg, inputRad = input_rsds,
                                   scenario = scenario, horizon = horizon,
                                  ofile = NA, regions = "NLD")
 

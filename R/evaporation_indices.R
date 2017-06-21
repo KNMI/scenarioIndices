@@ -31,8 +31,8 @@ evmk_sums_relchange<- function(input_tg, input_rsds, scenario,
 
   evmk_ref <- fread(system.file("refdata","KNMI14____ref_evmk___19810101-20101231_v3.2.txt", package="knmitransformer"))
 
-  evmk_scenario <- TransformEvap(input_tg = input_tg,
-                                 input_rsds = input_rsds,
+  evmk_scenario <- TransformEvap(inputTemp = input_tg,
+                                 inputRad = input_rsds,
                                  ofile="uitvoer.txt",
                                  scenario = scenario,
                                  horizon = horizon,
