@@ -7,8 +7,6 @@ Authors@R: as.person(c(
     "Alexander Bakker [aut]",
     "Christiana Photiadou <photiado@knmi.nl> [aut, cre]",
     "Martin Roth <roth@knmi.nl> [aut]",
-    "Rudmer Jilderda [ctb]",
-    "Jules Beersma <jules.beersma@knmi.nl> [ctb]",
     "KNMI [cph]"
   ))
 Description: Calculates the scenario indices for temp, precip, evap & radiation
@@ -18,7 +16,8 @@ LazyData: TRUE
 Imports:
   knmitransformer,
   data.table,
-  futile.logger
+  futile.logger,
+  rgdal
 RoxygenNote: 6.0.1
 Suggests:
   testthat,

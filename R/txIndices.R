@@ -5,10 +5,10 @@
 #' @param index      indices ("nID", "nWD", "nSD", "nTD", "aTX")
 #' @inheritParams TempAvgIndices
 #' @export
-TempMaxIndices<- function(ifile, index,
+TempMaxIndices<- function(input, index,
                           ofile = NA, scenario,
                           horizon=2030, season,
-                          regio.file = NA) {
+                          regions = "NLD") {
 
 
   if (!index %in% c("nID", "nWD", "nSD", "nTD", "aTX")){
@@ -21,8 +21,8 @@ TempMaxIndices<- function(ifile, index,
                                           system.file("refdata","KNMI14____ref_tx___19810101-20101231_v3.2.txt",
                                                       package="knmitransformer"))$obs
   } else {
-    input <- TransformTemp(ifile=ifile, ofile=NA, scenario=scenario,
-                           horizon=horizon, var="tx", regio.file=regio.file)
+    input <- TransformTemp(input=input, ofile=NA, scenario=scenario,
+                           horizon=horizon, var="tx", regions = regions)
     input <- input[-(1:5) ]
 
   }

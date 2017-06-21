@@ -2,7 +2,7 @@
 #' @description Function reads Makkink evaporation reference series
 #' and makes season sums
 #' @param ofile          (DEFAULT="uitvoer.txt") Name of the output file to write the transformed data to.
-#'                Format is similar to ifile
+#'                Format is similar to input
 #' @export
 evmk_sums_reference<- function(ofile="uitvoer.txt") {
 

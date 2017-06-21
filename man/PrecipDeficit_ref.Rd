@@ -10,7 +10,7 @@ PrecipDeficit_ref(ofile = NA)
 }
 \arguments{
 \item{ofile}{(DEFAULT="uitvoer.txt") Name of the output file to write the transformed data to.
-Format is similar to ifile}
+Format is similar to input}
 }
 \description{
 function reads reference ts for evmk, rr, tg & rdrs
