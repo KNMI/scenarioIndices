@@ -11,9 +11,12 @@ install:
   ps: Bootstrap
 
 # Adapt as necessary starting from here
+
+
 environment:
   global:
     WARNINGS_ARE_ERRORS: 1
+    USE_RTOOLS: true
 
   matrix:
   - R_VERSION: oldrel
@@ -22,7 +25,6 @@ environment:
 
 build_script:
   - travis-tool.sh install_deps
-  - travis-tool.sh install_github MartinRoth/knmitransformer@oldfactor2
 
 test_script:
   - travis-tool.sh run_tests
