@@ -11,6 +11,14 @@ install:
   ps: Bootstrap
 
 # Adapt as necessary starting from here
+environment:
+  global:
+    WARNINGS_ARE_ERRORS: 1
+
+  matrix:
+  - R_VERSION: oldrel
+    RTOOLS_VERSION: 33
+    CRAN: http://cran.rstudio.com
 
 build_script:
   - travis-tool.sh install_deps
@@ -42,11 +50,4 @@ artifacts:
   - path: '\*_*.zip'
     name: Bits
 
-environment:
-  global:
-    WARNINGS_ARE_ERRORS: 1
 
-  matrix:
-  - R_VERSION: oldrel
-    RTOOLS_VERSION: 33
-    CRAN: http://cran.rstudio.com
