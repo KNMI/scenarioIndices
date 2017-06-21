@@ -6,11 +6,11 @@
 as it was calculated for KNMI14 scenarios brochure For Just the REFERENCE Period
 this index uses the evmk of DeBilt and precipitation amount of 102 stations (the homogenenised ones) over the NL}
 \usage{
-PrecipDeficit_ref(ofile = "uitvoer.txt")
+PrecipDeficit_ref(ofile = NA)
 }
 \arguments{
 \item{ofile}{(DEFAULT="uitvoer.txt") Name of the output file to write the transformed data to.
-Format is similar to ifile}
+Format is similar to input}
 }
 \description{
 function reads reference ts for evmk, rr, tg & rdrs

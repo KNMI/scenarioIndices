@@ -1,26 +1,24 @@
 #' Calculate potential evaporation (Makkink), year mean (seasons sum) and summer for brochure validation
 #' @description Function reads transormed mean temperature and transformed global radiation
 #' and calculates the Makkink evaporation for 'future time series' that match a certain climate, makes season sums and summer values
-#' @param ifile_tg input file for tg
-#' @param ifile_rsds input file for rsds
+#' @param input_tg input file for tg
+#' @param input_rsds input file for rsds
 #' @param ofile          (DEFAULT="uitvoer.txt") Name of the output file to write the transformed data to.
-#'                Format is similar to ifile
+#'                Format is similar to input
 #' @param scenario  scenario                      ["GL", "GH", "WL", "WH"]
 #' @param horizon   time horizon                  [2030 (=DEFAULT), 2050, 2085]
-#' @param regio.file     this (optional) argument provides the name of an ASCII file that relates the stations to
-#'                a particular region. First column is station id and second column region
-#'                KNMI14 distinguishes following regions:
-#'                <NLD> Nederland            [DEFAULT]
-#'                <NWN> Noordwest Nederland
-#'                <ZWN> Zuidwest Nederland
-#'                <NON> Noordoost Nederland
-#'                <MON> Middenoost Nederland
-#'                <ZON> Zuidoost Nederland
+#' @param regions     vector of regions
+#'                   KNMI14 distinguishes following regions:\cr
+#'                   <NLD> Nederland (DEFAULT) \cr
+#'                   <NWN> Noordwest Nederland \cr
+#'                   <ZWN> Zuidwest Nederland \cr
+#'                   <NON> Noordoost Nederland \cr
+#'                   <MON> Middenoost Nederland \cr
+#'                  <ZON> Zuidoost Nederland
 #' @export
-evmk_sums_relchange<- function(ifile_tg, ifile_rsds,
-                                      ofile="uitvoer.txt",
-                                      scenario,
-                                      horizon = NA, regio.file = NA) {
+evmk_sums_relchange<- function(input_tg, input_rsds, scenario,
+                                      horizon = NA, regions = "NLD", ofile=NA) {
+
   flog.info("Running evaporation calculation")
   flog.debug("Version is 1.0")
   # CONSTANTS AND FUNCTIONS ###############################################################################
@@ -33,12 +31,12 @@ evmk_sums_relchange<- function(ifile_tg, ifile_rsds,
 
   evmk_ref <- fread(system.file("refdata","KNMI14____ref_evmk___19810101-20101231_v3.2.txt", package="knmitransformer"))
 
-  evmk_scenario <- TransformEvap(ifile_tg = ifile_tg,
-                                 ifile_rsds = ifile_rsds,
+  evmk_scenario <- TransformEvap(input_tg = input_tg,
+                                 input_rsds = input_rsds,
                                  ofile="uitvoer.txt",
                                  scenario = scenario,
                                  horizon = horizon,
-                                 regio.file = regio.file)
+                                 regions = regions)
 
   if (!all(evmk_ref [1:5] == evmk_scenario[1:5])) {
     flog.error("Same stations should be used for reference and scenarios")
@@ -48,8 +46,9 @@ evmk_sums_relchange<- function(ifile_tg, ifile_rsds,
   ev_ref <- evmk_ref[-(1:5)]
   ev_ref <- as.data.frame(ev_ref)
 
+#  ev_sce <- round(evmk_scenario[-(1:5)],1)
   ev_sce <- evmk_scenario[-(1:5)]
-  ev_sce <- as.data.frame(ev_sce)
+    ev_sce <- as.data.frame(ev_sce)
 
   mm <- (ev_ref[,1]%/%100)%%100
   ss <- as.integer((mm/3)%%4+1)

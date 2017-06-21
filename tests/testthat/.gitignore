@@ -3,3 +3,6 @@ uitvoer.txt
 scenarioenarioIndices_evaporation.log
 scenarioIndices_evaporation.log
 scenarioIndices_precipitationDeficit.log
+scenarioIndices_AVGtemperature.log
+scenarioIndices_MAXtemperature.log
+scenarioIndices_MINtemperature.log
