@@ -11,6 +11,9 @@ install:
   ps: Bootstrap
 
 # Adapt as necessary starting from here
+
+USE_RTOOLS: true
+
 environment:
   global:
     WARNINGS_ARE_ERRORS: 1
