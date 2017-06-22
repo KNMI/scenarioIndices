@@ -43,7 +43,7 @@ TempAvgIndices<- function(input, index, scenario,
 
 # calcualte index for reference; else...
  if (!scenario %in% c("GL","GH","WL","WH") && horizon !=c(2030,2050,2085)){
-      input <-  knmitransformer:::ReadInput("tg",
+      input <-  knmitransformer::ReadInput("tg",
                 system.file("refdata","KNMI14____ref_tg___19810101-20101231_v3.2.txt",
                             package="knmitransformer"))$obs
     } else {
