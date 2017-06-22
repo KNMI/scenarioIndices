@@ -1,4 +1,4 @@
-context("Temperature AVG indices")
+context("Temperature MAX indices")
 
 library(futile.logger)
 flog.threshold(DEBUG)

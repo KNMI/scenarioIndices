@@ -16,7 +16,7 @@
 #'                   <MON> Middenoost Nederland \cr
 #'                  <ZON> Zuidoost Nederland
 #' @export
-evmk_sums_relchange<- function(inputTemp, inputRad, scenario,
+evmk_sums_relchange <- function(inputTemp, inputRad, scenario,
                                       horizon = NA, regions = "NLD", ofile=NA) {
 
   flog.info("Running evaporation calculation")

@@ -77,17 +77,11 @@ TempAvgIndices<- function(input, index, scenario,
    }
 
   #Indices
-     if(index=="aTG") {
-       X     <- aggregate(input[id,-1],by=list(idy),  mean)
-     } else {
-   if(index=="amnTG") {
-         X     <- aggregate(input[id,-1],by=list(idy),  min)
-      } else {
-    if(index=="amxTG") {
-         X     <- aggregate(input[id,-1],by=list(idy),  max)
-       }
-     }
-  }
+   switch(index,
+          "aTG" = X <- aggregate(input[id,-1],by=list(idy),  mean),
+          "amnTG" = X <- aggregate(input[id,-1],by=list(idy),  min),
+          "amxTG" = X <- aggregate(input[id,-1],by=list(idy),  max))
+
    return(X)
 }
 

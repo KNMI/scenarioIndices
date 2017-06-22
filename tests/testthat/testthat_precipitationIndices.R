@@ -13,9 +13,12 @@ ofile      <- "tmp.txt" # output file - used only temporary
 
 #
  test_that("precipIndices  reference", {
+   scenario = "ref"
 
-   tmp <- PrecipThreshIndices(input = inputPrec, threshold, scenario = scenario,
-                              horizon = horizon, ofile = ofile)
+   horizon = 1981
+
+   tmp <- PrecipThreshIndices(input = inputPrec, threshold = 30.0, scenario = scenario,
+                              horizon = horizon, season = "year", ofile = ofile)
 
    expect_equal_to_reference(tmp, "./regressionOutput/precipitation/KNMI14_ref_precipitationIndices.rds")
  })
