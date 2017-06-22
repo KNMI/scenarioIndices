@@ -1,8 +1,8 @@
-context("Temperature AVG indices")
+context("Temperature MIN indices")
 
 library(futile.logger)
 flog.threshold(DEBUG)
-flog.appender(appender.file('scenarioIndices_MINtemperature.log'))
+flog.appender(appender.file("scenarioIndices_MINtemperature.log"))
 library(data.table)
 
 context("Temp tn ref indices - Entire station set")

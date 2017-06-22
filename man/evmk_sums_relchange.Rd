@@ -4,13 +4,13 @@
 \alias{evmk_sums_relchange}
 \title{Calculate potential evaporation (Makkink), year mean (seasons sum) and summer for brochure validation}
 \usage{
-evmk_sums_relchange(input_tg, input_rsds, scenario, horizon = NA,
+evmk_sums_relchange(inputTemp, inputRad, scenario, horizon = NA,
   regions = "NLD", ofile = NA)
 }
 \arguments{
-\item{input_tg}{input file for tg}
+\item{inputTemp}{input file for tg}
 
-\item{input_rsds}{input file for rsds}
+\item{inputRad}{input file for rsds}
 
 \item{scenario}{scenario                      ["GL", "GH", "WL", "WH"]}
 

@@ -5,7 +5,7 @@
 #' @param index      indices ("nID", "nWD", "nSD", "nTD", "aTX")
 #' @inheritParams TempAvgIndices
 #' @export
-TempMaxIndices<- function(input, index,
+TempMaxIndices <- function(input, index,
                           ofile = NA, scenario,
                           horizon=2030, season,
                           regions = "NLD") {
@@ -17,9 +17,9 @@ TempMaxIndices<- function(input, index,
 
 
   if (!scenario %in% c("GL","GH","WL","WH") && horizon !=c(2030,2050,2085)){
-    input <-  knmitransformer:::ReadInput("tx",
-                                          system.file("refdata","KNMI14____ref_tx___19810101-20101231_v3.2.txt",
-                                                      package="knmitransformer"))$obs
+    input <-  knmitransformer::ReadInput("tx",
+         system.file("refdata","KNMI14____ref_tx___19810101-20101231_v3.2.txt",
+                                      package="knmitransformer"))$obs
   } else {
     input <- TransformTemp(input=input, ofile=NA, scenario=scenario,
                            horizon=horizon, var="tx", regions = regions)
@@ -49,27 +49,12 @@ TempMaxIndices<- function(input, index,
   }
 
   #Indices
-  if(index=="nID"){
-    X     <- aggregate(input[id,-1] < 0,by=list(idy),  sum)
-  } else {
-    if(index=="nWD") {
-      X     <- aggregate(input[id,-1] >= 20,by=list(idy),  sum)
-    } else {
-    if(index=="nSD") {
-      X     <- aggregate(input[id,-1] >= 25,by=list(idy),  sum)
-    } else {
-    if(index=="nTD") {
-      X     <- aggregate(input[id,-1] >= 30,by=list(idy),  sum)
-    } else {
-    if(index=="aTX") {
-      X     <- aggregate(input[id,-1],by=list(idy),  mean)
-        }
-        }
-      }
-    }
-  }
-
-
+  switch(index,
+         "nID" = X <- aggregate(input[id,-1] < 0,by=list(idy),  sum),
+         "nWD" = X <- aggregate(input[id,-1] >= 20,by=list(idy),  sum),
+         "nSD" = X <- aggregate(input[id,-1] >= 25,by=list(idy),  sum),
+         "nTD" = X <- aggregate(input[id,-1] >= 30,by=list(idy),  sum),
+         "aTX" = X <- aggregate(input[id,-1],by=list(idy),  mean))
 
   return(X)
 }

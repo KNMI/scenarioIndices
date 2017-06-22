@@ -1,8 +1,8 @@
-context("Temperature AVG indices")
+context("Temperature MAX indices")
 
 library(futile.logger)
 flog.threshold(DEBUG)
-flog.appender(appender.file('scenarioIndices_MAXtemperature.log'))
+flog.appender(appender.file("scenarioIndices_MAXtemperature.log"))
 library(data.table)
 
 context("Temp tx ref indices - Entire station set")

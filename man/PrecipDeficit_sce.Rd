@@ -6,15 +6,15 @@
 as it was calculated for KNMI14 scenarios brochure
 this index uses the evmk of DeBilt and precipitation amount of 102 stations (the homogenenised ones) over the NL}
 \usage{
-PrecipDeficit_sce(input_tg, input_rsds, input_rr, scenario, horizon = NA,
+PrecipDeficit_sce(inputTemp, inputRad, inputPrec, scenario, horizon = NA,
   ofile = NA, regions = "NLD")
 }
 \arguments{
-\item{input_tg}{input file for tg}
+\item{inputTemp}{input file for tg}
 
-\item{input_rsds}{input file for rsds}
+\item{inputRad}{input file for rsds}
 
-\item{input_rr}{input for rr}
+\item{inputPrec}{input for rr}
 
 \item{scenario}{scenario                      ["GL", "GH", "WL", "WH"]}
 
