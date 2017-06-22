@@ -534,4 +534,3 @@ test_that("aTX decadal prediction", {
 
   expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14_WH_2085_tx_aTX.rds")
 })
-

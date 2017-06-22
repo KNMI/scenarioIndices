@@ -14,9 +14,9 @@ PrecipDeficit_ref<- function(ofile = NA) {
                                package="knmitransformer"))
   stationID     <- evmkRef[(1)]
   names(evmkRef)<- as.character(stationID)
-  evDeBilt      <- evmkRef[-(1:5),"260",with=FALSE]
+  evDeBilt      <- evmkRef[-c(1:5),"260",with=FALSE]
 
-  dt         <- evmkRef[-(1:5),1, with = FALSE]
+  dt         <- evmkRef[-c(1:5),1, with = FALSE]
   mm         <- (dt%/%100)%%100
   amjjas     <- which(mm>=4 & mm<=9)
   yy         <- (dt%/%10000)[amjjas]
@@ -31,7 +31,7 @@ PrecipDeficit_ref<- function(ofile = NA) {
 #  rrRef       <- rrRef[-(1:5),StationSub, with=FALSE]
 #
 # WRONG
-  rrRef       <- rrRef[-(1:6),StationSub, with=FALSE]
+  rrRef       <- rrRef[-c(1:6),StationSub, with=FALSE]
 #
   rrRefMean   <- apply(as.data.frame(rrRef[amjjas,]),1,mean)
 

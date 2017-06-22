@@ -42,22 +42,22 @@ evmk_sums_relchange <- function(inputTemp, inputRad, scenario,
     stop("Same stations should be used for reference and scenarios")
   }
 
-  ev_ref <- evmk_ref[-(1:5)]
+  ev_ref <- evmk_ref[-c(1:5)]
   ev_ref <- as.data.frame(ev_ref)
 
 #  ev_sce <- round(evmk_scenario[-(1:5)],1)
-  ev_sce <- evmk_scenario[-(1:5)]
+  ev_sce <- evmk_scenario[-c(1:5)]
     ev_sce <- as.data.frame(ev_sce)
 
   mm <- (ev_ref[,1]%/%100)%%100
-  ss <- as.integer((mm/3)%%4+1)
+  ss <- as.integer( (mm/3)%%4+1)
   yy <-  ev_ref[,1]%/%10000
   wy <- ifelse(mm<12,yy,yy+1)
 
   products <- data.frame("sum"=1)
   drempels <- vector()
 
-  table_sce <-  table_ref <- reltable <- as.data.frame(matrix(NA,5*(length(drempels)+sum(products)),ncol(ev_ref)))
+  table_sce <-  table_ref <- reltable <- as.data.frame(matrix(NA,5 * (length(drempels)+sum(products)),ncol(ev_ref)))
   names(table_ref) <- evmk_ref[1]
   names(table_sce) <- evmk_ref[1]
   names(reltable) <- evmk_ref[1]
@@ -66,22 +66,22 @@ evmk_sums_relchange <- function(inputTemp, inputRad, scenario,
   i=0
 
   # seasonal variables
-  for(season in 0:4) {
-    if(season==0) {
+  for (season in 0:4) {
+    if (season==0) {
       id  <- 1:length(yy)
     } else {
-      if(season==1) {
+      if (season==1) {
         id  <- which(ss==1 & wy > min(wy) & wy < max(wy))
       } else {
         id  <- which(ss==season)
       }
     }
 
-    if(length(drempels>0)) {
-      for(j in 1:length(drempels)) {
+    if (length(drempels>0)) {
+      for (j in 1:length(drempels)) {
         i=i+1
         dname <- paste("N_",drempels[j],"mm",season,sep="")
-        table_ref[i, 1] <- paste(dname,substr("        ",1,8-nchar(dname)))
+        table_ref[i, 1] <- paste(dname,substr("        ",1,8-nchar(dname))) # nolint
         table_ref[i,-1] <- apply(ev_ref[id,-1]>=drempels[j],2,sum) / length(unique(yy))
         ##scenarios
         table_sce[i, 1] <- paste(dname,substr("        ",1,8-nchar(dname)))
@@ -90,7 +90,7 @@ evmk_sums_relchange <- function(inputTemp, inputRad, scenario,
     }
 
     prod="sum"   # sd seizoenssom EV
-    if(products[prod]==1) {
+    if (products[prod]==1) {
       dname=paste(prod,season,sep="")
       i=i+1
       table_ref[i, 1] <- paste(dname,substr("        ",1,8-nchar(dname)))
@@ -99,7 +99,7 @@ evmk_sums_relchange <- function(inputTemp, inputRad, scenario,
       # relative change
       table_sce[i, 1] <- paste(dname,substr("        ",1,8-nchar(dname)))
       table_sce[i,-1]  <- round(apply(ev_sce[id,-1],2,sum)/30,0)
-      reltable[,-1]    <- round((100 * (table_sce[,-1] - table_ref[,-1]) / table_ref[,-1]),2)
+      reltable[,-1]    <- round( (100 * (table_sce[,-1] - table_ref[,-1]) / table_ref[,-1]),2)
 
     }
   } # end seasonal variables
@@ -108,4 +108,3 @@ evmk_sums_relchange <- function(inputTemp, inputRad, scenario,
   write.table(format(reltable,width=8,nsmall=2), ofile,col.names=F,row.names=F,quote=F)
   return(reltable)
 }
-

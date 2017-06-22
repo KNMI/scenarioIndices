@@ -334,5 +334,3 @@ test_that("amxTG decadal prediction", {
 
   expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14_WH_2085_amxTG.rds")
 })
-
-

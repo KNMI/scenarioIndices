@@ -1,3 +1,4 @@
+# nolint start
 #setwd("/usr/people/bakker/KNMI14/transformatie/droogte")
 setwd("/nobackup/users/photiado/KNMI14_scenarios_2/transformatie/droogte")
 
@@ -54,7 +55,7 @@ tabel.yr$reference  <- round(as.numeric(Xsum),1)
 
 for(version in versions) {
   for(scaling in c("lower","upper","centr")) {
-    
+
     for(p in periodes) {
       for(sc in scenarios) {
         if(( (p == "2030" | p == "ref") & sc == "") | (p != "2030" & p != "ref" & sc != "")) {
@@ -71,31 +72,32 @@ for(version in versions) {
           amjjas    <- which(mm>=4 & mm<=9)
           yy        <- (dt%/%10000)[amjjas]
           ev        <- ev[amjjas]
-          
+
           # neerslag
           rr        <- read.table(paste("../tijdreeksen/",file.name(sc=sc,p=p,var="rr",range=range,v=version,scaling=scaling),sep=""))
           names(rr) <- c("date",round(rr[1,-1],0))
           h.ids     <- which(rr[,1]==0)
           rr        <- rr[-h.ids,sset][-1,]
           rr        <- apply(rr[amjjas,],1,mean)
-          
+
           # maximaal potentieel neerslagtekort
           Ysum      <- tapply(ev-rr,yy,max.pos.cumsum) # bereken maximaal potentieel neerslagtekort
           Ystat     <- c(mean(Ysum),sd(Ysum),sort(as.numeric(Ysum)))          # mean,sd,ranks Ysum
-          delta     <- 100*(Ystat-Xstat)/Xstat          
+          delta     <- 100*(Ystat-Xstat)/Xstat
           ## DEFINIEER SCENARIOTABEL EN JAARREEKSTABEL ##
           tabel.sc[,sc_p]  <- round(delta,1)
           tabel.yr[,sc_p]  <- round(as.numeric(Ysum),1)
-          
+
         } # if(p == "MOC" | p == "EOC" | sc == "G") {
       }   # sc
     }     # period
-    
+
     ofile <- paste("scenario_tabel_neerslagtekort_scaling-",scaling,"_trans_",version,"_",subset,".txt",sep="")
     write.table(format(rbind(colnames(tabel.sc),tabel.sc),width=10,digits=1,justify="right"), ofile,col.names=F,row.names=F,quote=F)
-    
+
     ofile <- paste("jaarlijks_neerslagtekort_scaling-",scaling,"_trans_",version,"_",subset,".txt",sep="")
     write.table(format(rbind(colnames(tabel.yr),tabel.yr),width=10,digits=1,justify="right"), ofile,col.names=F,row.names=F,quote=F)
   }
 }
 
+# nolint end

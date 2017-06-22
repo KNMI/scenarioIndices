@@ -1,3 +1,4 @@
+# nolint start
 #setwd("/usr/people/bakker/KNMI14/transformatie/droogte")
 setwd("/nobackup/users/photiado/KNMI14_scenarios_2/transformatie/droogte")
 
@@ -19,23 +20,23 @@ for(p in periodes) {
   for(sc in scenarios) {
     if(( (p == "2030" | p == "ref") & sc == "") | (p != "2030" & p != "ref" & sc != "")) {
       print(paste(sc,p))
-      
+
       ev        <- read.table(paste("../tijdreeksen/",file.name(sc=sc,p=p,var=var,range=range,v=version),sep=""))
       h.ids     <- which(ev[,1]==0)
       header    <- ev[h.ids,]; header[,1] <- "00000000"
       names(ev) <- c("date",round(ev[1,-1],0))
       ev        <- ev[-h.ids,]
-      
+
       mm <- (ev[,1]%/%100)%%100
       ss <- as.integer((mm/3)%%4+1)
       yy <-  ev[,1]%/%10000
       wy <- ifelse(mm<12,yy,yy+1)
-      
+
       tabel <- as.data.frame(matrix(NA,5*(length(drempels)+sum(products)),ncol(ev)))
       names(tabel) <- names(ev)
-      
+
       i=0
-      
+
       # seasonal variables
       for(season in 0:4) {
         if(season==0) {
@@ -59,7 +60,7 @@ for(p in periodes) {
             tabel[i,-1] <- apply(ev[id,-1]>=drempels[j],2,sum) / length(unique(yy))
           }
         }
-                
+
         prod="sum"   # sd seizoenssom EV
         if(products[prod]==1) {
           dname=paste(prod,season,sep="")
@@ -68,14 +69,14 @@ for(p in periodes) {
           #X           <- aggregate(ev[id,-1],by=list(idy),  sum)
           #tabel[i,-1] <- apply(X[,-1]       , 2          ,   sd)
           tabel[i,-1]  <- apply(ev[id,-1],2,sum)/30
-        }  
+        }
       } # end seasonal variables
-      
+
       # schrijf weg naar ASCII bestand
       ofile <- paste("../klimatologie/klimaat_",file.name(sc=sc,p=p,var=var,range=range,v="v1.0"),sep="")
-      
-      
-      sink(ofile)    
+
+
+      sink(ofile)
       # comments
       writeLines("# Climatologies derived from transformed Makkink crop reference evaporation")
       writeLines("# Royal Netherlands Meteorological Institute (KNMI)")
@@ -96,6 +97,6 @@ for(p in periodes) {
     } # if(p == "MOC" | p == "EOC" | sc == "G") {
   }   # sc
 }     # period
-  
 
 
+# nolint end

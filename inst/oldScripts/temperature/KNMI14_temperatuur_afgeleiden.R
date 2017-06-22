@@ -1,3 +1,4 @@
+# nolint start
 #'CP: change path
 #setwd("/usr/people/bakker/KNMI14/transformatie/temperatuur")
 
@@ -38,12 +39,12 @@ for(p in periodes) {
   for(sc in scenarios) {
     if(( (p == "2030" | p == "ref") & sc == "") | (p != "2030" & p != "ref" & sc != "")) {
       print(c(sc,p,paste("version:",version)))
-      
+
       # read data
       var="tg"; tg <- read.table(paste("../tijdreeksen/",file.name(sc=sc,p=p,var=var,range=range,v=version),sep=""))
       var="tn"; tn <- read.table(paste("../tijdreeksen/",file.name(sc=sc,p=p,var=var,range=range,v=version),sep=""))
       var="tx"; tx <- read.table(paste("../tijdreeksen/",file.name(sc=sc,p=p,var=var,range=range,v=version),sep=""))
-      
+
       h.ids        <- which(tg[,1]==0)
       header       <- tg[h.ids,]; header[,1] <- "00000000"
       names(tg)    <- c("date",round(tg[1,-1],0))
@@ -57,13 +58,13 @@ for(p in periodes) {
       ss <- as.integer((mm/3)%%4+1)
       yy <-  tg[,1]%/%10000
       wy <- ifelse(mm<12,yy,yy+1)
-      
+
       # afgeleiden per seizoen
       tabel <- as.data.frame(matrix(NA,5*sum(sproducts),ncol(tg)))
       names(tabel) <- names(tg)
-      
+
       i=0
-      
+
       for(season in 0:4) {
         if(season==0) {
           id  <- 1:length(yy)
@@ -77,7 +78,7 @@ for(p in periodes) {
             idy <- yy[id]
           }
         }
-        
+
         prod="N_ijs" # aantal ijsdagen
         if(sproducts[prod]==1) {
           i=i+1
@@ -85,39 +86,39 @@ for(p in periodes) {
           tabel[i, 1] <- paste(name,substr("        ",1,8-nchar(name)))
           tabel[i,-1] <- apply(tx[id,-1]<0,2,sum,na.rm=T) / length(unique(yy))
         }
-        
+
         prod="N_str.v" # dagen met strenge vorst
         if(sproducts[prod]==1) {
           i=i+1
           name <- paste(prod,season,sep="")
           tabel[i, 1] <- paste(name,substr("        ",1,8-nchar(name)))
           tabel[i,-1] <- apply(tn[id,-1]<(-10),2,sum,na.rm=T) / length(unique(yy))
-        }  
-        
+        }
+
         prod="N_vorst" # vorstdagen
         if(sproducts[prod]==1) {
           i=i+1
           name <- paste(prod,season,sep="")
           tabel[i, 1] <- paste(name,substr("        ",1,8-nchar(name)))
           tabel[i,-1] <- apply(tn[id,-1]<0,2,sum,na.rm=T) / length(unique(yy))
-        }  
-        
+        }
+
         prod="N_warm" # warme dagen
         if(sproducts[prod]==1) {
           i=i+1
           name <- paste(prod,season,sep="")
           tabel[i, 1] <- paste(name,substr("        ",1,8-nchar(name)))
           tabel[i,-1] <- apply(tx[id,-1]>=20,2,sum,na.rm=T) / length(unique(yy))
-        }  
-        
+        }
+
         prod="N_zomer" # zomerse dagen
         if(sproducts[prod]==1) {
           i=i+1
           name <- paste(prod,season,sep="")
           tabel[i, 1] <- paste(name,substr("        ",1,8-nchar(name)))
           tabel[i,-1] <- apply(tx[id,-1]>=25,2,sum,na.rm=T) / length(unique(yy))
-        }  
-        
+        }
+
         prod="N_trop" # tropische dagen
         if(sproducts[prod]==1) {
           i=i+1
@@ -125,7 +126,7 @@ for(p in periodes) {
           tabel[i, 1] <- paste(name,substr("        ",1,8-nchar(name)))
           tabel[i,-1] <- apply(tx[id,-1]>=30,2,sum,na.rm=T) / length(unique(yy))
         }
-        
+
         prod="N_wn" # warme nachten
         if(sproducts[prod]==1) {
           i=i+1
@@ -133,7 +134,7 @@ for(p in periodes) {
           tabel[i, 1] <- paste(name,substr("        ",1,8-nchar(name)))
           tabel[i,-1] <- apply(tn[id,-1]>=20,2,sum,na.rm=T) / length(unique(yy))
         }
-        
+
         prod="tg.av" # gemiddelde temperatuur per seizoen
         if(sproducts[prod]==1) {
           i=i+1
@@ -141,7 +142,7 @@ for(p in periodes) {
           tabel[i, 1] <- paste(name,substr("        ",1,8-nchar(name)))
           X           <- aggregate(tg[id,-1],by=list(idy),mean,na.rm=T)
           tabel[i,-1] <- apply(X[,-1]       , 2          ,mean,na.rm=T)
-        }  
+        }
 
         prod="tn.av" # gemiddelde minimumtemperatuur per seizoen
         if(sproducts[prod]==1) {
@@ -150,8 +151,8 @@ for(p in periodes) {
           tabel[i, 1] <- paste(name,substr("        ",1,8-nchar(name)))
           X           <- aggregate(tn[id,-1],by=list(idy),mean,na.rm=T)
           tabel[i,-1] <- apply(X[,-1]       , 2          ,mean,na.rm=T)
-        }  
-        
+        }
+
         prod="tx.av" # gemiddelde maximumtemperatuur per seizoen
         if(sproducts[prod]==1) {
           i=i+1
@@ -159,8 +160,8 @@ for(p in periodes) {
           tabel[i, 1] <- paste(name,substr("        ",1,8-nchar(name)))
           X           <- aggregate(tx[id,-1],by=list(idy),mean,na.rm=T)
           tabel[i,-1] <- apply(X[,-1]       , 2          ,mean,na.rm=T)
-        }  
-        
+        }
+
         prod="tg.mn" # gemiddelde minimale dagtemperatuur per seizoen
         if(sproducts[prod]==1) {
           i=i+1
@@ -168,8 +169,8 @@ for(p in periodes) {
           tabel[i, 1] <- paste(name,substr("        ",1,8-nchar(name)))
           X           <- aggregate(tg[id,-1],by=list(idy), min,na.rm=T)
           tabel[i,-1] <- apply(X[,-1]       , 2          ,mean,na.rm=T)
-        }  
-        
+        }
+
         prod="tg.mx" # gemiddelde maximale dagtemperatuur per seizoen
         if(sproducts[prod]==1) {
           i=i+1
@@ -178,7 +179,7 @@ for(p in periodes) {
           X           <- aggregate(tg[id,-1],by=list(idy), max,na.rm=T)
           tabel[i,-1] <- apply(X[,-1]       , 2          ,mean,na.rm=T)
         }
-        
+
         prod="tg.g.sd" # standaard deviatie seizoensgemiddelde temperatuur
         if(sproducts[prod]==1) {
           i=i+1
@@ -188,12 +189,12 @@ for(p in periodes) {
           tabel[i,-1] <- apply(X[,-1]       , 2          ,   sd,na.rm=T)
         }
       } # end seasonal variables
-      
+
       #'CP: changed v=version to v=version_out
       # schrijf weg naar ASCII bestand
       ofile <- paste("../klimatologie/klimaat_",file.name(sc=sc,p=p,var="temp",range=range,v=version),sep="")
-      
-      sink(ofile)    
+
+      sink(ofile)
       # comments
       writeLines("# Climatologies derived from transformed daily temperature observations")
       writeLines("# Royal Netherlands Meteorological Institute (KNMI)")
@@ -215,6 +216,5 @@ for(p in periodes) {
     } # if(p == "MOC" | p == "EOC" | sc == "G") {
   }   # sc
 }     # period
-  
 
-
+# nolint end

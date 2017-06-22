@@ -39,14 +39,14 @@ PrecipDeficit_sce<- function(inputTemp, inputRad, inputPrec,
                                   scenario = scenario, horizon = horizon,
                                  ofile = NA, regions = "NLD")
 
-  dt     <- evmk_scenario[-(1:5),1, with = FALSE]
+  dt     <- evmk_scenario[-c(1:5),1, with = FALSE]
   mm     <- (dt%/%100)%%100
   amjjas <- which(mm>=4 & mm<=9)
   yy     <- (dt%/%10000)[amjjas]
 
   stationID           <- evmk_scenario[(1)]
   names(evmk_scenario)<- as.character(stationID)
-  evDeBiltSC          <- evmk_scenario[-(1:5),"260",with=FALSE]
+  evDeBiltSC          <- evmk_scenario[-c(1:5),"260",with=FALSE]
   evDeBiltSCGS        <- evDeBiltSC[amjjas]
 
   # calculate rr for scenarios
@@ -59,7 +59,7 @@ PrecipDeficit_sce<- function(inputTemp, inputRad, inputPrec,
   stationID         <- rrScenario[(1)]
   names(rrScenario) <- as.character(stationID)
   #Wrong version. Correct should be -(1:5)
-  rrScenario        <- rrScenario[-(1:6),StationSub, with=FALSE]
+  rrScenario        <- rrScenario[-c(1:6),StationSub, with=FALSE]
   rrScenarioMean    <- apply(as.data.frame(rrScenario[amjjas,]),1,mean)
 
 
@@ -69,7 +69,7 @@ PrecipDeficit_sce<- function(inputTemp, inputRad, inputPrec,
   ndy        <- order(Ysum,decreasing=T)[1:N]
   highestsce <- mean(Ysum[ndy])
   Ystat      <- c(mean(Ysum), sd(Ysum), sort(as.numeric(Ysum)))
-  delta      <- 100*(Ystat-Xstat) / Xstat
+  delta      <- 100 * (Ystat-Xstat) / Xstat
   nd <- length(delta)
   highestdel <- mean(delta[(nd-2):nd])
 

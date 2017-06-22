@@ -21,7 +21,7 @@ TempMinIndices<- function(input, index,
   } else {
     input <- TransformTemp(input=input, ofile=NA, scenario=scenario,
                            horizon=horizon, var="tn", regions = regions)
-    input <- input[-(1:5)]
+    input <- input[-c(1:5)]
 
   }
 
@@ -29,15 +29,15 @@ TempMinIndices<- function(input, index,
 
   #Seasons
   mm <- (input[,1]%/%100)%%100
-  ss <- as.integer((mm/3)%%4+1)
+  ss <- as.integer( (mm/3)%%4+1)
   yy <-  input[,1]%/%10000
   wy <- ifelse(mm<12,yy,yy+1)
 
-  if(season=="year"){
+  if (season=="year"){
     id  <- 1:length(yy)
     idy <- yy
   } else {
-    if(season=="winter"){
+    if (season=="winter"){
       id  <- which(ss==1 & wy > min(wy) & wy < max(wy))
       idy <- wy[id]
     } else {
@@ -54,4 +54,3 @@ TempMinIndices<- function(input, index,
          "aTN"   = X <- aggregate(input[id, -1],       by=list(idy),  mean))
   return(X)
 }
-

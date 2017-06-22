@@ -14,36 +14,36 @@ evmk_sums_reference<- function(ofile="uitvoer.txt") {
   evmk_ref <- fread(system.file("refdata","KNMI14____ref_evmk___19810101-20101231_v3.2.txt", package="knmitransformer"))
 
 
-  ev_ref <- evmk_ref[-(1:5)]
+  ev_ref <- evmk_ref[-c(1:5)]
   ev_ref <- as.data.frame(ev_ref)
 
   mm <- (ev_ref[,1]%/%100)%%100
-  ss <- as.integer((mm/3)%%4+1)
+  ss <- as.integer( (mm/3)%%4+1)
   yy <-  ev_ref[,1]%/%10000
   wy <- ifelse(mm<12,yy,yy+1)
 
   products <- data.frame("sum"=1)
   drempels <- vector()
 
-  table_ref <- as.data.frame(matrix(NA,5*(length(drempels)+sum(products)),ncol(ev_ref)))
+  table_ref <- as.data.frame(matrix(NA,5 * (length(drempels)+sum(products)),ncol(ev_ref)))
   names(table_ref) <- evmk_ref[1]
 
   i=0
 
   # seasonal variables
-  for(season in 0:4) {
-    if(season==0) {
+  for (season in 0:4) {
+    if (season==0) {
       id  <- 1:length(yy)
     } else {
-      if(season==1) {
+      if (season==1) {
         id  <- which(ss==1 & wy > min(wy) & wy < max(wy))
       } else {
         id  <- which(ss==season)
       }
     }
 
-    if(length(drempels>0)) {
-      for(j in 1:length(drempels)) {
+    if (length(drempels>0)) {
+      for (j in 1:length(drempels)) {
         i=i+1
         dname <- paste("N_",drempels[j],"mm",season,sep="")
         table_ref[i, 1] <- paste(dname,substr("        ",1,8-nchar(dname)))
@@ -52,7 +52,7 @@ evmk_sums_reference<- function(ofile="uitvoer.txt") {
     }
 
     prod="sum"   # sd seizoenssom EV
-    if(products[prod]==1) {
+    if (products[prod]==1) {
       dname=paste(prod,season,sep="")
       i=i+1
       table_ref[i, 1] <- paste(dname,substr("        ",1,8-nchar(dname)))
@@ -65,4 +65,3 @@ evmk_sums_reference<- function(ofile="uitvoer.txt") {
   write.table(format(table_ref,width=8,nsmall=2), ofile,col.names=F,row.names=F,quote=F)
   return(table_ref)
 }
-

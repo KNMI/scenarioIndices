@@ -1,3 +1,4 @@
+# nolint start
 #setwd("/usr/people/bakker/KNMI14/transformatie/droogte")
 setwd("/nobackup/users/photiado/KNMI14_scenarios_2/transformatie/droogte")
 
@@ -76,31 +77,31 @@ tabel.all <- rbind(tabel.all,tabel)
 
 for(p in periodes) {
   for(sc in scenarios) {
-    
+
     if(( (p == "2030" | p == "ref") & sc == "") | (p != "2030" & p != "ref" & sc != "")) {
-      
+
       sc_p       <- paste(sc,p,sep="")
       print(c(sc_p,paste("version:",version)))
-      
+
       ifile      <- paste("../klimatologie/klimaat_",file.name(sc=sc,p=p,var=var,v=version),sep="")
       fut        <- read.table(ifile)
       names(fut) <- names(obs)
       fut        <- fut[-h.ids,]
       delta      <- obs
-      
+
       # relative change
       delta[,-1]    <- 100 * (fut[,-1] - obs[,-1]) / obs[,-1]
-      
+
       # scenario tabellen (alles op basis van De Bilt)
       for(ss in 0:4) {tabel.260[which(season==ss),sc_p] <- round(delta[season==ss,"260"],2)}
-      
+
       # scenario tabel (alles)
       tabel[,-1:-3]  <- round(delta[,-1],2)
       tabel$scenario <- sc_p
-      
+
       tabel.all <- rbind(tabel.all,tabel)
-      
-      
+
+
     } # if(p == "MOC" | p == "EOC" | sc == "G") {
   }   # sc
 }     # period
@@ -110,3 +111,5 @@ write.table(format(rbind(colnames(tabel.260),tabel.260),width=10,digits=1,justif
 
 ofile <- paste("scenario_tabel_verdamping_trans_",version,"_ALL.txt",sep="")
 write.table(format(rbind(colnames(tabel.all),tabel.all),width=10,digits=1,justify="right"), ofile,col.names=F,row.names=F,quote=F)
+
+# nolint end

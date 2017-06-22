@@ -34,7 +34,7 @@ PrecipThreshIndices<- function(input, threshold, scenario = NA,
     input <-  knmitransformer::ReadInput("rr",
                                           system.file("refdata","KNMI14____ref_rrcentr___19810101-20101231_v3.2.txt",
                                                       package="knmitransformer"))$obs
-    dt <- input[-(1:5),1]
+    dt <- input[-c(1:5),1]
 
     input <- input[,StationSub]
 
@@ -45,8 +45,8 @@ PrecipThreshIndices<- function(input, threshold, scenario = NA,
     stationID    <- input[(1)]
     names(input) <- as.character(stationID)
 
-    dt <- as.vector(input[-(1:5),1, with = FALSE])
-    input  <- input[-(1:5),StationSub, with=FALSE]
+    dt <- as.vector(input[-c(1:5),1, with = FALSE])
+    input  <- input[-c(1:5),StationSub, with=FALSE]
   }
 
   tabel <- as.data.frame(matrix(NA,5,ncol(input)))
@@ -54,17 +54,17 @@ PrecipThreshIndices<- function(input, threshold, scenario = NA,
 
   #Seasons
   mm <- (dt%/%100)%%100
-  ss <- as.integer((mm/3)%%4+1)
+  ss <- as.integer( (mm/3)%%4+1)
   yy <-  dt%/%10000
   wy <- ifelse(mm<12,yy,yy+1)
 
   i=0
 
-  if(season=="year"){
+  if (season=="year"){
     id  <- 1:length(yy)
     idy <- yy
   } else {
-    if(season=="winter"){
+    if (season=="winter"){
       id  <- which(ss==1 & wy > min(wy) & wy < max(wy))
       idy <- wy[id]
     } else {
@@ -76,6 +76,3 @@ PrecipThreshIndices<- function(input, threshold, scenario = NA,
       tabel[i,-1] <- apply(input[idy,-1]>=threshold,2,sum) / length(unique(yy))
 
 }
-
-
-
