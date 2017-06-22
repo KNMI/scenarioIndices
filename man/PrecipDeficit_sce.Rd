@@ -10,6 +10,12 @@ PrecipDeficit_sce(inputTemp, inputRad, inputPrec, scenario, horizon = NA,
   ofile = NA, regions = "NLD")
 }
 \arguments{
+\item{inputTemp}{input file for tg}
+
+\item{inputRad}{input file for rsds}
+
+\item{inputPrec}{input for rr}
+
 \item{scenario}{scenario                      ["GL", "GH", "WL", "WH"]}
 
 \item{horizon}{time horizon                  [2030 (=DEFAULT), 2050, 2085]}
@@ -25,12 +31,6 @@ KNMI14 distinguishes following regions:\cr
 <NON> Noordoost Nederland \cr
 <MON> Middenoost Nederland \cr
 <ZON> Zuidoost Nederland}
-
-\item{input_tg}{input file for tg}
-
-\item{input_rsds}{input file for rsds}
-
-\item{input_rr}{input for rr}
 }
 \description{
 function reads reference ts for evmk, rr, tg & rdrs

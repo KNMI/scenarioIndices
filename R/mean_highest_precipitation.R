@@ -2,9 +2,9 @@
 #' as it was calculated for KNMI14 scenarios brochure
 #' this index uses the evmk of DeBilt and precipitation amount of 102 stations (the homogenenised ones) over the NL
 #' @description      function reads reference ts for evmk, rr, tg & rdrs
-#' @param input_tg   input file for tg
-#' @param input_rsds input file for rsds
-#' @param input_rr   input for rr
+#' @param inputTemp   input file for tg
+#' @param inputRad input file for rsds
+#' @param inputPrec   input for rr
 #' @param ofile      (DEFAULT="uitvoer.txt") Name of the output file to write the transformed data to.
 #'                    Format is similar to input
 #' @param scenario    scenario                      ["GL", "GH", "WL", "WH"]
