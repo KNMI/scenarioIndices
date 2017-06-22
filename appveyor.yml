@@ -12,7 +12,10 @@ install:
 
 # Adapt as necessary starting from here
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> temperature
 environment:
   global:
     WARNINGS_ARE_ERRORS: 1

@@ -58,6 +58,8 @@ PrecipThreshIndices<- function(input, threshold, scenario = NA,
   yy <-  dt%/%10000
   wy <- ifelse(mm<12,yy,yy+1)
 
+  i=0
+
   if(season=="year"){
     id  <- 1:length(yy)
   } else {
