@@ -64,7 +64,7 @@ PrecipThreshIndices<- function(input, threshold, scenario = NA,
     }
   }
 
-      tabel[i,-1] <- apply(rr[id,-1]>=threshold,2,sum) / length(unique(yy))
+      tabel[i,-1] <- apply(input[id,-1]>=threshold,2,sum) / length(unique(yy))
 
 }
 
