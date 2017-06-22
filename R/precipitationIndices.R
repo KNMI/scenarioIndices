@@ -27,28 +27,35 @@
 PrecipThreshIndices<- function(input, threshold, scenario = NA,
                           horizon = NA, season, subscenario, ofile = NA) {
 
+  StationSub <- as.character(fread(system.file("refdata","P102.txt", package = "scenarioIndices"))$V1)
 
   # calcualte index for reference; else...
   if (!scenario %in% c("GL","GH","WL","WH") && horizon !=c(2030,2050,2085)){
     input <-  knmitransformer::ReadInput("rr",
-                                          system.file("refdata","KNMI14____ref_rr___19810101-20101231_v3.2.txt",
+                                          system.file("refdata","KNMI14____ref_rrcentr___19810101-20101231_v3.2.txt",
                                                       package="knmitransformer"))$obs
+    dt <- input[-(1:5),1]
+
+    input <- input[,StationSub]
+
   } else {
+
     input <- TransformPrecip(input = input, ofile=NA, scenario=scenario,
                            horizon=horizon, subscenario = subscenario)
-    input <- input[-(1:5), ]
+    stationID    <- input[(1)]
+    names(input) <- as.character(stationID)
 
+    dt <- as.vector(input[-(1:5),1, with = FALSE])
+    input  <- input[-(1:5),StationSub, with=FALSE]
   }
-
-  input <- as.data.frame(input)
 
   tabel <- as.data.frame(matrix(NA,5,ncol(input)))
   names(tabel) <- names(input)
 
   #Seasons
-  mm <- (input[,1]%/%100)%%100
+  mm <- (dt%/%100)%%100
   ss <- as.integer((mm/3)%%4+1)
-  yy <-  input[,1]%/%10000
+  yy <-  dt%/%10000
   wy <- ifelse(mm<12,yy,yy+1)
 
   if(season=="year"){

@@ -1,8 +1,8 @@
 #' Calculate potential evaporation (Makkink), year mean (seasons sum) and summer for brochure validation
 #' @description Function reads transormed mean temperature and transformed global radiation
 #' and calculates the Makkink evaporation for 'future time series' that match a certain climate, makes season sums and summer values
-#' @param input_tg input file for tg
-#' @param input_rsds input file for rsds
+#' @param inputTemp input file for tg
+#' @param inputRad input file for rsds
 #' @param ofile          (DEFAULT="uitvoer.txt") Name of the output file to write the transformed data to.
 #'                Format is similar to input
 #' @param scenario  scenario                      ["GL", "GH", "WL", "WH"]
@@ -16,7 +16,7 @@
 #'                   <MON> Middenoost Nederland \cr
 #'                  <ZON> Zuidoost Nederland
 #' @export
-evmk_sums_relchange<- function(input_tg, input_rsds, scenario,
+evmk_sums_relchange<- function(inputTemp, inputRad, scenario,
                                       horizon = NA, regions = "NLD", ofile=NA) {
 
   flog.info("Running evaporation calculation")
@@ -30,9 +30,9 @@ evmk_sums_relchange<- function(input_tg, input_rsds, scenario,
 
   evmk_ref <- fread(system.file("refdata","KNMI14____ref_evmk___19810101-20101231_v3.2.txt", package="knmitransformer"))
 
-  evmk_scenario <- TransformEvap(inputTemp = input_tg,
-                                 inputRad = input_rsds,
-                                 ofile="uitvoer.txt",
+  evmk_scenario <- TransformEvap(inputTemp = inputTemp,
+                                 inputRad = inputRad,
+                                 ofile=NA,
                                  scenario = scenario,
                                  horizon = horizon,
                                  regions = regions)

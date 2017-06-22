@@ -18,7 +18,7 @@
 #'                   <MON> Middenoost Nederland \cr
 #'                   <ZON> Zuidoost Nederland
 #' @export
-PrecipDeficit_sce<- function(input_tg, input_rsds, input_rr,
+PrecipDeficit_sce<- function(inputTemp, inputRad, inputPrec,
                                scenario, horizon = NA, ofile=NA, regions = "NLD") {
 
 
@@ -35,7 +35,7 @@ PrecipDeficit_sce<- function(input_tg, input_rsds, input_rr,
 
   #input for scenarios
   #calculate evmk for scenarios
-  evmk_scenario <- TransformEvap(inputTemp = input_tg, inputRad = input_rsds,
+  evmk_scenario <- TransformEvap(inputTemp = inputTemp, inputRad = inputRad,
                                   scenario = scenario, horizon = horizon,
                                  ofile = NA, regions = "NLD")
 
@@ -50,8 +50,8 @@ PrecipDeficit_sce<- function(input_tg, input_rsds, input_rr,
   evDeBiltSCGS        <- evDeBiltSC[amjjas]
 
   # calculate rr for scenarios
-  rrScenario <- TransformPrecip(input = input_rr,
-                  ofile="tmp.txt",
+  rrScenario <- TransformPrecip(input = inputPrec,
+                  ofile=NA,
                   scenario=scenario,
                   horizon = horizon,
                   subscenario="centr", rounding = TRUE)
