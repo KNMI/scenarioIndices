@@ -22,7 +22,6 @@ evmk_sums_relchange<- function(input_tg, input_rsds, scenario,
   flog.info("Running evaporation calculation")
   flog.debug("Version is 1.0")
   # CONSTANTS AND FUNCTIONS ###############################################################################
-  version="v1.0"
 
   if (!horizon %in% c(2030, 2050, 2085)) {
     flog.error("horizon={%s} has to be a valid period", paste(horizon))
@@ -70,14 +69,11 @@ evmk_sums_relchange<- function(input_tg, input_rsds, scenario,
   for(season in 0:4) {
     if(season==0) {
       id  <- 1:length(yy)
-      idy <- yy
     } else {
       if(season==1) {
         id  <- which(ss==1 & wy > min(wy) & wy < max(wy))
-        idy <- wy[id]
       } else {
         id  <- which(ss==season)
-        idy <- yy[id]
       }
     }
 
@@ -98,7 +94,6 @@ evmk_sums_relchange<- function(input_tg, input_rsds, scenario,
       dname=paste(prod,season,sep="")
       i=i+1
       table_ref[i, 1] <- paste(dname,substr("        ",1,8-nchar(dname)))
-      #X           <- aggregate(ev[id,-1],by=list(idy),  sum)
       #table[i,-1] <- apply(X[,-1]       , 2          ,   sd)
       table_ref[i,-1]  <- round(apply(ev_ref[id,-1],2,sum)/30,0)
       # relative change

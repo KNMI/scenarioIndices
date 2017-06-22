@@ -9,7 +9,6 @@ evmk_sums_reference<- function(ofile="uitvoer.txt") {
   flog.info("Running evaporation sums for reference")
   flog.debug("Version is 1.0")
   # CONSTANTS AND FUNCTIONS ###############################################################################
-  version="v1.0"
 
 
   evmk_ref <- fread(system.file("refdata","KNMI14____ref_evmk___19810101-20101231_v3.2.txt", package="knmitransformer"))
@@ -35,14 +34,11 @@ evmk_sums_reference<- function(ofile="uitvoer.txt") {
   for(season in 0:4) {
     if(season==0) {
       id  <- 1:length(yy)
-      idy <- yy
     } else {
       if(season==1) {
         id  <- which(ss==1 & wy > min(wy) & wy < max(wy))
-        idy <- wy[id]
       } else {
         id  <- which(ss==season)
-        idy <- yy[id]
       }
     }
 
@@ -60,7 +56,6 @@ evmk_sums_reference<- function(ofile="uitvoer.txt") {
       dname=paste(prod,season,sep="")
       i=i+1
       table_ref[i, 1] <- paste(dname,substr("        ",1,8-nchar(dname)))
-      #X           <- aggregate(ev[id,-1],by=list(idy),  sum)
       #table[i,-1] <- apply(X[,-1]       , 2          ,   sd)
       table_ref[i,-1]  <- round(apply(ev_ref[id,-1],2,sum)/30,0)
     }

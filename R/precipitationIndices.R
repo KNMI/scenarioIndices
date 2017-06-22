@@ -53,14 +53,11 @@ PrecipThreshIndices<- function(input, threshold, scenario = NA,
 
   if(season=="year"){
     id  <- 1:length(yy)
-    idy <- yy
   } else {
     if(season=="winter"){
       id  <- which(ss==1 & wy > min(wy) & wy < max(wy))
-      idy <- wy[id]
     } else {
       id  <- which(ss==season)
-      idy <- yy[id]
     }
   }
 
