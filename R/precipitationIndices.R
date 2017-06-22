@@ -30,13 +30,13 @@ PrecipThreshIndices<- function(input, threshold, scenario = NA,
   StationSub <- as.character(fread(system.file("refdata","P102.txt", package = "scenarioIndices"))$V1)
 
   # calcualte index for reference; else...
-  # if (!scenario %in% c("GL","GH","WL","WH") && horizon !=c(2030,2050,2085)){
-  #   input <-  knmitransformer:::ReadInput("rr",
-  #                                         system.file("refdata","KNMI14____ref_rrcentr___19810101-20101231_v3.2.txt",
-  #                                                     package="knmitransformer"))$obs
-  #   input <- input[,StationSub]
-  # } else {
-    input <- knmitransformer::TransformPrecip(input = input, ofile=NA, scenario=scenario,
+  if (!scenario %in% c("GL","GH","WL","WH") && horizon !=c(2030,2050,2085)){
+    input <-  knmitransformer:::ReadInput("rr",
+                                          system.file("refdata","KNMI14____ref_rrcentr___19810101-20101231_v3.2.txt",
+                                                      package="knmitransformer"))$obs
+    input <- input[,StationSub]
+  } else {
+    input <- TransformPrecip(input = input, ofile=NA, scenario=scenario,
                            horizon=horizon, subscenario = subscenario)
    stationID         <- input[(1)]
     names(input) <- as.character(stationID)
@@ -106,7 +106,7 @@ PrecipThreshIndices<- function(input, threshold, scenario = NA,
 
   } # end seasonal variables
   return(tabel)
-}
+}}
 
 
 
