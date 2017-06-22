@@ -7,12 +7,12 @@ library(data.table)
 
 context("precipDefic  calc - Entire station set")
 
-input_tg   <- system.file("refdata","KNMI14____ref_tg___19810101-20101231_v3.2.txt", package="knmitransformer")
-input_rsds <- system.file("refdata","KNMI14____ref_rsds___19810101-20101231_v3.2.txt", package="knmitransformer")
-input_rr   <- system.file("refdata","KNMI14____ref_rrcentr___19810101-20101231_v3.2.txt", package = "scenarioIndices")
+inputTemp   <- system.file("refdata","KNMI14____ref_tg___19810101-20101231_v3.2.txt", package="knmitransformer")
+inputRad <- system.file("refdata","KNMI14____ref_rsds___19810101-20101231_v3.2.txt", package="knmitransformer")
+inputPrec   <- system.file("refdata","KNMI14____ref_rrcentr___19810101-20101231_v3.2.txt", package = "scenarioIndices")
 ofile      <- "tmp.txt" # output file - used only temporary
 var <- "tg"
-regions    <- knmitransformer::MatchRegionsOnStationId(knmitransformer::ReadInput(var, input_tg)$header[1, -1])
+regions    <- knmitransformer::MatchRegionsOnStationId(knmitransformer::ReadInput(var, inputTemp)$header[1, -1])
 #
 # test_that("precipDefic  reference", {
 #
@@ -26,8 +26,8 @@ test_that("2030 decadal prediction", {
 
   horizon = 2030
 
-  tmp <- PrecipDeficit_sce(input_tg = input_tg, input_rsds = input_rsds,
-                           input_rr = input_rr,ofile = ofile, scenario = scenario,
+  tmp <- PrecipDeficit_sce(inputTemp = inputTemp, inputRad = inputRad,
+                           inputPrec = inputPrec,ofile = ofile, scenario = scenario,
                            horizon = horizon,
                            regions = regions)
 
@@ -39,8 +39,8 @@ test_that("scenario WL", {
 
   horizon = 2050
 
-  tmp <- PrecipDeficit_sce(input_tg = input_tg, input_rsds = input_rsds,
-                           input_rr = input_rr,ofile = ofile, scenario = scenario,
+  tmp <- PrecipDeficit_sce(inputTemp = inputTemp, inputRad = inputRad,
+                           inputPrec = inputPrec,ofile = ofile, scenario = scenario,
                            horizon = horizon,
                            regions = regions)
 
@@ -48,8 +48,8 @@ test_that("scenario WL", {
 
   p = 2085
 
-  tmp <- PrecipDeficit_sce(input_tg = input_tg, input_rsds = input_rsds,
-                           input_rr = input_rr,ofile = ofile, scenario = scenario,
+  tmp <- PrecipDeficit_sce(inputTemp = inputTemp, inputRad = inputRad,
+                           inputPrec = inputPrec,ofile = ofile, scenario = scenario,
                            horizon = horizon,
                            regions = regions)
 
@@ -61,8 +61,8 @@ test_that("scenario WH", {
 
   horizon = 2050
 
-  tmp <- PrecipDeficit_sce(input_tg = input_tg, input_rsds = input_rsds,
-                           input_rr = input_rr,ofile = ofile, scenario = scenario,
+  tmp <- PrecipDeficit_sce(inputTemp = inputTemp, inputRad = inputRad,
+                           inputPrec = inputPrec,ofile = ofile, scenario = scenario,
                            horizon = horizon,
                            regions = regions)
 
@@ -71,8 +71,8 @@ test_that("scenario WH", {
 
   horizon = 2085
 
-  tmp <- PrecipDeficit_sce(input_tg = input_tg, input_rsds = input_rsds,
-                           input_rr = input_rr,ofile = ofile, scenario = scenario,
+  tmp <- PrecipDeficit_sce(inputTemp = inputTemp, inputRad = inputRad,
+                           inputPrec = inputPrec,ofile = ofile, scenario = scenario,
                            horizon = horizon,
                            regions = regions)
 
@@ -84,8 +84,8 @@ test_that("scenario GH", {
 
   horizon = 2050
 
-  tmp <- PrecipDeficit_sce(input_tg = input_tg, input_rsds = input_rsds,
-                           input_rr = input_rr,ofile = ofile, scenario = scenario,
+  tmp <- PrecipDeficit_sce(inputTemp = inputTemp, inputRad = inputRad,
+                           inputPrec = inputPrec,ofile = ofile, scenario = scenario,
                            horizon = horizon,
                            regions = regions)
 
@@ -94,8 +94,8 @@ test_that("scenario GH", {
 
   horizon = 2085
 
-  tmp <- PrecipDeficit_sce(input_tg = input_tg, input_rsds = input_rsds,
-                           input_rr = input_rr,ofile = ofile, scenario = scenario,
+  tmp <- PrecipDeficit_sce(inputTemp = inputTemp, inputRad = inputRad,
+                           inputPrec = inputPrec,ofile = ofile, scenario = scenario,
                            horizon = horizon,
                            regions = regions)
 
@@ -107,8 +107,8 @@ test_that("scenario GL", {
 
   horizon = 2050
 
-  tmp <- PrecipDeficit_sce(input_tg = input_tg, input_rsds = input_rsds,
-                           input_rr = input_rr,ofile = ofile, scenario = scenario,
+  tmp <- PrecipDeficit_sce(inputTemp = inputTemp, inputRad = inputRad,
+                           inputPrec = inputPrec,ofile = ofile, scenario = scenario,
                            horizon = horizon,
                            regions = regions)
 
@@ -116,8 +116,8 @@ test_that("scenario GL", {
 
   horizon = 2085
 
-  tmp <- PrecipDeficit_sce(input_tg = input_tg, input_rsds = input_rsds,
-                           input_rr = input_rr,ofile = ofile, scenario = scenario,
+  tmp <- PrecipDeficit_sce(inputTemp = inputTemp, inputRad = inputRad,
+                           inputPrec = inputPrec,ofile = ofile, scenario = scenario,
                            horizon = horizon,
                            regions = regions)
 
