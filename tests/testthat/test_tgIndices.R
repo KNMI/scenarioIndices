@@ -29,6 +29,41 @@ test_that("reference", {
 
   expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14___ref_tg_aTG.rds")
 
+  tmp <- TempAvgIndices(input= input, index=index,
+                        ofile= ofile,
+                        scenario = scenario,
+                        horizon = horizon, season = "winter",
+                        regions = regions)
+
+  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14___ref_tg_aTG_winter.rds")
+
+  tmp <- TempAvgIndices(input= input, index=index,
+                        ofile= ofile,
+                        scenario = scenario,
+                        horizon = horizon, season = "spring",
+                        regions = regions)
+
+  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14___ref_tg_aTG_spring.rds")
+
+
+  tmp <- TempAvgIndices(input= input, index=index,
+                        ofile= ofile,
+                        scenario = scenario,
+                        horizon = horizon, season = "summer",
+                        regions = regions)
+
+  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14___ref_tg_aTG_summer.rds")
+
+
+  tmp <- TempAvgIndices(input= input, index=index,
+                        ofile= ofile,
+                        scenario = scenario,
+                        horizon = horizon, season = "autumn",
+                        regions = regions)
+
+  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14___ref_tg_aTG_autumn.rds")
+
+
 })
 test_that("2030 decadal prediction", {
   index = "aTG"
