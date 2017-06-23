@@ -16,7 +16,7 @@
 #'                   <MON> Middenoost Nederland \cr
 #'                  <ZON> Zuidoost Nederland
 #' @export
-evmk_sums_relchange <- function(inputTemp, inputRad, scenario,
+evmkSumsRelchange <- function(inputTemp, inputRad, scenario,
                                       horizon = NA, regions = "NLD", ofile=NA) {
 
   flog.info("Running evaporation calculation")
@@ -28,45 +28,41 @@ evmk_sums_relchange <- function(inputTemp, inputRad, scenario,
   stop("Horizon must be valid, i.e. 2030, 2050, or 2085")
   }
 
-  evmk_ref <- fread(system.file("refdata",
-                                "KNMI14____ref_evmk___19810101-20101231_v3.2.txt",
-                                package="knmitransformer"))
+  evmkRef <- fread(KnmiRefFile("KNMI14____ref_evmk___19810101-20101231_v3.2.txt"))
 
-  evmk_scenario <- TransformEvap(inputTemp = inputTemp,
+  evmkScenario <- TransformEvap(inputTemp = inputTemp,
                                  inputRad = inputRad,
                                  ofile=NA,
                                  scenario = scenario,
                                  horizon = horizon,
                                  regions = regions)
 
-  if (!all(evmk_ref [1:5] == evmk_scenario[1:5])) {
+  if (!all(evmkRef [1:5] == evmkScenario[1:5])) {
     flog.error("Same stations should be used for reference and scenarios")
     stop("Same stations should be used for reference and scenarios")
   }
 
-  ev_ref <- evmk_ref[-c(1:5)]
-  ev_ref <- as.data.frame(ev_ref)
+  evRef <- evmkRef[-c(1:5), ]
+  evRef <- as.data.frame(evRef)
 
-#  ev_sce <- round(evmk_scenario[-(1:5)],1)
-  ev_sce <- evmk_scenario[-c(1:5)]
-    ev_sce <- as.data.frame(ev_sce)
+  evSce <- evmkScenario[-c(1:5), ]
+  evSce <- as.data.frame(evSce)
 
-  mm <- (ev_ref[,1]%/%100)%%100
+  mm <- (evRef[,1]%/%100)%%100
   ss <- as.integer( (mm/3)%%4+1)
-  yy <-  ev_ref[,1]%/%10000
+  yy <-  evRef[,1]%/%10000
   wy <- ifelse(mm<12,yy,yy+1)
 
   products <- data.frame("sum"=1)
   drempels <- vector()
 
-  table_sce <-  table_ref <- reltable <- as.data.frame(matrix(NA,
-      5 * (length(drempels)+sum(products)),ncol(ev_ref)))
-  names(table_ref) <- evmk_ref[1]
-  names(table_sce) <- evmk_ref[1]
-  names(reltable) <- evmk_ref[1]
+  tableSce <-  tableRef <- reltable <- as.data.frame(matrix(NA,
+               5 * (length(drempels)+sum(products)),ncol(evRef)))
+  names(tableRef) <- evmkRef[1]
+  names(tableSce) <- evmkRef[1]
+  names(reltable) <- evmkRef[1]
 
-
-  i=0
+  i = 0
 
   # seasonal variables
   for (season in 0:4) {
@@ -84,11 +80,11 @@ evmk_sums_relchange <- function(inputTemp, inputRad, scenario,
       for (j in 1:length(drempels)) {
         i=i+1
         dname <- paste("N_",drempels[j],"mm",season,sep="")
-        table_ref[i, 1] <- paste(dname,substr("        ",1,8-nchar(dname))) # nolint
-        table_ref[i,-1] <- apply(ev_ref[id,-1]>=drempels[j],2,sum) / length(unique(yy))
+        tableRef[i, 1] <- paste(dname,substr("        ",1,8-nchar(dname))) # nolint
+        tableRef[i,-1] <- apply(evRef[id,-1]>=drempels[j],2,sum) / length(unique(yy))
         ##scenarios
-        table_sce[i, 1] <- paste(dname,substr("        ",1,8-nchar(dname)))
-        table_sce[i,-1] <- apply(ev_sce[id,-1]>=drempels[j],2,sum) / length(unique(yy))
+        tableSce[i, 1] <- paste(dname,substr("        ",1,8-nchar(dname)))
+        tableSce[i,-1] <- apply(evSce[id,-1]>=drempels[j],2,sum) / length(unique(yy))
       }
     }
 
@@ -96,13 +92,13 @@ evmk_sums_relchange <- function(inputTemp, inputRad, scenario,
     if (products[prod]==1) {
       dname=paste(prod,season,sep="")
       i=i+1
-      table_ref[i, 1] <- paste(dname,substr("        ",1,8-nchar(dname)))
+      tableRef[i, 1] <- paste(dname,substr("        ",1,8-nchar(dname)))
       #table[i,-1] <- apply(X[,-1]       , 2          ,   sd)
-      table_ref[i,-1]  <- round(apply(ev_ref[id,-1],2,sum)/30,0)
+      tableRef[i,-1]  <- round(apply(evRef[id,-1],2,sum)/30,0)
       # relative change
-      table_sce[i, 1] <- paste(dname,substr("        ",1,8-nchar(dname)))
-      table_sce[i,-1]  <- round(apply(ev_sce[id,-1],2,sum)/30,0)
-      reltable[,-1]    <- round( (100 * (table_sce[,-1] - table_ref[,-1]) / table_ref[,-1]),2)
+      tableSce[i, 1] <- paste(dname,substr("        ",1,8-nchar(dname)))
+      tableSce[i,-1]  <- round(apply(evSce[id,-1],2,sum)/30,0)
+      reltable[,-1]    <- round( (100 * (tableSce[,-1] - tableRef[,-1]) / tableRef[,-1]),2)
 
     }
   } # end seasonal variables

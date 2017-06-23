@@ -31,7 +31,7 @@ test_that("2030 decadal prediction", {
 
   horizon = 2030
 
-  tmp <- evmk_sums_relchange(inputTemp=inputTemp, inputRad=inputRad,
+  tmp <- evmkSumsRelchange(inputTemp=inputTemp, inputRad=inputRad,
                              ofile = ofile,
                              scenario = scenario,
                              horizon = horizon,
@@ -46,7 +46,7 @@ test_that("scenarioenario WL", {
   scenario = "WL"
 
   horizon = 2050
-  tmp <- evmk_sums_relchange(inputTemp = inputTemp, inputRad = inputRad,
+  tmp <- evmkSumsRelchange(inputTemp = inputTemp, inputRad = inputRad,
                              ofile = ofile,
                              scenario = scenario,
                              horizon = horizon,
@@ -57,7 +57,7 @@ test_that("scenarioenario WL", {
   expect_equal_to_reference(tmp, "regressionOutput/evaporation/KNMI14_WL_2050_evmk_sums.rds")
 
   horizon = 2085
-  tmp <- evmk_sums_relchange(inputTemp=inputTemp, inputRad=inputRad,
+  tmp <- evmkSumsRelchange(inputTemp=inputTemp, inputRad=inputRad,
                              ofile=ofile,
                              scenario=scenario,
                              horizon = horizon,
@@ -72,7 +72,7 @@ test_that("scenarioenario WH", {
   scenario = "WH"
 
   horizon = 2050
-  tmp <- evmk_sums_relchange(inputTemp=inputTemp, inputRad=inputRad,
+  tmp <- evmkSumsRelchange(inputTemp=inputTemp, inputRad=inputRad,
                              ofile=ofile,
                              scenario=scenario,
                              horizon = horizon,
@@ -83,7 +83,7 @@ test_that("scenarioenario WH", {
   expect_equal_to_reference(tmp, "regressionOutput/evaporation/KNMI14_WH_2050_evmk_sums.rds")
 
   horizon = 2085
-  tmp <- evmk_sums_relchange(inputTemp=inputTemp, inputRad=inputRad,
+  tmp <- evmkSumsRelchange(inputTemp=inputTemp, inputRad=inputRad,
                              ofile=ofile,
                              scenario=scenario,
                              horizon = horizon,
@@ -98,7 +98,7 @@ test_that("scenarioenario GH", {
   scenario = "GH"
 
   horizon = 2050
-  tmp <- evmk_sums_relchange(inputTemp=inputTemp, inputRad=inputRad,
+  tmp <- evmkSumsRelchange(inputTemp=inputTemp, inputRad=inputRad,
                              ofile=ofile,
                              scenario=scenario,
                              horizon = horizon,
@@ -109,7 +109,7 @@ test_that("scenarioenario GH", {
   expect_equal_to_reference(tmp, "regressionOutput/evaporation/KNMI14_GH_2050_evmk_sums.rds")
 
   horizon = 2085
-  tmp <- evmk_sums_relchange(inputTemp=inputTemp, inputRad=inputRad,
+  tmp <- evmkSumsRelchange(inputTemp=inputTemp, inputRad=inputRad,
                              ofile=ofile,
                              scenario=scenario,
                              horizon = horizon,
@@ -124,7 +124,7 @@ test_that("scenarioenario GL", {
   scenario = "GL"
 
   horizon = 2050
-  tmp <- evmk_sums_relchange(inputTemp=inputTemp, inputRad=inputRad,
+  tmp <- evmkSumsRelchange(inputTemp=inputTemp, inputRad=inputRad,
                              ofile=ofile,
                              scenario=scenario,
                              horizon = horizon,
@@ -135,7 +135,7 @@ test_that("scenarioenario GL", {
   expect_equal_to_reference(tmp, "regressionOutput/evaporation/KNMI14_GL_2050_evmk_sums.rds")
 
   horizon = 2085
-  tmp <- evmk_sums_relchange(inputTemp=inputTemp, inputRad=inputRad,
+  tmp <- evmkSumsRelchange(inputTemp=inputTemp, inputRad=inputRad,
                              ofile=ofile,
                              scenario=scenario,
                              horizon = horizon,

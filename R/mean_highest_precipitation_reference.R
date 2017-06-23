@@ -4,7 +4,7 @@
 #' @description      function reads reference ts for evmk, rr, tg & rdrs
 #' @param ofile      (DEFAULT="uitvoer.txt") Name of the output file to write the transformed data to.
 #'                    Format is similar to input
-PrecipDeficit_ref<- function(ofile = NA) {
+PrecipDeficitRef <- function(ofile = NA) {
 
 
   StationSub <- as.character(fread(system.file("refdata",
@@ -13,9 +13,9 @@ PrecipDeficit_ref<- function(ofile = NA) {
   # reference for evmk for de bilt
   evmkRef <- fread(system.file("refdata","KNMI14____ref_evmk___19810101-20101231_v3.2.txt",
                                package="knmitransformer"))
-  stationID     <- evmkRef[(1)]
-  names(evmkRef)<- as.character(stationID)
-  evDeBilt      <- evmkRef[-c(1:5),"260",with=FALSE]
+  stationID      <- evmkRef[(1)]
+  names(evmkRef) <- as.character(stationID)
+  evDeBilt       <- evmkRef[-c(1:5),"260",with=FALSE]
 
   dt         <- evmkRef[-c(1:5),1, with = FALSE]
   mm         <- (dt%/%100)%%100

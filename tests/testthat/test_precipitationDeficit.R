@@ -26,7 +26,7 @@ test_that("2030 decadal prediction", {
 
   horizon = 2030
 
-  tmp <- PrecipDeficit_sce(inputTemp = inputTemp, inputRad = inputRad,
+  tmp <- PrecipDeficit(inputTemp = inputTemp, inputRad = inputRad,
                            inputPrec = inputPrec,ofile = ofile, scenario = scenario,
                            horizon = horizon,
                            regions = regions)
@@ -40,7 +40,7 @@ test_that("scenario WL", {
 
   horizon = 2050
 
-  tmp <- PrecipDeficit_sce(inputTemp = inputTemp, inputRad = inputRad,
+  tmp <- PrecipDeficit(inputTemp = inputTemp, inputRad = inputRad,
                            inputPrec = inputPrec,ofile = ofile, scenario = scenario,
                            horizon = horizon,
                            regions = regions)
@@ -50,7 +50,7 @@ test_that("scenario WL", {
 
   p = 2085
 
-  tmp <- PrecipDeficit_sce(inputTemp = inputTemp, inputRad = inputRad,
+  tmp <- PrecipDeficit(inputTemp = inputTemp, inputRad = inputRad,
                            inputPrec = inputPrec,ofile = ofile, scenario = scenario,
                            horizon = horizon,
                            regions = regions)
@@ -64,7 +64,7 @@ test_that("scenario WH", {
 
   horizon = 2050
 
-  tmp <- PrecipDeficit_sce(inputTemp = inputTemp, inputRad = inputRad,
+  tmp <- PrecipDeficit(inputTemp = inputTemp, inputRad = inputRad,
                            inputPrec = inputPrec,ofile = ofile, scenario = scenario,
                            horizon = horizon,
                            regions = regions)
@@ -75,7 +75,7 @@ test_that("scenario WH", {
 
   horizon = 2085
 
-  tmp <- PrecipDeficit_sce(inputTemp = inputTemp, inputRad = inputRad,
+  tmp <- PrecipDeficit(inputTemp = inputTemp, inputRad = inputRad,
                            inputPrec = inputPrec,ofile = ofile, scenario = scenario,
                            horizon = horizon,
                            regions = regions)
@@ -89,7 +89,7 @@ test_that("scenario GH", {
 
   horizon = 2050
 
-  tmp <- PrecipDeficit_sce(inputTemp = inputTemp, inputRad = inputRad,
+  tmp <- PrecipDeficit(inputTemp = inputTemp, inputRad = inputRad,
                            inputPrec = inputPrec,ofile = ofile, scenario = scenario,
                            horizon = horizon,
                            regions = regions)
@@ -100,10 +100,10 @@ test_that("scenario GH", {
 
   horizon = 2085
 
-  tmp <- PrecipDeficit_sce(inputTemp = inputTemp, inputRad = inputRad,
-                           inputPrec = inputPrec,ofile = ofile, scenario = scenario,
-                           horizon = horizon,
-                           regions = regions)
+  tmp <- PrecipDeficit(inputTemp = inputTemp, inputRad = inputRad,
+                       inputPrec = inputPrec,ofile = ofile, scenario = scenario,
+                       horizon = horizon,
+                       regions = regions)
 
   expect_equal_to_reference(tmp,
       "./regressionOutput/precipitationDeficit/KNMI14_GH_2085_precipDefic.rds")
@@ -114,20 +114,20 @@ test_that("scenario GL", {
 
   horizon = 2050
 
-  tmp <- PrecipDeficit_sce(inputTemp = inputTemp, inputRad = inputRad,
-                           inputPrec = inputPrec,ofile = ofile, scenario = scenario,
-                           horizon = horizon,
-                           regions = regions)
+  tmp <- PrecipDeficit(inputTemp = inputTemp, inputRad = inputRad,
+                       inputPrec = inputPrec,ofile = ofile, scenario = scenario,
+                       horizon = horizon,
+                       regions = regions)
 
   expect_equal_to_reference(tmp,
       "./regressionOutput/precipitationDeficit/KNMI14_GL_2050_precipDefic.rds")
 
   horizon = 2085
 
-  tmp <- PrecipDeficit_sce(inputTemp = inputTemp, inputRad = inputRad,
-                           inputPrec = inputPrec,ofile = ofile, scenario = scenario,
-                           horizon = horizon,
-                           regions = regions)
+  tmp <- PrecipDeficit(inputTemp = inputTemp, inputRad = inputRad,
+                       inputPrec = inputPrec,ofile = ofile, scenario = scenario,
+                       horizon = horizon,
+                       regions = regions)
 
   expect_equal_to_reference(tmp,
       "./regressionOutput/precipitationDeficit/KNMI14_GL_2085_precipDefic.rds")
