@@ -54,25 +54,12 @@ PrecipThreshIndices<- function(input, threshold, scenario = NA,
   tabel <- as.data.frame(matrix(NA,5,ncol(input)))
   names(tabel) <- names(input)
 
-  #Seasons
-  mm <- (dt%/%100)%%100
-  ss <- as.integer( (mm/3)%%4+1)
-  yy <-  dt%/%10000
-  wy <- ifelse(mm<12,yy,yy+1)
+  seasonalSplit <- SeasonalSplit(season, dt)
+  # id  <- seasonalSplit$id
+  idy <- seasonalSplit$idy
+  yy  <- date %/% 10000
 
-  if (season=="year"){
-    id  <- 1:length(yy)
-    idy <- yy
-  } else {
-    if (season=="winter"){
-      id  <- which(ss==1 & wy > min(wy) & wy < max(wy))
-      idy <- wy[id]
-    } else {
-      id  <- which(ss==season)
-      idy <- yy[id]
-    }
-  }
-
+  i <- 0 # FIXME
       tabel[i,-1] <- apply(input[idy,-1]>=threshold,2,sum) / length(unique(yy))
 
 }
