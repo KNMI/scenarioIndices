@@ -18,35 +18,38 @@
 #'                   <MON> Middenoost Nederland \cr
 #'                   <ZON> Zuidoost Nederland
 #' @export
-PrecipDeficit_sce<- function(inputTemp, inputRad, inputPrec,
-                               scenario, horizon = NA, ofile=NA, regions = "NLD") {
+PrecipDeficit <- function(inputTemp, inputRad, inputPrec,
+                        scenario, horizon = NA, ofile=NA, regions = "NLD") {
 
 
-  StationSub <- as.character(fread(system.file("refdata","P102.txt", package = "scenarioIndices"))$V1)
+  StationSub <- as.character(fread(system.file("refdata","P102.txt",
+                                               package = "scenarioIndices"))$V1)
 
   # read PrecipDeficitRef
 # Wrong PrecipDeficitRef
-  PrecipDeficitRef <- system.file("refdata", "PrecipDeficitRef_19810101-20101231_error.txt", package = "scenarioIndices")
+  PrecipDeficitRef <- system.file("refdata", "PrecipDeficitRef_19810101-20101231_error.txt",
+                                  package = "scenarioIndices")
   Xstat <- read.table(PrecipDeficitRef)$V2
   nx <- length(Xstat)
   Xstat <- Xstat[1:(nx-1)]
+
 # Correct PrecipDeficitRef
  # Xstat <- fread(system.file("refdata","PrecipDeficitRef_19810101-20101231_correct.txt", package = "scenarioIndices"))
 
   #input for scenarios
   #calculate evmk for scenarios
-  evmk_scenario <- TransformEvap(inputTemp = inputTemp, inputRad = inputRad,
+  evmkScenario <- TransformEvap(inputTemp = inputTemp, inputRad = inputRad,
                                   scenario = scenario, horizon = horizon,
                                  ofile = NA, regions = "NLD")
 
-  dt     <- evmk_scenario[-c(1:5),1, with = FALSE]
+  dt     <- evmkScenario[-c(1:5),1, with = FALSE]
   mm     <- (dt%/%100)%%100
   amjjas <- which(mm>=4 & mm<=9)
   yy     <- (dt%/%10000)[amjjas]
 
-  stationID           <- evmk_scenario[(1)]
-  names(evmk_scenario)<- as.character(stationID)
-  evDeBiltSC          <- evmk_scenario[-c(1:5),"260",with=FALSE]
+  stationID           <- evmkScenario[(1)]
+  names(evmkScenario)<- as.character(stationID)
+  evDeBiltSC          <- evmkScenario[-c(1:5),"260",with=FALSE]
   evDeBiltSCGS        <- evDeBiltSC[amjjas]
 
   # calculate rr for scenarios
