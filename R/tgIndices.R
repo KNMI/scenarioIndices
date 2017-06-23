@@ -36,24 +36,24 @@ TempAvgIndices<- function(input, index, scenario,
                           horizon = 2030, season,
                           regions = "NLD", ofile = NA) {
 
-#
+
   if (!index %in% c("aTG", "amnTG", "amxTG")) {
     stop("index should be one of aTG, amnTG, amxTG")
   }
 
-# calcualte index for reference; else...
- if (!scenario %in% c("GL","GH","WL","WH") && horizon !=c(2030,2050,2085)){
-      input <-  ReadInput("tg",
-          KnmiRefFile("KNMI14____ref_tg___19810101-20101231_v3.2.txt"))$obs
-    } else {
-        input <- TransformTemp(input=input, ofile=NA, scenario=scenario,
-                                                horizon=horizon, var="tg",regions = regions)
-        input <- input[-c(1:5), ]
+  if (class(input) != "knmiTF") {
+    input <- ReadInput("tg", input)
+  }
 
-    }
+  if (!scenario %in% c("GL", "GH", "WL", "WH") &&
+        horizon != c(2030, 2050, 2085)) {
+    input <- input$obs
+  } else {
+    input <- TransformTemp(input = input, ofile = NA, scenario=scenario,
+                           horizon = horizon, var = "tg", regions = regions)
+    input <- input[-c(1:5), ]
+  }
 
-
-#
   input <- as.data.frame(input)
 
   seasonalSplit <- SeasonalSplit(season, input[, 1])
@@ -61,12 +61,12 @@ TempAvgIndices<- function(input, index, scenario,
   idy <- seasonalSplit$idy
 
   #Indices
-   switch(index,
-          "aTG" = X <- aggregate(input[id,-1],by=list(idy),  mean),
-          "amnTG" = X <- aggregate(input[id,-1],by=list(idy),  min),
-          "amxTG" = X <- aggregate(input[id,-1],by=list(idy),  max))
+  switch(index,
+         "aTG" = X <- aggregate(input[id,-1],by=list(idy),  mean),
+         "amnTG" = X <- aggregate(input[id,-1],by=list(idy),  min),
+         "amxTG" = X <- aggregate(input[id,-1],by=list(idy),  max))
 
-   return(X)
+  return(X)
 }
 
 #' Calculates a set of TG related indices for all scenarios, horizons, and
@@ -78,41 +78,31 @@ TempAvgIndices<- function(input, index, scenario,
 #' @export
 TempAvgIndicesWrapper <- function(input, regions = "NLD", ofile = NA) {
 
-  fn <- function(season, scenario, horizon) {
+  if (class(input) != "knmiTF") {
+    input <- ReadInput("tg", input)
+  }
+
+  fn <- function(index, season, scenario, horizon) {
     tmp <- TempAvgIndices(input = input, index = index, ofile = ofile,
                           scenario = scenario, horizon = horizon, season = season,
                           regions = regions)
-    tmp$season <- season
-    tmp$horizon <- horizon
+    tmp$season   <- season
+    tmp$horizon  <- horizon
     tmp$scenario <- scenario
+    tmp$index    <- index
     tmp
   }
 
 
-  seasons <- c("year", "winter", "spring", "summer", "autumn")
-  combinations <- expand.grid(season = seasons,
-                              scenario = "ref",
-                              horizon = 1981,
-                              stringsAsFactors = FALSE)
+  indices <- c("aTG", "amnTG", "amxTG")
 
-  combinations <- rbind(combinations,
-                        expand.grid(season = seasons,
-                                    scenario = "GL",
-                                    horizon = 2030,
-                                    stringsAsFactors = FALSE))
-
-  combinations <- rbind(combinations,
-                        expand.grid(season = seasons,
-                                    scenario = c("GL", "GH", "WL", "WH"),
-                                    horizon = c(2050, 2085),
-                                    stringsAsFactors = FALSE))
-
+  combinations <- MakeCombinations(indices)
 
   result <- pmap(combinations, fn)
   result <- rbindlist(result)
   setnames(result, "Group.1", "year")
   nCols <- ncol(result)
   names <- colnames(result)
-  setcolorder(result, names[c( (nCols - (0:2)), 1, 2 : (nCols-3))])
+  setcolorder(result, names[c( (nCols - (0:3)), 1, 2 : (nCols-4))])
   result
 }

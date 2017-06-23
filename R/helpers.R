@@ -15,3 +15,27 @@ SeasonalSplit <- function(season, date) {
   idy <- yy[id]
   list(id = id, idy = idy)
 }
+
+MakeCombinations <- function(indices) {
+  seasons <- c("year", "winter", "spring", "summer", "autumn")
+  combinations <- expand.grid(index = indices,
+                              season = seasons,
+                              scenario = "ref",
+                              horizon = 1981,
+                              stringsAsFactors = FALSE)
+
+  combinations <- rbind(combinations,
+                        expand.grid(index = indices,
+                                    season = seasons,
+                                    scenario = "GL",
+                                    horizon = 2030,
+                                    stringsAsFactors = FALSE))
+
+  combinations <- rbind(combinations,
+                        expand.grid(index = indices,
+                                    season = seasons,
+                                    scenario = c("GL", "GH", "WL", "WH"),
+                                    horizon = c(2050, 2085),
+                                    stringsAsFactors = FALSE))
+  combinations
+}

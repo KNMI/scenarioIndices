@@ -13,11 +13,10 @@ var     <- "tg"
 regions <- MatchRegionsOnStationId(ReadInput(var, input)$header[1, -1])
 
 test_that("full table", {
-  index = "aTG"
 
-  tmp <- TempAvgIndicesWrapper(input, index, regions = regions)
+  tmp <- TempAvgIndicesWrapper(input, regions = regions)
   expect_equal_to_reference(tmp,
-      "regressionOutput/temperature/KNMI14___ref_tg_aTG_fullTable.rds")
+      "regressionOutput/temperature/tg_fullTable.rds")
 })
 
 
@@ -75,7 +74,7 @@ test_that("reference", {
 test_that("2030 decadal prediction", {
   index = "aTG"
 
-    scenario = "GL"
+  scenario = "GL"
 
   horizon = 2030
 

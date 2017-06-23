@@ -1,8 +1,8 @@
 Package: scenarioIndices
 Type: Package
 Title: Calculate indices for KNMI climate scenarios
-Version: 0.1.3
-Date: 2017-06-21
+Version: 0.1.4
+Date: 2017-06-23
 Authors@R: as.person(c(
     "Alexander Bakker [aut]",
     "Christiana Photiadou <photiado@knmi.nl> [aut, cre]",
@@ -25,6 +25,6 @@ Suggests:
   testthat,
   covr,
   lintr,
-    knitr,
-    rmarkdown
+  knitr,
+  rmarkdown
 VignetteBuilder: knitr

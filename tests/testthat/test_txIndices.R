@@ -12,6 +12,12 @@ ofile   <- "tmp.txt" # output file - used only temporary
 var     <- "tx"
 regions <- MatchRegionsOnStationId(ReadInput(var, input)$header[1, -1])
 
+test_that("full table", {
+
+  tmp <- TempMaxIndicesWrapper(input, regions = regions)
+  expect_equal_to_reference(tmp,
+                            "regressionOutput/temperature/tx_fullTable.rds")
+})
 
 test_that("reference", {
   index = "nID"
