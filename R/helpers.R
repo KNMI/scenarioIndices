@@ -9,7 +9,9 @@ SeasonalSplit <- function(season, date) {
   switch(season,
          "year" = id <- 1:length(yy),
          "winter" = id <- which(ss == 1 & wy > min(wy) & wy < max(wy)),
-         id <- which(ss == season))
+         "spring" = id <- which(ss == 2),
+         "summer" = id <- which(ss == 3),
+         "autumn" = id <- which(ss == 4))
   idy <- yy[id]
   list(id = id, idy = idy)
 }
