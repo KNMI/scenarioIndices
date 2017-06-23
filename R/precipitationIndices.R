@@ -27,13 +27,15 @@
 PrecipThreshIndices<- function(input, threshold, scenario = NA,
                           horizon = NA, season, subscenario, ofile = NA) {
 
-  StationSub <- as.character(fread(system.file("refdata","P102.txt", package = "scenarioIndices"))$V1)
+  StationSub <- as.character(fread(system.file("refdata","P102.txt",
+      package = "scenarioIndices"))$V1)
 
   # calcualte index for reference; else...
   if (!scenario %in% c("GL","GH","WL","WH") && horizon !=c(2030,2050,2085)){
     input <-  knmitransformer::ReadInput("rr",
-                                          system.file("refdata","KNMI14____ref_rrcentr___19810101-20101231_v3.2.txt",
-                                                      package="knmitransformer"))$obs
+        system.file("refdata",
+                    "KNMI14____ref_rrcentr___19810101-20101231_v3.2.txt",
+                    package="knmitransformer"))$obs
     dt <- input[-c(1:5),1]
 
     input <- input[,StationSub]

@@ -22,16 +22,20 @@ PrecipDeficit_sce<- function(inputTemp, inputRad, inputPrec,
                                scenario, horizon = NA, ofile=NA, regions = "NLD") {
 
 
-  StationSub <- as.character(fread(system.file("refdata","P102.txt", package = "scenarioIndices"))$V1)
+  StationSub <- as.character(fread(system.file("refdata","P102.txt",
+      package = "scenarioIndices"))$V1)
 
   # read PrecipDeficitRef
 # Wrong PrecipDeficitRef
-  PrecipDeficitRef <- system.file("refdata", "PrecipDeficitRef_19810101-20101231_error.txt", package = "scenarioIndices")
+  PrecipDeficitRef <- system.file("refdata",
+      "PrecipDeficitRef_19810101-20101231_error.txt",
+      package = "scenarioIndices")
   Xstat <- read.table(PrecipDeficitRef)$V2
   nx <- length(Xstat)
   Xstat <- Xstat[1:(nx-1)]
 # Correct PrecipDeficitRef
- # Xstat <- fread(system.file("refdata","PrecipDeficitRef_19810101-20101231_correct.txt", package = "scenarioIndices"))
+ # Xstat <- fread(system.file("refdata",
+  # "PrecipDeficitRef_19810101-20101231_correct.txt", package = "scenarioIndices"))
 
   #input for scenarios
   #calculate evmk for scenarios

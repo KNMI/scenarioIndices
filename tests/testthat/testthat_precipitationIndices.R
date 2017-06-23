@@ -7,8 +7,8 @@ library(data.table)
 
 context("precipIndices  calc - Entire station set")
 
-inputPrec   <- system.file("refdata","KNMI14____ref_rrcentr___19810101-20101231_v3.2.txt", package = "scenarioIndices")
-ofile      <- "tmp.txt" # output file - used only temporary
+inputPrec <- KnmiRefFile("KNMI14____ref_rrcentr___19810101-20101231_v3.2.txt")
+ofile     <- "tmp.txt" # output file - used only temporary
 
 
 #
@@ -20,5 +20,6 @@ ofile      <- "tmp.txt" # output file - used only temporary
    tmp <- PrecipThreshIndices(input = inputPrec, threshold = 30.0, scenario = scenario,
                               horizon = horizon, season = "year", ofile = ofile)
 
-   expect_equal_to_reference(tmp, "./regressionOutput/precipitation/KNMI14_ref_precipitationIndices.rds")
+   expect_equal_to_reference(tmp,
+      "./regressionOutput/precipitation/KNMI14_ref_precipitationIndices.rds")
  })

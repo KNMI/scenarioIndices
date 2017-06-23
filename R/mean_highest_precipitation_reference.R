@@ -7,7 +7,8 @@
 PrecipDeficit_ref<- function(ofile = NA) {
 
 
-  StationSub <- as.character(fread(system.file("refdata","P102.txt", package = "scenarioIndices"))$V1)
+  StationSub <- as.character(fread(system.file("refdata",
+      "P102.txt", package = "scenarioIndices"))$V1)
 
   # reference for evmk for de bilt
   evmkRef <- fread(system.file("refdata","KNMI14____ref_evmk___19810101-20101231_v3.2.txt",
@@ -23,7 +24,9 @@ PrecipDeficit_ref<- function(ofile = NA) {
   evDeBiltGS <- evDeBilt[amjjas]
 
   # rr reference for P102
-  rrRef       <- fread(system.file("refdata","KNMI14____ref_rrcentr___19810101-20101231_v3.2.txt", package = "scenarioIndices"))
+  rrRef       <- fread(system.file("refdata",
+      "KNMI14____ref_rrcentr___19810101-20101231_v3.2.txt",
+      package = "scenarioIndices"))
   stationID   <- rrRef[(1)]
   names(rrRef)<- as.character(stationID)
 # Error in KNMI14 runs: 19810101 was removed from calculations

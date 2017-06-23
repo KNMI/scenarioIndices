@@ -8,10 +8,12 @@ evmk_sums_reference<- function(ofile="uitvoer.txt") {
 
   flog.info("Running evaporation sums for reference")
   flog.debug("Version is 1.0")
-  # CONSTANTS AND FUNCTIONS ###############################################################################
+  # CONSTANTS AND FUNCTIONS ####################################################
 
 
-  evmk_ref <- fread(system.file("refdata","KNMI14____ref_evmk___19810101-20101231_v3.2.txt", package="knmitransformer"))
+  evmk_ref <- fread(system.file("refdata",
+      "KNMI14____ref_evmk___19810101-20101231_v3.2.txt",
+      package="knmitransformer"))
 
 
   ev_ref <- evmk_ref[-c(1:5)]

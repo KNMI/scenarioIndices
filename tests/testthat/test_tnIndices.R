@@ -7,10 +7,10 @@ library(data.table)
 
 context("Temp tn ref indices - Entire station set")
 
-input   <- system.file("refdata","KNMI14____ref_tn___19810101-20101231_v3.2.txt", package="knmitransformer")
-ofile      <- "tmp.txt" # output file - used only temporary
-var <- "tn"
-regions    <- knmitransformer::MatchRegionsOnStationId(knmitransformer::ReadInput(var, input)$header[1, -1])
+input   <- KnmiRefFile("KNMI14____ref_tn___19810101-20101231_v3.2.txt")
+ofile   <- "tmp.txt" # output file - used only temporary
+var     <- "tn"
+regions <- MatchRegionsOnStationId(ReadInput(var, input)$header[1, -1])
 
 test_that("reference", {
   index = "aTN"

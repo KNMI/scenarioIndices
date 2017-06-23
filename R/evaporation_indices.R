@@ -21,14 +21,16 @@ evmk_sums_relchange <- function(inputTemp, inputRad, scenario,
 
   flog.info("Running evaporation calculation")
   flog.debug("Version is 1.0")
-  # CONSTANTS AND FUNCTIONS ###############################################################################
+  # CONSTANTS AND FUNCTIONS ####################################################
 
   if (!horizon %in% c(2030, 2050, 2085)) {
     flog.error("horizon={%s} has to be a valid period", paste(horizon))
   stop("Horizon must be valid, i.e. 2030, 2050, or 2085")
   }
 
-  evmk_ref <- fread(system.file("refdata","KNMI14____ref_evmk___19810101-20101231_v3.2.txt", package="knmitransformer"))
+  evmk_ref <- fread(system.file("refdata",
+                                "KNMI14____ref_evmk___19810101-20101231_v3.2.txt",
+                                package="knmitransformer"))
 
   evmk_scenario <- TransformEvap(inputTemp = inputTemp,
                                  inputRad = inputRad,
@@ -57,7 +59,8 @@ evmk_sums_relchange <- function(inputTemp, inputRad, scenario,
   products <- data.frame("sum"=1)
   drempels <- vector()
 
-  table_sce <-  table_ref <- reltable <- as.data.frame(matrix(NA,5 * (length(drempels)+sum(products)),ncol(ev_ref)))
+  table_sce <-  table_ref <- reltable <- as.data.frame(matrix(NA,
+      5 * (length(drempels)+sum(products)),ncol(ev_ref)))
   names(table_ref) <- evmk_ref[1]
   names(table_sce) <- evmk_ref[1]
   names(reltable) <- evmk_ref[1]

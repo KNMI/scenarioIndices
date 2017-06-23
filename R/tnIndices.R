@@ -16,8 +16,8 @@ TempMinIndices<- function(input, index,
 
   if (!scenario %in% c("GL","GH","WL","WH") && horizon !=c(2030,2050,2085)){
     input <-  knmitransformer::ReadInput("tn",
-                                          system.file("refdata","KNMI14____ref_tn___19810101-20101231_v3.2.txt",
-                                                      package="knmitransformer"))$obs
+        system.file("refdata","KNMI14____ref_tn___19810101-20101231_v3.2.txt",
+                    package="knmitransformer"))$obs
   } else {
     input <- TransformTemp(input=input, ofile=NA, scenario=scenario,
                            horizon=horizon, var="tn", regions = regions)
@@ -50,7 +50,8 @@ TempMinIndices<- function(input, index,
   switch(index,
          "nstFD" = X <- aggregate(input[id, -1] < -10, by=list(idy),  sum),
          "nFD"   = X <- aggregate(input[id, -1] < 0,   by=list(idy),  sum),
-         "nTN"   = X <- aggregate(input[id, -1] >= 20, by=list(idy),  sum),  # in the brochure they are mentioned as warm nights
+         # in the brochure they are mentioned as warm nights
+         "nTN"   = X <- aggregate(input[id, -1] >= 20, by=list(idy),  sum),
          "aTN"   = X <- aggregate(input[id, -1],       by=list(idy),  mean))
   return(X)
 }

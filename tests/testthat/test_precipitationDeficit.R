@@ -7,12 +7,12 @@ library(data.table)
 
 context("precipDefic  calc - Entire station set")
 
-inputTemp   <- system.file("refdata","KNMI14____ref_tg___19810101-20101231_v3.2.txt", package="knmitransformer")
-inputRad <- system.file("refdata","KNMI14____ref_rsds___19810101-20101231_v3.2.txt", package="knmitransformer")
-inputPrec   <- system.file("refdata","KNMI14____ref_rrcentr___19810101-20101231_v3.2.txt", package = "scenarioIndices")
-ofile      <- "tmp.txt" # output file - used only temporary
-var <- "tg"
-regions    <- knmitransformer::MatchRegionsOnStationId(knmitransformer::ReadInput(var, inputTemp)$header[1, -1])
+inputTemp <- KnmiRefFile("KNMI14____ref_tg___19810101-20101231_v3.2.txt")
+inputRad  <- KnmiRefFile("KNMI14____ref_rsds___19810101-20101231_v3.2.txt")
+inputPrec <- KnmiRefFile("KNMI14____ref_rrcentr___19810101-20101231_v3.2.txt")
+ofile     <- "tmp.txt" # output file - used only temporary
+var       <- "tg"
+regions   <- MatchRegionsOnStationId(ReadInput(var, inputTemp)$header[1, -1])
 #
 # test_that("precipDefic  reference", {
 #
@@ -31,7 +31,8 @@ test_that("2030 decadal prediction", {
                            horizon = horizon,
                            regions = regions)
 
-  expect_equal_to_reference(tmp, "./regressionOutput/precipitationDeficit/KNMI14___2030_precipDefic.rds")
+  expect_equal_to_reference(tmp,
+      "./regressionOutput/precipitationDeficit/KNMI14___2030_precipDefic.rds")
 })
 
 test_that("scenario WL", {
@@ -44,7 +45,8 @@ test_that("scenario WL", {
                            horizon = horizon,
                            regions = regions)
 
-  expect_equal_to_reference(tmp, "./regressionOutput/precipitationDeficit/KNMI14_WL_2050_precipDefic.rds")
+  expect_equal_to_reference(tmp,
+      "./regressionOutput/precipitationDeficit/KNMI14_WL_2050_precipDefic.rds")
 
   p = 2085
 
@@ -53,7 +55,8 @@ test_that("scenario WL", {
                            horizon = horizon,
                            regions = regions)
 
-  expect_equal_to_reference(tmp, "./regressionOutput/precipitationDeficit/KNMI14_WL_2085_precipDefic.rds")
+  expect_equal_to_reference(tmp,
+      "./regressionOutput/precipitationDeficit/KNMI14_WL_2085_precipDefic.rds")
 })
 
 test_that("scenario WH", {
@@ -67,7 +70,8 @@ test_that("scenario WH", {
                            regions = regions)
 
 
-  expect_equal_to_reference(tmp, "./regressionOutput/precipitationDeficit/KNMI14_WH_2050_precipDefic.rds")
+  expect_equal_to_reference(tmp,
+      "./regressionOutput/precipitationDeficit/KNMI14_WH_2050_precipDefic.rds")
 
   horizon = 2085
 
@@ -76,7 +80,8 @@ test_that("scenario WH", {
                            horizon = horizon,
                            regions = regions)
 
-  expect_equal_to_reference(tmp, "./regressionOutput/precipitationDeficit/KNMI14_WH_2085_precipDefic.rds")
+  expect_equal_to_reference(tmp,
+      "./regressionOutput/precipitationDeficit/KNMI14_WH_2085_precipDefic.rds")
 })
 
 test_that("scenario GH", {
@@ -90,7 +95,8 @@ test_that("scenario GH", {
                            regions = regions)
 
 
-  expect_equal_to_reference(tmp, "./regressionOutput/precipitationDeficit/KNMI14_GH_2050_precipDefic.rds")
+  expect_equal_to_reference(tmp,
+      "./regressionOutput/precipitationDeficit/KNMI14_GH_2050_precipDefic.rds")
 
   horizon = 2085
 
@@ -99,7 +105,8 @@ test_that("scenario GH", {
                            horizon = horizon,
                            regions = regions)
 
-  expect_equal_to_reference(tmp, "./regressionOutput/precipitationDeficit/KNMI14_GH_2085_precipDefic.rds")
+  expect_equal_to_reference(tmp,
+      "./regressionOutput/precipitationDeficit/KNMI14_GH_2085_precipDefic.rds")
 })
 
 test_that("scenario GL", {
@@ -112,7 +119,8 @@ test_that("scenario GL", {
                            horizon = horizon,
                            regions = regions)
 
-  expect_equal_to_reference(tmp, "./regressionOutput/precipitationDeficit/KNMI14_GL_2050_precipDefic.rds")
+  expect_equal_to_reference(tmp,
+      "./regressionOutput/precipitationDeficit/KNMI14_GL_2050_precipDefic.rds")
 
   horizon = 2085
 
@@ -121,5 +129,6 @@ test_that("scenario GL", {
                            horizon = horizon,
                            regions = regions)
 
-  expect_equal_to_reference(tmp, "./regressionOutput/precipitationDeficit/KNMI14_GL_2085_precipDefic.rds")
+  expect_equal_to_reference(tmp,
+      "./regressionOutput/precipitationDeficit/KNMI14_GL_2085_precipDefic.rds")
 })

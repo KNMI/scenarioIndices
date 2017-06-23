@@ -7,11 +7,16 @@ library(data.table)
 
 context("evmk sum calc - Entire station set")
 
-inputTemp   <- system.file("refdata","KNMI14____ref_tg___19810101-20101231_v3.2.txt", package="knmitransformer")
-inputRad <- system.file("refdata","KNMI14____ref_rsds___19810101-20101231_v3.2.txt", package="knmitransformer")
-ofile      <- "tmp.txt" # output file - used only temporary
+inputTemp <- system.file("refdata",
+                         "KNMI14____ref_tg___19810101-20101231_v3.2.txt",
+                         package="knmitransformer")
+inputRad  <- system.file("refdata",
+                         "KNMI14____ref_rsds___19810101-20101231_v3.2.txt",
+                         package="knmitransformer")
+ofile     <- "tmp.txt" # output file - used only temporary
 var <- "tg"
-regions    <- knmitransformer::MatchRegionsOnStationId(knmitransformer::ReadInput(var, inputTemp)$header[1, -1])
+regions <- knmitransformer::MatchRegionsOnStationId(
+  knmitransformer::ReadInput(var, inputTemp)$header[1, -1])
 
 
 test_that("evaporation sums reference", {
