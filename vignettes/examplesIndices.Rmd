@@ -1,0 +1,74 @@
+---
+title: "Scenario Indices - examples"
+author: "Christiana Photiaodu & Martin Roth"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{potentialEvaporation}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+```{r LoadLibraries, include=FALSE}
+library(data.table)
+library(scenarioIndices)
+library(knmitransformer)
+```
+
+The *scenarioIndices* package calculates a set of indices that were published in the KNMI'14 Climate scenarios and uses the *knmitransformer* package for the transformed series. This document provides examples on how to use the function to calculate evaporation, precipitation and temperature indices in different seasonal periods. 
+
+## Potential Evaporation Makkink
+
+For the KNMI'14 Climate Scenarios brochure the annual and summer potential evaporation sum is presented.
+```{r makkinkevaporation}
+inputTemp <- KnmiRefFile("KNMI14____ref_tg___19810101-20101231_v3.2.txt")
+inputRad  <- KnmiRefFile("KNMI14____ref_rsds___19810101-20101231_v3.2.txt")
+ofile     <- "tmp.txt" # output file - used only temporary
+var <- "tg"
+regions <- MatchRegionsOnStationId(ReadInput(var, inputTemp)$header[1, -1])
+  scenario = "GL"
+
+  horizon = 2030
+
+  tmp <- evmkSumsRelchange(inputTemp=inputTemp, inputRad=inputRad,
+                             ofile = ofile,
+                             scenario = scenario,
+                             horizon = horizon,
+                             regions = regions)
+```
+## Styles
+
+The `html_vignette` template includes a basic CSS theme. To override this theme you can specify your own CSS in the document metadata as follows:
+
+    output: 
+      rmarkdown::html_vignette:
+        css: mystyles.css
+
+## Figures
+
+The figure sizes have been customised so that you can easily put two images side-by-side. 
+
+```{r, fig.show='hold'}
+plot(1:10)
+plot(10:1)
+```
+
+You can enable figure captions by `fig_caption: yes` in YAML:
+
+    output:
+      rmarkdown::html_vignette:
+        fig_caption: yes
+
+Then you can use the chunk option `fig.cap = "Your figure caption."` in **knitr**.
+
+## More Examples
+
+You can write math expressions, e.g. $Y = X\beta + \epsilon$, footnotes^[A footnote here.], and tables, e.g. using `knitr::kable()`.
+
+```{r, echo=FALSE, results='asis'}
+knitr::kable(head(mtcars, 10))
+```
+
+Also a quote using `>`:
+
+> "He who gives up [code] safety for [code] speed deserves neither."
+([via](https://twitter.com/hadleywickham/status/504368538874703872))
