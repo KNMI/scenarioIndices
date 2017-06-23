@@ -21,7 +21,7 @@ evmkSumsRelchange <- function(inputTemp, inputRad, scenario,
 
   flog.info("Running evaporation calculation")
   flog.debug("Version is 1.0")
-  # CONSTANTS AND FUNCTIONS ####################################################
+  # CONSTANTS AND FUNCTIONS #
 
   if (!horizon %in% c(2030, 2050, 2085)) {
     flog.error("horizon={%s} has to be a valid period", paste(horizon))
@@ -48,60 +48,24 @@ evmkSumsRelchange <- function(inputTemp, inputRad, scenario,
   evSce <- evmkScenario[-c(1:5), ]
   evSce <- as.data.frame(evSce)
 
-  mm <- (evRef[,1]%/%100)%%100
-  ss <- as.integer( (mm/3)%%4+1)
-  yy <-  evRef[,1]%/%10000
-  wy <- ifelse(mm<12,yy,yy+1)
+  dt <- evRef[,1]
 
-  products <- data.frame("sum"=1)
-  drempels <- vector()
-
-  tableSce <-  tableRef <- reltable <- as.data.frame(matrix(NA,
-               5 * (length(drempels)+sum(products)),ncol(evRef)))
+  # 5 because of annual & 4 seasons
+  tableSce <-  tableRef <- reltable <- as.data.frame(matrix(NA, 5, ncol(evRef)))
   names(tableRef) <- evmkRef[1]
   names(tableSce) <- evmkRef[1]
   names(reltable) <- evmkRef[1]
 
+
   i = 0
-
-  # seasonal variables
-  for (season in 0:4) {
-    if (season==0) {
-      id  <- 1:length(yy)
-    } else {
-      if (season==1) {
-        id  <- which(ss==1 & wy > min(wy) & wy < max(wy))
-      } else {
-        id  <- which(ss==season)
-      }
-    }
-
-    if (length(drempels>0)) {
-      for (j in 1:length(drempels)) {
-        i=i+1
-        dname <- paste("N_",drempels[j],"mm",season,sep="")
-        tableRef[i, 1] <- paste(dname,substr("        ",1,8-nchar(dname))) # nolint
-        tableRef[i,-1] <- apply(evRef[id,-1]>=drempels[j],2,sum) / length(unique(yy))
-        ##scenarios
-        tableSce[i, 1] <- paste(dname,substr("        ",1,8-nchar(dname)))
-        tableSce[i,-1] <- apply(evSce[id,-1]>=drempels[j],2,sum) / length(unique(yy))
-      }
-    }
-
-    prod="sum"   # sd seizoenssom EV
-    if (products[prod]==1) {
-      dname=paste(prod,season,sep="")
+  # # seasonal variables
+  for (season in c("year", "winter", "spring", "summer", "autumn")) {
       i=i+1
-      tableRef[i, 1] <- paste(dname,substr("        ",1,8-nchar(dname)))
-      #table[i,-1] <- apply(X[,-1]       , 2          ,   sd)
-      tableRef[i,-1]  <- round(apply(evRef[id,-1],2,sum)/30,0)
-      # relative change
-      tableSce[i, 1] <- paste(dname,substr("        ",1,8-nchar(dname)))
-      tableSce[i,-1]  <- round(apply(evSce[id,-1],2,sum)/30,0)
-      reltable[,-1]    <- round( (100 * (tableSce[,-1] - tableRef[,-1]) / tableRef[,-1]),2)
-
-    }
+      tableRef[i,-1]  <- round(apply(evRef[SeasonalSplit(season,dt)$id,-1],2,sum)/30,0)
+      tableSce[i,-1]  <- round(apply(evSce[SeasonalSplit(season,dt)$id,-1],2,sum)/30,0)
   } # end seasonal variables
+  # relative change
+  reltable[,-1] <- round( (100 * (tableSce[,-1] - tableRef[,-1]) / tableRef[,-1]),2)
   reltable[,1] <- c("year","winter","spring","summer","autumn")
 
   write.table(format(reltable,width=8,nsmall=2), ofile,col.names=F,row.names=F,quote=F)
