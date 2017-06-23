@@ -17,7 +17,8 @@ Imports:
   knmitransformer,
   data.table,
   futile.logger,
-  rgdal
+  rgdal,
+  purrr
 Remotes:
   MartinRoth/knmitransformer@oldfactor2
 RoxygenNote: 6.0.1
