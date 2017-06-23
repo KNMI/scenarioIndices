@@ -15,8 +15,7 @@ inputRad  <- system.file("refdata",
                          package="knmitransformer")
 ofile     <- "tmp.txt" # output file - used only temporary
 var <- "tg"
-regions <- knmitransformer::MatchRegionsOnStationId(
-  knmitransformer::ReadInput(var, inputTemp)$header[1, -1])
+regions <- MatchRegionsOnStationId(ReadInput(var, inputTemp)$header[1, -1])
 
 
 test_that("evaporation sums reference", {

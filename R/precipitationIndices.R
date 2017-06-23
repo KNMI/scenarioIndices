@@ -30,12 +30,10 @@ PrecipThreshIndices<- function(input, threshold, scenario = NA,
   StationSub <- as.character(fread(system.file("refdata","P102.txt",
       package = "scenarioIndices"))$V1)
 
-  # calcualte index for reference; else...
+  # calculate index for reference; else...
   if (!scenario %in% c("GL","GH","WL","WH") && horizon !=c(2030,2050,2085)){
-    input <-  knmitransformer::ReadInput("rr",
-        system.file("refdata",
-                    "KNMI14____ref_rrcentr___19810101-20101231_v3.2.txt",
-                    package="knmitransformer"))$obs
+    input <- ReadInput("rr",
+        KnmiRefFile("KNMI14____ref_rrcentr___19810101-20101231_v3.2.txt"))$obs
     dt <- input[-c(1:5),1]
 
     input <- input[,StationSub]
@@ -57,7 +55,7 @@ PrecipThreshIndices<- function(input, threshold, scenario = NA,
   seasonalSplit <- SeasonalSplit(season, dt)
   # id  <- seasonalSplit$id
   idy <- seasonalSplit$idy
-  yy  <- date %/% 10000
+  yy  <- dt %/% 10000
 
   i <- 0 # FIXME
       tabel[i,-1] <- apply(input[idy,-1]>=threshold,2,sum) / length(unique(yy))

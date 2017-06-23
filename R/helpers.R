@@ -6,17 +6,10 @@ SeasonalSplit <- function(season, date) {
   yy <- date %/% 10000
   wy <- ifelse(mm < 12, yy, yy + 1)
 
-  if (season == "year"){
-    id  <- 1:length(yy)
-    idy <- yy
-  } else {
-    if (season == "winter"){
-      id  <- which(ss == 1 & wy > min(wy) & wy < max(wy))
-      idy <- wy[id]
-    } else {
-      id  <- which(ss == season)
-      idy <- yy[id]
-    }
-  }
+  switch(season,
+         "year" = id <- 1:length(yy),
+         "winter" = id <- which(ss == 1 & wy > min(wy) & wy < max(wy)),
+         id <- which(ss == season))
+  idy <- yy[id]
   list(id = id, idy = idy)
 }

@@ -15,9 +15,8 @@ TempMinIndices<- function(input, index,
   }
 
   if (!scenario %in% c("GL","GH","WL","WH") && horizon !=c(2030,2050,2085)){
-    input <-  knmitransformer::ReadInput("tn",
-        system.file("refdata","KNMI14____ref_tn___19810101-20101231_v3.2.txt",
-                    package="knmitransformer"))$obs
+    input <- ReadInput("tn",
+        KnmiRefFile("KNMI14____ref_tn___19810101-20101231_v3.2.txt"))$obs
   } else {
     input <- TransformTemp(input=input, ofile=NA, scenario=scenario,
                            horizon=horizon, var="tn", regions = regions)
