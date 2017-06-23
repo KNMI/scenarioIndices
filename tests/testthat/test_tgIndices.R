@@ -12,6 +12,13 @@ ofile   <- "tmp.txt" # output file - used only temporary
 var     <- "tg"
 regions <- MatchRegionsOnStationId(ReadInput(var, input)$header[1, -1])
 
+test_that("full table", {
+  index = "aTG"
+
+  tmp <- TempAvgIndicesWrapper(input, index, regions = regions)
+  expect_equal_to_reference(tmp,
+      "regressionOutput/temperature/KNMI14___ref_tg_aTG_fullTable.rds")
+})
 
 
 test_that("reference", {
