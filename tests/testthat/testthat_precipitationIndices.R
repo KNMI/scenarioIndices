@@ -7,9 +7,17 @@ library(data.table)
 
 context("precipIndices  calc - Entire station set")
 
-inputPrec <- KnmiRefFile("KNMI14____ref_rrcentr___19810101-20101231_v3.2.txt")
+input <- KnmiRefFile("KNMI14____ref_rrcentr___19810101-20101231_v3.2.txt")
+subscenario <- "centr"
 ofile     <- "tmp.txt" # output file - used only temporary
 
+
+test_that("full table", {
+
+  tmp <- PrecIndicesWrapper(input, subscenario = subscenario)
+  expect_equal_to_reference(tmp,
+                            "regressionOutput/precipitation/pre_fullTable.rds")
+})
 
 #
  test_that("precipIndices  reference", {
@@ -17,8 +25,10 @@ ofile     <- "tmp.txt" # output file - used only temporary
 
    horizon = 1981
 
-   tmp <- PrecipThreshIndices(input = inputPrec, threshold = 30.0, scenario = scenario,
-                              horizon = horizon, season = "year", ofile = ofile)
+   tmp <- PrecipThreshIndices(input = input, index = "N30mm",
+                              scenario = scenario, horizon = horizon,
+                              season = "year", subscenario = subscenario,
+                              ofile = ofile)
 
    expect_equal_to_reference(tmp,
       "./regressionOutput/precipitation/KNMI14_ref_precipitationIndices.rds")
