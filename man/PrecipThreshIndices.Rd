@@ -4,8 +4,8 @@
 \alias{PrecipThreshIndices}
 \title{precipitation threshold index}
 \usage{
-PrecipThreshIndices(input, index, ofile = NA, scenario, horizon = 2030,
-  season, subscenario = "centr")
+PrecipThreshIndices(input, index, scenario, horizon = 2030, season,
+  subscenario = "centr")
 }
 \arguments{
 \item{input}{Name of the input file (ASCII) that contains reference data
@@ -21,9 +21,6 @@ Rows starting with "#" are completely ignored and returned
 unchanged.}
 
 \item{index}{vector of thresholds}
-
-\item{ofile}{(DEFAULT=NA) Name of the output file to write the indices to.
-Format is similar to input without the 5 first lines}
 
 \item{scenario}{scenario ("GL", "GH", "WL", "WH"). If scenario is not one of the 4
 then the indices are calculated for the reference period 1981-2010}

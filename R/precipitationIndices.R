@@ -21,11 +21,8 @@
 #' @param season     season (0= year, 1=winter, 2=spring, 3=summer, 4=autumn)
 #' @param subscenario subscenario for extreme precipitation
 #' ("lower", "centr" (=DEFAULT), "upper")
-#' @param ofile      (DEFAULT=NA) Name of the output file to write the indices to.
-#'                   Format is similar to input without the 5 first lines
 #' @export
-PrecipThreshIndices<- function(input, index,
-                               ofile = NA, scenario,
+PrecipThreshIndices<- function(input, index, scenario,
                                horizon = 2030, season,
                                subscenario = "centr") {
 
@@ -42,9 +39,9 @@ PrecipThreshIndices<- function(input, index,
     dt <- input$date
     input <- input[, StationSub]
   } else {
-    input <- TransformPrecip(input = input, ofile=NA, scenario=scenario,
+    input <- TransformPrecip(input = input, scenario=scenario,
                              horizon=horizon, subscenario = subscenario)
-    dt <- input[-c(1:5),1]
+    dt <- input[-c(1:5), V1]
     stationID         <- input[(1)]
     names(input) <- as.character(stationID)
     input <- input[-c(1:5), StationSub, with = FALSE]
@@ -77,7 +74,7 @@ PrecipThreshIndices<- function(input, index,
 #'   they were defined for the KNMI14 scenarios brochure
 #' @inheritParams PrecipThreshIndices
 #' @export
-PrecIndicesWrapper <- function(input, subscenario = "centr", ofile = NA) {
+PrecIndicesWrapper <- function(input, subscenario = "centr") {
 
   if (class(input) != "knmiTF") {
     input <- ReadInput("rr", input)
@@ -88,24 +85,32 @@ PrecIndicesWrapper <- function(input, subscenario = "centr", ofile = NA) {
                                ofile = ofile, scenario = scenario,
                                horizon = horizon, season = season,
                                subscenario = subscenario)
+    tmp          <- as.data.frame(t(tmp))
     tmp$season   <- season
     tmp$horizon  <- horizon
+    tmp$subscenario <- subscenario
     tmp$scenario <- scenario
     tmp$index    <- index
     tmp
   }
 
-
   indices <- c("N0.1mm", "N0.5mm", "N10mm", "N20mm", "N30mm")
 
   combinations <- MakeCombinations(indices)
 
-  result <- pmap(combinations, fn)
+  result <- pmap(combinations, fn_savely)
+
   result <- rbindlist(result)
-  setnames(result, "Group.1", "year")
+
+  # hasErrors <- map_lgl(result, function(x) !is.null(x$error))
+
+  # result <- map_df(result[!hasErrors], "result")
+  #
+  # result <- as.data.table(result)
   nCols <- ncol(result)
   names <- colnames(result)
-  setcolorder(result, names[c( (nCols - (0:3)), 1, 2 : (nCols-4))])
+  setcolorder(result, names[c( (nCols - (0:4)), 1, 2 : (nCols-5))])
   result
+  # combinations[hasErrors, ]
 }
 

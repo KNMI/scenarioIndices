@@ -5,7 +5,7 @@
 \title{Calculates a set of precipitation related indices (thresholds) for all scenarios, horizons, and
 seasons at once}
 \usage{
-PrecIndicesWrapper(input, subscenario = "centr", ofile = NA)
+PrecIndicesWrapper(input, subscenario = "centr")
 }
 \arguments{
 \item{input}{Name of the input file (ASCII) that contains reference data
@@ -22,9 +22,6 @@ unchanged.}
 
 \item{subscenario}{subscenario for extreme precipitation
 ("lower", "centr" (=DEFAULT), "upper")}
-
-\item{ofile}{(DEFAULT=NA) Name of the output file to write the indices to.
-Format is similar to input without the 5 first lines}
 }
 \description{
 Calculates a set of daily precipitation related indices as

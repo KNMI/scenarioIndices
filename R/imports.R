@@ -1,4 +1,4 @@
-#' @importFrom data.table fread rbindlist setnames setcolorder
+#' @importFrom data.table fread rbindlist setnames setcolorder as.data.table
 #' @importFrom utils write.table
 #' @importFrom utils read.table
 #' @importFrom stats sd aggregate

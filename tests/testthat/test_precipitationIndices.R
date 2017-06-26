@@ -12,12 +12,14 @@ subscenario <- "centr"
 ofile     <- "tmp.txt" # output file - used only temporary
 
 
-test_that("full table", {
+test_that("full table centr", {
 
-  tmp <- PrecIndicesWrapper(input, subscenario = subscenario)
-  expect_equal_to_reference(tmp,
-                            "regressionOutput/precipitation/pre_fullTable.rds")
+  # tmp <- PrecIndicesWrapper(input, subscenario = "centr")
+  # expect_equal_to_reference(tmp,
+  #                           "regressionOutput/precipitation/pre_fullTable_centr.rds")
 })
+
+
 
 #
  test_that("precipIndices  reference", {
