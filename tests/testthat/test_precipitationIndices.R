@@ -8,17 +8,53 @@ library(data.table)
 context("precipIndices  calc - Entire station set")
 
 input <- KnmiRefFile("KNMI14____ref_rrcentr___19810101-20101231_v3.2.txt")
-subscenario <- "centr"
 ofile     <- "tmp.txt" # output file - used only temporary
+input <- ReadInput("rr", input)
 
-#
-# test_that("full table centr", {
-#
-#   # tmp <- PrecIndicesWrapper(input, subscenario = "centr")
-#   # expect_equal_to_reference(tmp,
-#   #                           "regressionOutput/precipitation/pre_fullTable_centr.rds")
-# })
 
+
+test_that("indices reference", {
+
+   tmp <- PrecIndicesWrapper2(input$obs)
+   expect_equal_to_reference(tmp,
+                             "regressionOutput/precipitation/precipInidces_ref.rds")
+})
+
+
+
+test_that("indices 2030 centr", {
+  scenario = "GL"
+  horizon = 2030
+  subscenario = "centr"
+
+  trans <- TransformPrecip(input = input, scenario=scenario,
+                           horizon=horizon, subscenario = subscenario)
+
+  setnames(trans, c("date", paste(trans[1, -1, with = FALSE])))
+
+  trans <- trans[-c(1:5), ]
+  tmp <- PrecIndicesWrapper2(input = trans)
+  expect_equal_to_reference(tmp,
+                            "regressionOutput/precipitation/precipInidces___2030_centr.rds")
+
+})
+
+test_that("indices GL 2050 centr", {
+  scenario = "GL"
+  horizon = 2050
+  subscenario = "centr"
+
+  trans <- TransformPrecip(input = input, scenario=scenario,
+                           horizon=horizon, subscenario = subscenario)
+
+  setnames(trans, c("date", paste(trans[1, -1, with = FALSE])))
+
+  trans <- trans[-c(1:5), ]
+  tmp <- PrecIndicesWrapper2(input = trans)
+  expect_equal_to_reference(tmp,
+                            "regressionOutput/precipitation/precipInidces_GL_2050_centr.rds")
+
+})
 
 
 # #
