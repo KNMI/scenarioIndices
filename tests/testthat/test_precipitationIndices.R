@@ -15,7 +15,7 @@ input <- ReadInput("rr", input)
 
 test_that("indices reference", {
 
-   tmp <- PrecIndicesWrapper2(input$obs)
+   tmp <- PrecIndicesWrapper(input$obs)
    expect_equal_to_reference(tmp,
                              "regressionOutput/precipitation/precipInidces_ref.rds")
 })
@@ -33,7 +33,7 @@ test_that("indices 2030 centr", {
   setnames(trans, c("date", paste(trans[1, -1, with = FALSE])))
 
   trans <- trans[-c(1:5), ]
-  tmp <- PrecIndicesWrapper2(input = trans)
+  tmp <- PrecIndicesWrapper(input = trans)
   expect_equal_to_reference(tmp,
                             "regressionOutput/precipitation/precipInidces___2030_centr.rds")
 
@@ -50,7 +50,7 @@ test_that("indices GL 2050 centr", {
   setnames(trans, c("date", paste(trans[1, -1, with = FALSE])))
 
   trans <- trans[-c(1:5), ]
-  tmp <- PrecIndicesWrapper2(input = trans)
+  tmp <- PrecIndicesWrapper(input = trans)
   expect_equal_to_reference(tmp,
                             "regressionOutput/precipitation/precipInidces_GL_2050_centr.rds")
 
