@@ -3,8 +3,6 @@
 #' and calculates the Makkink evaporation for 'future time series' that match a certain climate, makes season sums and summer values
 #' @param inputTemp input file for tg
 #' @param inputRad input file for rsds
-#' @param ofile          (DEFAULT="uitvoer.txt") Name of the output file to write the transformed data to.
-#'                Format is similar to input
 #' @param scenario  scenario                      ["GL", "GH", "WL", "WH"]
 #' @param horizon   time horizon                  [2030 (=DEFAULT), 2050, 2085]
 #' @param regions     vector of regions
@@ -32,7 +30,6 @@ evmkSumsRelchange <- function(inputTemp, inputRad, scenario,
 
   evmkScenario <- TransformEvap(inputTemp = inputTemp,
                                  inputRad = inputRad,
-                                 ofile=NA,
                                  scenario = scenario,
                                  horizon = horizon,
                                  regions = regions)
@@ -68,6 +65,6 @@ evmkSumsRelchange <- function(inputTemp, inputRad, scenario,
   reltable[,-1] <- round( (100 * (tableSce[,-1] - tableRef[,-1]) / tableRef[,-1]),2)
   reltable[,1] <- c("year","winter","spring","summer","autumn")
 
-  write.table(format(reltable,width=8,nsmall=2), ofile,col.names=F,row.names=F,quote=F)
+  #write.table(format(reltable,width=8,nsmall=2), ofile,col.names=F,row.names=F,quote=F)
   return(reltable)
 }

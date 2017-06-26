@@ -18,22 +18,106 @@ The *scenarioIndices* package calculates a set of indices that were published in
 
 ## Potential Evaporation Makkink
 
-For the KNMI'14 Climate Scenarios brochure the annual and summer potential evaporation sum is presented.
+In the KNMI'14 Climate Scenarios brochure the annual and summer potential evaporation sum is presented. For this, the following need to be specified; temperature and radiation data sets, scenario and horizon.
 ```{r makkinkevaporation}
 inputTemp <- KnmiRefFile("KNMI14____ref_tg___19810101-20101231_v3.2.txt")
 inputRad  <- KnmiRefFile("KNMI14____ref_rsds___19810101-20101231_v3.2.txt")
-ofile     <- "tmp.txt" # output file - used only temporary
-var <- "tg"
-regions <- MatchRegionsOnStationId(ReadInput(var, inputTemp)$header[1, -1])
-  scenario = "GL"
+regions <- MatchRegionsOnStationId(ReadInput("tg", inputTemp)$header[1, -1])
+scenario = "GL"  
+horizon = 2030
+```
 
-  horizon = 2030
-
-  tmp <- evmkSumsRelchange(inputTemp=inputTemp, inputRad=inputRad,
-                             ofile = ofile,
+```{r evmksums}
+  EvapRelChange <- evmkSumsRelchange(inputTemp=inputTemp, inputRad=inputRad,
                              scenario = scenario,
                              horizon = horizon,
                              regions = regions)
+  
+  EvapRelChange
 ```
+The above table shows the relative change between the evaporation sums for GL 2030 and the reference data/period(1981-2010) for each station (columns) for the the annual change and the 4 seasons, winter, spring, summer, and autumn(rows.) 
+
+## Precipitation Deficit
+To calculate the index for precipitation deficit we must first specify the three input data sets for temperature, radiation and precipitation, and of course the regions for the temprature stations (knmitransformer)
+```{r neerslagtekort}
+
+inputTemp <- KnmiRefFile("KNMI14____ref_tg___19810101-20101231_v3.2.txt")
+inputRad  <- KnmiRefFile("KNMI14____ref_rsds___19810101-20101231_v3.2.txt")
+inputPrec <- KnmiRefFile("KNMI14____ref_rrcentr___19810101-20101231_v3.2.txt")
+regions   <- MatchRegionsOnStationId(ReadInput("tg", inputTemp)$header[1, -1])
+```
+Then specify the scenario and horizon we would like to calculate the index:
+```{r neerslagtekort2}
+  scenario = "WL"
+  horizon = 2050
+
+  precdefic <- PrecipDeficit(inputTemp = inputTemp, inputRad = inputRad,
+                           inputPrec = inputPrec,ofile = ofile, scenario = scenario,
+                           horizon = horizon,
+                           regions = regions)
+```
+
+```{r neerslagtekort3}
+head(precdefic)
+```
+The second column (WL2050) 
 ## Precipitation threshold indices
-A set of 
+A set of precipitation threshold indices can be calculated using the following function
+```{r precipindices}
+ input <- KnmiRefFile("KNMI14____ref_rrcentr___19810101-20101231_v3.2.txt")
+ input <- ReadInput("rr", input)
+ PrecIndicesRef <- PrecIndicesWrapper(input$obs)
+```
+```{r showprecindices}
+ head(PrecIndicesRef)
+```
+This table shows the calculate indices with thresholds: 0.1, 0.5, 10, 20, and 30 mm, for all seasons (year, & 4 seasons) for 104 precipitation stations.
+
+## Temperature indices
+* Indices calculated regarding daily average temperature
+The following specifications are required:
+```{r tgindices}
+ input   <- KnmiRefFile("KNMI14____ref_tg___19810101-20101231_v3.2.txt")
+ regions <- MatchRegionsOnStationId(ReadInput("tg", input)$header[1, -1])
+```
+Using the following wrapper function we can get a table with all related indices for all horizons and scenarios (including reference period) for all 4 seasons and annual values, for all temperature stations.
+```{r tgindicesshow}
+  tgindices <- TempAvgIndicesWrapper(input, regions = regions)
+
+```
+
+```{r tgindiesagain}
+head(tgindices)
+```
+
+* Indices calculated using daily maximum temperature
+
+Similar to the previous indices:
+```{r txindices}
+input   <- KnmiRefFile("KNMI14____ref_tx___19810101-20101231_v3.2.txt")
+regions <- MatchRegionsOnStationId(ReadInput("tx", input)$header[1, -1])
+```
+
+```{r txindicesagain}
+  txindices <- TempMaxIndicesWrapper(input, regions = regions)
+```
+
+```{r txindicesshow}
+head(txindices)
+```
+
+* Indices calculated using daily minimum temperature
+
+Similar to the previous indices:
+```{r tnindices}
+input   <- KnmiRefFile("KNMI14____ref_tn___19810101-20101231_v3.2.txt")
+regions <- MatchRegionsOnStationId(ReadInput("tn", input)$header[1, -1])
+```
+
+```{r tnindicesagain}
+  tnindices <- TempMinIndicesWrapper(input, regions = regions)
+```
+
+```{r tnindicesshow}
+head(tnindices)
+```

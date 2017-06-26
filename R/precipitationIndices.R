@@ -32,7 +32,7 @@ PrecIndicesWrapper <- function(input) {
 
 
   fn <- function(index, season) {
-    tmp <- PrecipThreshIndices2(input = input, index = index, season = season)
+    tmp <- PrecipThreshIndices(input = input, index = index, season = season)
     tmp          <- as.data.frame(t(tmp))
     tmp$season   <- season
     tmp$index    <- index

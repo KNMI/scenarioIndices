@@ -27,7 +27,6 @@ test_that("2030 decadal prediction", {
   horizon = 2030
 
   tmp <- evmkSumsRelchange(inputTemp=inputTemp, inputRad=inputRad,
-                             ofile = ofile,
                              scenario = scenario,
                              horizon = horizon,
                              regions = regions)
@@ -42,7 +41,6 @@ test_that("scenarioenario WL", {
 
   horizon = 2050
   tmp <- evmkSumsRelchange(inputTemp = inputTemp, inputRad = inputRad,
-                             ofile = ofile,
                              scenario = scenario,
                              horizon = horizon,
                              regions = regions)
@@ -53,7 +51,6 @@ test_that("scenarioenario WL", {
 
   horizon = 2085
   tmp <- evmkSumsRelchange(inputTemp=inputTemp, inputRad=inputRad,
-                             ofile=ofile,
                              scenario=scenario,
                              horizon = horizon,
                              regions = regions)
@@ -68,7 +65,6 @@ test_that("scenarioenario WH", {
 
   horizon = 2050
   tmp <- evmkSumsRelchange(inputTemp=inputTemp, inputRad=inputRad,
-                             ofile=ofile,
                              scenario=scenario,
                              horizon = horizon,
                              regions = regions)
@@ -79,7 +75,6 @@ test_that("scenarioenario WH", {
 
   horizon = 2085
   tmp <- evmkSumsRelchange(inputTemp=inputTemp, inputRad=inputRad,
-                             ofile=ofile,
                              scenario=scenario,
                              horizon = horizon,
                              regions = regions)
@@ -94,7 +89,6 @@ test_that("scenarioenario GH", {
 
   horizon = 2050
   tmp <- evmkSumsRelchange(inputTemp=inputTemp, inputRad=inputRad,
-                             ofile=ofile,
                              scenario=scenario,
                              horizon = horizon,
                              regions = regions)
@@ -105,7 +99,6 @@ test_that("scenarioenario GH", {
 
   horizon = 2085
   tmp <- evmkSumsRelchange(inputTemp=inputTemp, inputRad=inputRad,
-                             ofile=ofile,
                              scenario=scenario,
                              horizon = horizon,
                              regions = regions)
@@ -120,7 +113,6 @@ test_that("scenarioenario GL", {
 
   horizon = 2050
   tmp <- evmkSumsRelchange(inputTemp=inputTemp, inputRad=inputRad,
-                             ofile=ofile,
                              scenario=scenario,
                              horizon = horizon,
                              regions = regions)
@@ -131,7 +123,6 @@ test_that("scenarioenario GL", {
 
   horizon = 2085
   tmp <- evmkSumsRelchange(inputTemp=inputTemp, inputRad=inputRad,
-                             ofile=ofile,
                              scenario=scenario,
                              horizon = horizon,
                              regions = regions)
