@@ -44,6 +44,7 @@ PrecipThreshIndices<- function(input, index,
   } else {
     input <- TransformPrecip(input = input, ofile=NA, scenario=scenario,
                              horizon=horizon, subscenario = subscenario)
+    dt <- input[-c(1:5),1]
     stationID         <- input[(1)]
     names(input) <- as.character(stationID)
     input <- input[-c(1:5), StationSub, with = FALSE]
@@ -52,17 +53,19 @@ PrecipThreshIndices<- function(input, index,
   input <- as.data.frame(input)
 
   seasonalSplit <- SeasonalSplit(season, dt)
-  # id  <- seasonalSplit$id
+  id  <- seasonalSplit$id
   idy <- seasonalSplit$idy
   yy  <- dt %/% 10000
 
   #Indices
   switch(index,
-         "N0.1mm" = X <- apply(input[idy,-1]>=0.1,2,sum) / length(unique(yy)),
-         "N0.5mm" = X <- apply(input[idy,-1]>=0.5,2,sum) / length(unique(yy)),
-         "N10mm" = X <- apply(input[idy,-1]>=10,2,sum) / length(unique(yy)),
-         "N20mm" = X <- apply(input[idy,-1]>=20,2,sum) / length(unique(yy)),
-         "N30mm" = X <- apply(input[idy,-1]>=30,2,sum) / length(unique(yy)))
+         "N0.1mm" = X <- apply(input[id,-1]>=0.1,2,sum) / length(unique(yy)),
+         "N0.5mm" = X <- apply(input[id,-1]>=0.5,2,sum) / length(unique(yy)),
+         "N10mm" = X <- apply(input[id,-1]>=10,2,sum) / length(unique(yy)),
+         "N20mm" = X <- apply(input[id,-1]>=20,2,sum) / length(unique(yy)),
+         "N30mm" = X <- apply(input[id,-1]>=30,2,sum) / length(unique(yy)),
+         "SeasMean" = X <-  apply(aggregate(input[id,-1],by=list(idy),  sum)[,-1],2, mean),
+         "SeasSD" = X <-  apply(aggregate(input[id,-1],by=list(idy),  sum)[,-1],2, sd))
 
     return(X)
 }
