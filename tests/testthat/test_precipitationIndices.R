@@ -29,8 +29,7 @@ test_that("full table centr", {
 
    tmp <- PrecipThreshIndices(input = input, index = "N30mm",
                               scenario = scenario, horizon = horizon,
-                              season = "year", subscenario = subscenario,
-                              ofile = ofile)
+                              season = "year", subscenario = subscenario)
 
    expect_equal_to_reference(tmp,
       "./regressionOutput/precipitation/KNMI14_ref_precipitationIndices.rds")
