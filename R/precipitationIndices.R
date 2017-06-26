@@ -41,7 +41,7 @@ PrecipThreshIndices<- function(input, index, scenario,
   } else {
     input <- TransformPrecip(input = input, scenario=scenario,
                              horizon=horizon, subscenario = subscenario)
-    dt <- input[-c(1:5), V1]
+    dt <- input[-c(1:5), V1] #nolint
     stationID         <- input[(1)]
     names(input) <- as.character(stationID)
     input <- input[-c(1:5), StationSub, with = FALSE]
@@ -98,7 +98,7 @@ PrecIndicesWrapper <- function(input, subscenario = "centr") {
 
   combinations <- MakeCombinations(indices)
 
-  result <- pmap(combinations, fn_savely)
+  result <- pmap(combinations, fn)
 
   result <- rbindlist(result)
 
@@ -113,4 +113,3 @@ PrecIndicesWrapper <- function(input, subscenario = "centr") {
   result
   # combinations[hasErrors, ]
 }
-
