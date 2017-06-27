@@ -10,13 +10,12 @@ context("precipDefic  calc - Entire station set")
 inputTemp <- KnmiRefFile("KNMI14____ref_tg___19810101-20101231_v3.2.txt")
 inputRad  <- KnmiRefFile("KNMI14____ref_rsds___19810101-20101231_v3.2.txt")
 inputPrec <- KnmiRefFile("KNMI14____ref_rrcentr___19810101-20101231_v3.2.txt")
-ofile     <- "tmp.txt" # output file - used only temporary
 var       <- "tg"
 regions   <- MatchRegionsOnStationId(ReadInput(var, inputTemp)$header[1, -1])
 #
 # test_that("precipDefic  reference", {
 #
-#   tmp <- PrecipDeficit_ref(ofile = ofile)
+#   tmp <- PrecipDeficit_ref( = )
 #
 #   expect_equal_to_reference(tmp, "./regressionOutput/precipitationDeficit/KNMI14_ref_precipDefic.rds")
 # })
@@ -27,7 +26,7 @@ test_that("2030 decadal prediction", {
   horizon = 2030
 
   tmp <- PrecipDeficit(inputTemp = inputTemp, inputRad = inputRad,
-                           inputPrec = inputPrec,ofile = ofile, scenario = scenario,
+                           inputPrec = inputPrec, scenario = scenario,
                            horizon = horizon,
                            regions = regions)
 
@@ -41,7 +40,7 @@ test_that("scenario WL", {
   horizon = 2050
 
   tmp <- PrecipDeficit(inputTemp = inputTemp, inputRad = inputRad,
-                           inputPrec = inputPrec,ofile = ofile, scenario = scenario,
+                           inputPrec = inputPrec, scenario = scenario,
                            horizon = horizon,
                            regions = regions)
 
@@ -51,7 +50,7 @@ test_that("scenario WL", {
   p = 2085
 
   tmp <- PrecipDeficit(inputTemp = inputTemp, inputRad = inputRad,
-                           inputPrec = inputPrec,ofile = ofile, scenario = scenario,
+                           inputPrec = inputPrec, scenario = scenario,
                            horizon = horizon,
                            regions = regions)
 
@@ -65,7 +64,7 @@ test_that("scenario WH", {
   horizon = 2050
 
   tmp <- PrecipDeficit(inputTemp = inputTemp, inputRad = inputRad,
-                           inputPrec = inputPrec,ofile = ofile, scenario = scenario,
+                           inputPrec = inputPrec,  scenario = scenario,
                            horizon = horizon,
                            regions = regions)
 
@@ -76,7 +75,7 @@ test_that("scenario WH", {
   horizon = 2085
 
   tmp <- PrecipDeficit(inputTemp = inputTemp, inputRad = inputRad,
-                           inputPrec = inputPrec,ofile = ofile, scenario = scenario,
+                           inputPrec = inputPrec, scenario = scenario,
                            horizon = horizon,
                            regions = regions)
 
@@ -90,7 +89,7 @@ test_that("scenario GH", {
   horizon = 2050
 
   tmp <- PrecipDeficit(inputTemp = inputTemp, inputRad = inputRad,
-                           inputPrec = inputPrec,ofile = ofile, scenario = scenario,
+                           inputPrec = inputPrec, scenario = scenario,
                            horizon = horizon,
                            regions = regions)
 
@@ -101,7 +100,7 @@ test_that("scenario GH", {
   horizon = 2085
 
   tmp <- PrecipDeficit(inputTemp = inputTemp, inputRad = inputRad,
-                       inputPrec = inputPrec,ofile = ofile, scenario = scenario,
+                       inputPrec = inputPrec, scenario = scenario,
                        horizon = horizon,
                        regions = regions)
 
@@ -115,7 +114,7 @@ test_that("scenario GL", {
   horizon = 2050
 
   tmp <- PrecipDeficit(inputTemp = inputTemp, inputRad = inputRad,
-                       inputPrec = inputPrec,ofile = ofile, scenario = scenario,
+                       inputPrec = inputPrec , scenario = scenario,
                        horizon = horizon,
                        regions = regions)
 
@@ -125,7 +124,7 @@ test_that("scenario GL", {
   horizon = 2085
 
   tmp <- PrecipDeficit(inputTemp = inputTemp, inputRad = inputRad,
-                       inputPrec = inputPrec,ofile = ofile, scenario = scenario,
+                       inputPrec = inputPrec, scenario = scenario,
                        horizon = horizon,
                        regions = regions)
 

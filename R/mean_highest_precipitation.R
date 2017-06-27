@@ -19,7 +19,7 @@
 #'                   <ZON> Zuidoost Nederland
 #' @export
 PrecipDeficit <- function(inputTemp, inputRad, inputPrec,
-                        scenario, horizon = NA, ofile=NA, regions = "NLD") {
+                        scenario, horizon = 2030, regions = "NLD") {
 
 
   StationSub <- as.character(fread(system.file("refdata","P102.txt",
@@ -41,7 +41,7 @@ PrecipDeficit <- function(inputTemp, inputRad, inputPrec,
   #calculate evmk for scenarios
   evmkScenario <- TransformEvap(inputTemp = inputTemp, inputRad = inputRad,
                                   scenario = scenario, horizon = horizon,
-                                 ofile = NA, regions = "NLD")
+                                 regions = "NLD")
 
   dt     <- evmkScenario[-c(1:5),1, with = FALSE]
   mm     <- (dt%/%100)%%100
@@ -82,8 +82,6 @@ PrecipDeficit <- function(inputTemp, inputRad, inputPrec,
                           relativechange = c(round(delta,1), round(highestdel,1)))
 
   names(table_sce) <- c("year",  paste(scenario,horizon,sep=""), "delta")
-
-  write.table(format(table_sce,width=8,nsmall=2), ofile,col.names=F,row.names=F,quote=F)
 
   return(table_sce)
 }

@@ -6,8 +6,8 @@
 as it was calculated for KNMI14 scenarios brochure
 this index uses the evmk of DeBilt and precipitation amount of 102 stations (the homogenenised ones) over the NL}
 \usage{
-PrecipDeficit(inputTemp, inputRad, inputPrec, scenario, horizon = NA,
-  ofile = NA, regions = "NLD")
+PrecipDeficit(inputTemp, inputRad, inputPrec, scenario, horizon = 2030,
+  regions = "NLD")
 }
 \arguments{
 \item{inputTemp}{input file for tg}
@@ -20,9 +20,6 @@ PrecipDeficit(inputTemp, inputRad, inputPrec, scenario, horizon = NA,
 
 \item{horizon}{time horizon                  [2030 (=DEFAULT), 2050, 2085]}
 
-\item{ofile}{(DEFAULT="uitvoer.txt") Name of the output file to write the transformed data to.
-Format is similar to input}
-
 \item{regions}{vector of regions
 KNMI14 distinguishes following regions:\cr
 <NLD> Nederland (DEFAULT) \cr
@@ -31,6 +28,9 @@ KNMI14 distinguishes following regions:\cr
 <NON> Noordoost Nederland \cr
 <MON> Middenoost Nederland \cr
 <ZON> Zuidoost Nederland}
+
+\item{ofile}{(DEFAULT="uitvoer.txt") Name of the output file to write the transformed data to.
+Format is similar to input}
 }
 \description{
 function reads reference ts for evmk, rr, tg & rdrs
