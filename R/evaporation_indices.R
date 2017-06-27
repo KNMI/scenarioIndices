@@ -15,7 +15,7 @@
 #'                  <ZON> Zuidoost Nederland
 #' @export
 evmkSumsRelchange <- function(inputTemp, inputRad, scenario,
-                                      horizon = NA, regions = "NLD", ofile=NA) {
+                              horizon = 2030, regions = "NLD") {
 
   flog.info("Running evaporation calculation")
   flog.debug("Version is 1.0")
@@ -65,6 +65,5 @@ evmkSumsRelchange <- function(inputTemp, inputRad, scenario,
   reltable[,-1] <- round( (100 * (tableSce[,-1] - tableRef[,-1]) / tableRef[,-1]),2)
   reltable[,1] <- c("year","winter","spring","summer","autumn")
 
-  #write.table(format(reltable,width=8,nsmall=2), ofile,col.names=F,row.names=F,quote=F)
   return(reltable)
 }
