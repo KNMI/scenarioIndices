@@ -28,9 +28,6 @@ KNMI14 distinguishes following regions:\cr
 <NON> Noordoost Nederland \cr
 <MON> Middenoost Nederland \cr
 <ZON> Zuidoost Nederland}
-
-\item{ofile}{(DEFAULT="uitvoer.txt") Name of the output file to write the transformed data to.
-Format is similar to input}
 }
 \description{
 function reads reference ts for evmk, rr, tg & rdrs

@@ -5,8 +5,6 @@
 #' @param inputTemp   input file for tg
 #' @param inputRad input file for rsds
 #' @param inputPrec   input for rr
-#' @param ofile      (DEFAULT="uitvoer.txt") Name of the output file to write the transformed data to.
-#'                    Format is similar to input
 #' @param scenario    scenario                      ["GL", "GH", "WL", "WH"]
 #' @param horizon     time horizon                  [2030 (=DEFAULT), 2050, 2085]
 #' @param regions     vector of regions

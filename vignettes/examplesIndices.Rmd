@@ -12,6 +12,8 @@ vignette: >
 library(data.table)
 library(scenarioIndices)
 library(knmitransformer)
+library(futile.logger)
+flog.threshold(ERROR)
 ```
 
 The *scenarioIndices* package calculates a set of indices that were published in the KNMI'14 Climate scenarios and uses the *knmitransformer* package for the transformed series. This document provides examples on how to use the function to calculate evaporation, precipitation and temperature indices in different seasonal periods. 
