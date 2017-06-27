@@ -52,7 +52,7 @@ Then specify the scenario and horizon we would like to calculate the index:
   horizon = 2050
 
   precdefic <- PrecipDeficit(inputTemp = inputTemp, inputRad = inputRad,
-                           inputPrec = inputPrec,ofile = ofile, scenario = scenario,
+                           inputPrec = inputPrec, scenario = scenario,
                            horizon = horizon,
                            regions = regions)
 ```
