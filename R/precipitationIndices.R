@@ -1,4 +1,7 @@
 # Calculate precipitation threshold indices
+#' @param input input file with precipitation
+#' @param index threshold indices
+#' @param season vector year,winter, spring, summer, autumn
 #' @export
 PrecipThreshIndices <- function(input, index, season) {
   input <- as.data.frame(input)
@@ -27,6 +30,8 @@ PrecipThreshIndices <- function(input, index, season) {
   return(X)
 }
 
+#' Wrapper function for precipitation indices
+#' @param input precipitation input file
 #' @export
 PrecIndicesWrapper <- function(input) {
 
