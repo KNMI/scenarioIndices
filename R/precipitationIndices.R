@@ -21,12 +21,15 @@ PrecipThreshIndices <- function(input, index, season) {
   #Indices
   switch(index,
          "N0.1mm" = X <- apply(input[id,-1]>=0.1,2,sum) / length(unique(yy)),
-         "N0.5mm" = X <- apply(input[id,-1]>=0.5,2,sum) / length(unique(yy)),
+         "N0.3mm" = X <- apply(input[id,-1]>=0.3,2,sum) / length(unique(yy)),
+         "N1mm" = X <- apply(input[id,-1]>=1,2,sum) / length(unique(yy)),
+         "N5mm" = X <- apply(input[id,-1]>=5,2,sum) / length(unique(yy)),
          "N10mm" = X <- apply(input[id,-1]>=10,2,sum) / length(unique(yy)),
+         "N15mm" = X <- apply(input[id,-1]>=15,2,sum) / length(unique(yy)),
          "N20mm" = X <- apply(input[id,-1]>=20,2,sum) / length(unique(yy)),
          "N30mm" = X <- apply(input[id,-1]>=30,2,sum) / length(unique(yy)),
-         "SeasMean" = X <-  apply(aggregate(input[id,-1],by=list(idy),  sum)[,-1],2, mean),
-         "SeasSD" = X <-  apply(aggregate(input[id,-1],by=list(idy),  sum)[,-1],2, sd))
+         "Psum" = X <-  apply(aggregate(input[id,-1],by=list(idy),  sum)[,-1],2, mean),
+         "sdPsum" = X <-  apply(aggregate(input[id,-1],by=list(idy),  sum)[,-1],2, sd))
 
   return(X)
 }
@@ -46,7 +49,8 @@ PrecIndicesWrapper <- function(input) {
     tmp
   }
 
-  indices <- c("N0.1mm", "N0.5mm", "N10mm", "N20mm", "N30mm")
+  indices <- c("N0.1mm", "N0.3mm", "N1mm", "N5mm", "N10mm", "N15mm", "N20mm",
+               "N30mm", "Psum", "sdPsum")
   seasons <- c("year", "winter", "spring", "summer", "autumn")
 
   combinations <- expand.grid(index = indices, season = seasons, stringsAsFactors = FALSE)
