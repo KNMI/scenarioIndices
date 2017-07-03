@@ -36,61 +36,73 @@ TempAvgIndices<- function(input, index, scenario,
                           horizon = 2030, season,
                           regions = "NLD", ofile = NA) {
 
-#
+
   if (!index %in% c("aTG", "amnTG", "amxTG")) {
     stop("index should be one of aTG, amnTG, amxTG")
   }
 
-# calcualte index for reference; else...
- if (!scenario %in% c("GL","GH","WL","WH") && horizon !=c(2030,2050,2085)){
-      input <-  knmitransformer::ReadInput("tg",
-                system.file("refdata","KNMI14____ref_tg___19810101-20101231_v3.2.txt",
-                            package="knmitransformer"))$obs
-    } else {
-        input <- TransformTemp(input=input, ofile=NA, scenario=scenario,
-                                                horizon=horizon, var="tg",regions = regions)
-        input <- input[-(1:5), ]
+  if (class(input) != "knmiTF") {
+    input <- ReadInput("tg", input)
+  }
 
-    }
+  if (!scenario %in% c("GL", "GH", "WL", "WH") &&
+        horizon != c(2030, 2050, 2085)) {
+    input <- input$obs
+  } else {
+    input <- TransformTemp(input = input, ofile = NA, scenario=scenario,
+                           horizon = horizon, var = "tg", regions = regions)
+    input <- input[-c(1:5), ]
+  }
 
-
-#
   input <- as.data.frame(input)
 
-    #Seasons
-   mm <- (input[,1]%/%100)%%100
-   ss <- as.integer((mm/3)%%4+1)
-   yy <-  input[,1]%/%10000
-   wy <- ifelse(mm<12,yy,yy+1)
-
-   if(season=="year"){
-     id  <- 1:length(yy)
-     idy <- yy
-   } else {
-    if(season=="winter"){
-      id  <- which(ss==1 & wy > min(wy) & wy < max(wy))
-      idy <- wy[id]
-    } else {
-      id  <- which(ss==season)
-      idy <- yy[id]
-    }
-   }
+  seasonalSplit <- SeasonalSplit(season, input[, 1])
+  id  <- seasonalSplit$id
+  idy <- seasonalSplit$idy
 
   #Indices
-     if(index=="aTG") {
-       X     <- aggregate(input[id,-1],by=list(idy),  mean)
-     } else {
-   if(index=="amnTG") {
-         X     <- aggregate(input[id,-1],by=list(idy),  min)
-      } else {
-    if(index=="amxTG") {
-         X     <- aggregate(input[id,-1],by=list(idy),  max)
-       }
-     }
-  }
-   return(X)
+  switch(index,
+         "aTG" = X <- aggregate(input[id,-1],by=list(idy),  mean),
+         "amnTG" = X <- aggregate(input[id,-1],by=list(idy),  min),
+         "amxTG" = X <- aggregate(input[id,-1],by=list(idy),  max))
+
+  return(X)
 }
 
+#' Calculates a set of TG related indices for all scenarios, horizons, and
+#' seasons at once
+#'
+#' @description Calculates a set of daily average temperature related indices as
+#'   they were defined for the KNMI14 scenarios brochure
+#' @inheritParams TempAvgIndices
+#' @export
+TempAvgIndicesWrapper <- function(input, regions = "NLD", ofile = NA) {
+
+  if (class(input) != "knmiTF") {
+    input <- ReadInput("tg", input)
+  }
+
+  fn <- function(index, season, scenario, horizon) {
+    tmp <- TempAvgIndices(input = input, index = index, ofile = ofile,
+                          scenario = scenario, horizon = horizon, season = season,
+                          regions = regions)
+    tmp$season   <- season
+    tmp$horizon  <- horizon
+    tmp$scenario <- scenario
+    tmp$index    <- index
+    tmp
+  }
 
 
+  indices <- c("aTG", "amnTG", "amxTG")
 
+  combinations <- MakeCombinations(indices)
+
+  result <- pmap(combinations, fn)
+  result <- rbindlist(result)
+  setnames(result, "Group.1", "year")
+  nCols <- ncol(result)
+  names <- colnames(result)
+  setcolorder(result, names[c( (nCols - (0:3)), 1, 2 : (nCols-4))])
+  result
+}

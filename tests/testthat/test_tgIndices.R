@@ -2,16 +2,22 @@ context("Temperature AVG indices")
 
 library(futile.logger)
 flog.threshold(DEBUG)
-flog.appender(appender.file('scenarioIndices_AVGtemperature.log'))
+flog.appender(appender.file("scenarioIndices_AVGtemperature.log"))
 library(data.table)
 
 context("Temp tg ref indices - Entire station set")
 
-input   <- system.file("refdata","KNMI14____ref_tg___19810101-20101231_v3.2.txt", package="knmitransformer")
-ofile      <- "tmp.txt" # output file - used only temporary
-var <- "tg"
-regions    <- knmitransformer::MatchRegionsOnStationId(knmitransformer::ReadInput(var, input)$header[1, -1])
+input   <- KnmiRefFile("KNMI14____ref_tg___19810101-20101231_v3.2.txt")
+ofile   <- "tmp.txt" # output file - used only temporary
+var     <- "tg"
+regions <- MatchRegionsOnStationId(ReadInput(var, input)$header[1, -1])
 
+test_that("full table", {
+
+  tmp <- TempAvgIndicesWrapper(input, regions = regions)
+  expect_equal_to_reference(tmp,
+      "regressionOutput/temperature/tg_fullTable.rds")
+})
 
 
 test_that("reference", {
@@ -29,11 +35,46 @@ test_that("reference", {
 
   expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14___ref_tg_aTG.rds")
 
+  tmp <- TempAvgIndices(input= input, index=index,
+                        ofile= ofile,
+                        scenario = scenario,
+                        horizon = horizon, season = "winter",
+                        regions = regions)
+
+  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14___ref_tg_aTG_winter.rds")
+
+  tmp <- TempAvgIndices(input= input, index=index,
+                        ofile= ofile,
+                        scenario = scenario,
+                        horizon = horizon, season = "spring",
+                        regions = regions)
+
+  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14___ref_tg_aTG_spring.rds")
+
+
+  tmp <- TempAvgIndices(input= input, index=index,
+                        ofile= ofile,
+                        scenario = scenario,
+                        horizon = horizon, season = "summer",
+                        regions = regions)
+
+  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14___ref_tg_aTG_summer.rds")
+
+
+  tmp <- TempAvgIndices(input= input, index=index,
+                        ofile= ofile,
+                        scenario = scenario,
+                        horizon = horizon, season = "autumn",
+                        regions = regions)
+
+  expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14___ref_tg_aTG_autumn.rds")
+
+
 })
 test_that("2030 decadal prediction", {
   index = "aTG"
 
-    scenario = "GL"
+  scenario = "GL"
 
   horizon = 2030
 
@@ -334,5 +375,3 @@ test_that("amxTG decadal prediction", {
 
   expect_equal_to_reference(tmp, "regressionOutput/temperature/KNMI14_WH_2085_amxTG.rds")
 })
-
-

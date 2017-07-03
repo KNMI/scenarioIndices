@@ -2,41 +2,17 @@
 % Please edit documentation in R/precipitationIndices.R
 \name{PrecipThreshIndices}
 \alias{PrecipThreshIndices}
-\title{precipitation threshold index}
+\title{Calculate precipitation threshold indices}
 \usage{
-PrecipThreshIndices(input, threshold, scenario = NA, horizon = NA, season,
-  subscenario, ofile = NA)
+PrecipThreshIndices(input, index, season)
 }
 \arguments{
-\item{input}{Name of the input file (ASCII) that contains reference data
-(all numerics) in which the columns provide time series for
-specific stations.
-The first column should provide either 00000000 or a
-datestring YYYYMMDD:
-Rows starting with 00000000 are considered station info
-(station number, lat, lon etc.) and are ignored.
-Rows starting with a datestring refer to a specific day in the
-time series.
-Rows starting with "#" are completely ignored and returned
-unchanged.}
+\item{input}{input file with precipitation}
 
-\item{threshold}{vector of thresholds}
+\item{index}{vector threshold indices}
 
-\item{scenario}{scenario ("GL", "GH", "WL", "WH"). If scenario is not one of the 4
-then the indices are calculated for the reference period 1981-2010}
-
-\item{horizon}{time horizon ( DEFAULT=2030, 2050, 2085). If horizon is not one of the 3
-then the indices are calculated for the reference period 1981-2010}
-
-\item{season}{season (0= year, 1=winter, 2=spring, 3=summer, 4=autumn)}
-
-\item{subscenario}{subscenario for extreme precipitation
-("lower", "centr" (=DEFAULT), "upper")}
-
-\item{ofile}{(DEFAULT=NA) Name of the output file to write the indices to.
-Format is similar to input without the 5 first lines}
+\item{season}{vector year,winter, spring, summer, autumn}
 }
 \description{
-Calculates a set of daily precipitation related indices as
-they were defined for the KNMI14 scenarios brochure
+Calculate precipitation threshold indices
 }

@@ -1,3 +1,4 @@
+# nolint start
 #setwd("/usr/people/bakker/KNMI14/transformatie/droogte")
 setwd("/nobackup/users/photiado/KNMI14_scenarios_2/transformatie/droogte")
 
@@ -52,9 +53,11 @@ names(tabel.yr)       <- c("year","1951-1980")
 tabel.yr$year         <- as.numeric(names(Xsum))
 tabel.yr["1951-1980"] <- round(as.numeric(Xsum),0)
 
-# WEGSCHRIJVEN  
+# WEGSCHRIJVEN
 ofile <- "scenario_tabel_neerslagtekort_1951-1980_P102.txt"
 write.table(format(rbind(colnames(tabel.sc),tabel.sc),width=10,digits=1,justify="right"), ofile,col.names=F,row.names=F,quote=F)
 
 ofile <- "jaarlijks_neerslagtekort_1951-1980_P102.txt"
 write.table(format(rbind(colnames(tabel.yr),tabel.yr),width=10,digits=1,justify="right"), ofile,col.names=F,row.names=F,quote=F)
+
+# nolint end

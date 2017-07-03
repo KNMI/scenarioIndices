@@ -1,0 +1,10 @@
+linters: with_defaults(
+    infix_spaces_linter = NULL, # 1335
+    commas_linter = NULL, # 1295
+    assignment_linter = NULL, # 302
+    snake_case_linter = NULL, # 300 
+    line_length_linter(100), # 278
+    commented_code_linter = NULL, # 25
+    camel_case_linter = NULL, 
+    NULL
+  )

@@ -1,8 +1,8 @@
 Package: scenarioIndices
 Type: Package
 Title: Calculate indices for KNMI climate scenarios
-Version: 0.1.2
-Date: 2017-06-21
+Version: 0.1.4
+Date: 2017-06-23
 Authors@R: as.person(c(
     "Alexander Bakker [aut]",
     "Christiana Photiadou <photiado@knmi.nl> [aut, cre]",
@@ -17,10 +17,15 @@ Imports:
   knmitransformer,
   data.table,
   futile.logger,
-  rgdal
+  rgdal,
+  purrr
 Remotes:
   MartinRoth/knmitransformer@oldfactor2
 RoxygenNote: 6.0.1
 Suggests:
   testthat,
-  covr
+  covr,
+  lintr,
+  knitr,
+  rmarkdown
+VignetteBuilder: knitr

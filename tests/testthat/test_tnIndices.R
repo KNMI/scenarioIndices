@@ -1,16 +1,23 @@
-context("Temperature AVG indices")
+context("Temperature MIN indices")
 
 library(futile.logger)
 flog.threshold(DEBUG)
-flog.appender(appender.file('scenarioIndices_MINtemperature.log'))
+flog.appender(appender.file("scenarioIndices_MINtemperature.log"))
 library(data.table)
 
 context("Temp tn ref indices - Entire station set")
 
-input   <- system.file("refdata","KNMI14____ref_tn___19810101-20101231_v3.2.txt", package="knmitransformer")
-ofile      <- "tmp.txt" # output file - used only temporary
-var <- "tn"
-regions    <- knmitransformer::MatchRegionsOnStationId(knmitransformer::ReadInput(var, input)$header[1, -1])
+input   <- KnmiRefFile("KNMI14____ref_tn___19810101-20101231_v3.2.txt")
+ofile   <- "tmp.txt" # output file - used only temporary
+var     <- "tn"
+regions <- MatchRegionsOnStationId(ReadInput(var, input)$header[1, -1])
+
+test_that("full table", {
+
+  tmp <- TempMinIndicesWrapper(input, regions = regions)
+  expect_equal_to_reference(tmp,
+                            "regressionOutput/temperature/tn_fullTable.rds")
+})
 
 test_that("reference", {
   index = "aTN"

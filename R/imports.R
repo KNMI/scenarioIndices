@@ -1,7 +1,8 @@
-#' @importFrom data.table fread
+#' @importFrom data.table fread rbindlist setnames setcolorder as.data.table
 #' @importFrom utils write.table
 #' @importFrom utils read.table
 #' @importFrom stats sd aggregate
+#' @importFrom purrr pmap
 #' @import futile.logger
-#' @importFrom knmitransformer TransformEvap TransformPrecip TransformTemp
+#' @import knmitransformer
 NULL
